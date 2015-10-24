@@ -15,6 +15,8 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 # .haml instead of .html
 gem "haml-rails", "~> 0.9"
+# users
+gem 'devise'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
