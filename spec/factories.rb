@@ -6,7 +6,7 @@ FactoryGirl.define do
   end
 
   factory :tag do
-    name "Broker"
+    sequence(:name) { |n| "Broker#{n}" }
   end
 
   factory :profile do
@@ -15,6 +15,9 @@ FactoryGirl.define do
     representitive "Zach Levy"
     phone "647 667 5215"
     status "Coding until dawn"
+    facebook "zacharyaaronlevy"
+    twitter "@zachary_levy"
+    instagram "zachary_levy"
     category
     user
   end
@@ -27,6 +30,6 @@ FactoryGirl.define do
   end
 
   factory :category do
-    name "Real Estate"
+    sequence(:name) { |n| "Real Estate#{n}" }
   end
 end

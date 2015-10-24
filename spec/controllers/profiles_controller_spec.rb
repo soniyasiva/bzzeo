@@ -35,7 +35,10 @@ RSpec.describe ProfilesController, type: :controller do
       phone: "647 667 5215",
       status: "Coding until dawn",
       category_id: category.id,
-      user_id: user.id
+      user_id: user.id,
+      facebook: "zacharyaaronlevy",
+      twitter: "@zachary_levy",
+      instagram: "zachary_levy"
     }
   }
 
