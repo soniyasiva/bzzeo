@@ -1,0 +1,27 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @profile.name
+%p
+  %b Video:
+  = @profile.video
+%p
+  %b Representitive:
+  = @profile.representitive
+%p
+  %b Phone:
+  = @profile.phone
+%p
+  %b Status:
+  = @profile.status
+%p
+  %b Category:
+  = @profile.category
+%p
+  %b User:
+  = @profile.user
+
+= link_to 'Edit', edit_profile_path(@profile)
+\|
+= link_to 'Back', profiles_path

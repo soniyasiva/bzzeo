@@ -1,7 +1,17 @@
 FactoryGirl.define do
 
+  factory :profile do
+    name "First Exit Media"
+    video "https://www.youtube.com/watch?v=-9dAhOsyXBk"
+    representitive "Zach Levy"
+    phone "647 667 5215"
+    status "Coding until dawn"
+    category
+    user
+  end
+
   factory :user do
-    email "zacharyalevy@gmail.com"
+    sequence(:email) { |n| "user#{n}@example.com" }
     password "password"
     password_confirmation "password"
     # confirmed_at Date.today
