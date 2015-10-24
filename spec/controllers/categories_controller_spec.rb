@@ -40,6 +40,8 @@ RSpec.describe CategoriesController, type: :controller do
   # CategoriesController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
+  login_user
+
   describe "GET #index" do
     it "assigns all categories as @categories" do
       category = Category.create! valid_attributes
