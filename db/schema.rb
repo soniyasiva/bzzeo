@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151024175127) do
+ActiveRecord::Schema.define(version: 20151024184516) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,16 @@ ActiveRecord::Schema.define(version: 20151024175127) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "profile_tags", force: :cascade do |t|
+    t.integer  "profile_id"
+    t.integer  "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "profile_tags", ["profile_id"], name: "index_profile_tags_on_profile_id", using: :btree
+  add_index "profile_tags", ["tag_id"], name: "index_profile_tags_on_tag_id", using: :btree
 
   create_table "profiles", force: :cascade do |t|
     t.string   "name"
@@ -61,6 +71,8 @@ ActiveRecord::Schema.define(version: 20151024175127) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "profile_tags", "profiles"
+  add_foreign_key "profile_tags", "tags"
   add_foreign_key "profiles", "categories"
   add_foreign_key "profiles", "users"
 end

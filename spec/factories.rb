@@ -1,5 +1,10 @@
 FactoryGirl.define do
 
+  factory :profile_tag do
+    profile
+    tag
+  end
+
   factory :tag do
     name "Broker"
   end
