@@ -1,5 +1,9 @@
 FactoryGirl.define do
 
+  factory :tag do
+    name "Broker"
+  end
+
   factory :profile do
     name "First Exit Media"
     video "https://www.youtube.com/watch?v=-9dAhOsyXBk"
