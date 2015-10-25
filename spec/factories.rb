@@ -1,5 +1,22 @@
 FactoryGirl.define do
 
+  factory :post do
+    image_url nil
+    video_url nil
+    description "This is a really good post description"
+    profile
+
+    trait :image do
+      image_url "http://placehold.it/600x400"
+      video_url nil
+    end
+
+    trait :video do
+      image_url nil
+      video_url "https://www.youtube.com/watch?v=-9dAhOsyXBk"
+    end
+  end
+
   factory :profile_tag do
     profile
     tag
