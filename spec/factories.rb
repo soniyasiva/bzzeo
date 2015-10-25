@@ -1,5 +1,10 @@
 FactoryGirl.define do
 
+  factory :share do
+    post
+    profile
+  end
+
   factory :like do
     profile
     post
