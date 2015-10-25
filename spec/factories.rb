@@ -1,5 +1,11 @@
 FactoryGirl.define do
 
+  factory :comment do
+    profile
+    post
+    description "Great content"
+  end
+
   factory :post do
     image_url nil
     video_url nil

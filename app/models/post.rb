@@ -1,5 +1,6 @@
 class Post < ActiveRecord::Base
   belongs_to :profile
+  has_many :comments
 
   validates :profile, presence: true
   validate :has_content
