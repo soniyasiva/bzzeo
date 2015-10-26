@@ -51,4 +51,11 @@ group :development, :test do
   # testing
   gem 'rspec-rails', '~> 3.0'
   gem 'factory_girl_rails'
+  gem 'guard-rails', require: false
+  gem 'guard-rspec', require: false
+
+  # debug user interaction
+  gem 'capybara'
+  gem 'launchy'
+  # gem 'database_cleaner'
 end
