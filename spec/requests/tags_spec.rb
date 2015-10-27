@@ -1,10 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe "Tags", type: :request do
-  # describe "GET /tags" do
-  #   it "works! (now write some real specs)" do
-  #     get tags_path
-  #     expect(response).to have_http_status(200)
-  #   end
-  # end
+RSpec.describe "Tags", type: :feature do
+  describe "GET /tags" do
+
+    login
+
+    it "works! (now write some real specs)" do
+      visit tags_path
+      expect(page).to have_content 'tags'
+    end
+  end
 end

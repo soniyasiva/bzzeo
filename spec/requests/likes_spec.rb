@@ -1,10 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe "Likes", type: :request do
-  # describe "GET /likes" do
-  #   it "works! (now write some real specs)" do
-  #     get likes_path
-  #     expect(response).to have_http_status(200)
-  #   end
-  # end
+RSpec.describe "Likes", type: :feature do
+  describe "GET /likes" do
+
+    login
+
+    it "works! (now write some real specs)" do
+      visit likes_path
+      expect(page).to have_content 'likes'
+    end
+  end
 end
