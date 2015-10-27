@@ -5,4 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_one :profile
+
+  after_create do
+    Profile.create(:user => self)
+  end
 end
