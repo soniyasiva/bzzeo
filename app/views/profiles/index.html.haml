@@ -25,8 +25,8 @@
         %td= profile.facebook
         %td= profile.twitter
         %td= profile.instagram
-        %td= profile.category.name
-        %td= profile.user.email
+        %td= profile.category.name unless profile.category.nil?
+        %td= profile.user.email unless profile.user.nil?
         %td= link_to 'Show', profile
         %td= link_to 'Edit', edit_profile_path(profile)
         %td= link_to 'Destroy', profile, :method => :delete, :data => { :confirm => 'Are you sure?' }

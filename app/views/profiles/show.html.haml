@@ -16,11 +16,20 @@
   %b Status:
   = @profile.status
 %p
+  %b Facebook:
+  = @profile.facebook
+%p
+  %b Twitter:
+  = @profile.twitter
+%p
+  %b Instagram:
+  = @profile.instagram
+%p
   %b Category:
-  = @profile.category
+  = @profile.category.name unless @profile.category.nil?
 %p
   %b User:
-  = @profile.user
+  = @profile.user.email unless @profile.user.nil?
 
 = link_to 'Edit', edit_profile_path(@profile)
 \|
