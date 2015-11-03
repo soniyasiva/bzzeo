@@ -30,7 +30,7 @@ RSpec.describe ProfilesController, type: :controller do
     category = create(:category)
     {
       name: "First Exit Media",
-      video: "https://www.youtube.com/watch?v=-9dAhOsyXBk",
+      video: "-9dAhOsyXBk",
       representitive: "Zach Levy",
       phone: "647 667 5215",
       status: "Coding until dawn",

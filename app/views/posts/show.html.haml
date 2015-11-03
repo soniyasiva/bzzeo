@@ -5,7 +5,7 @@
   = @post.image_url
 %p
   %b Video url:
-  = @post.video_url
+  = embed(@post.video_url).html_safe
 %p
   %b Description:
   = @post.description

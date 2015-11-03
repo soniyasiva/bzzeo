@@ -29,7 +29,7 @@ FactoryGirl.define do
 
     trait :video do
       image_url nil
-      video_url "https://www.youtube.com/watch?v=-9dAhOsyXBk"
+      video_url "-9dAhOsyXBk"
     end
   end
 
@@ -44,7 +44,7 @@ FactoryGirl.define do
 
   factory :profile do
     name "First Exit Media"
-    video "https://www.youtube.com/watch?v=-9dAhOsyXBk"
+    video "-9dAhOsyXBk"
     representitive "Zach Levy"
     phone "647 667 5215"
     status "Coding until dawn"

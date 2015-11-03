@@ -1,3 +1,6 @@
+require_relative '../../lib/video.rb'
+include VideoModule
+
 class Post < ActiveRecord::Base
   belongs_to :profile
   has_many :comments
@@ -7,6 +10,12 @@ class Post < ActiveRecord::Base
   validates :profile, presence: true
   validate :has_content
   validate :does_not_have_video_and_image
+
+  before_save :format_video
+
+  def format_video
+    self.video_url = extract_video_id video_url
+  end
 
   def has_content
     errors[:base] << "Post needs some form of content" if image_url.blank? && video_url.blank? && description.blank?

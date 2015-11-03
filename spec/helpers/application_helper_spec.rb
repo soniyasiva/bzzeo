@@ -13,11 +13,11 @@ require 'rails_helper'
 RSpec.describe ApplicationHelper, type: :helper do
   describe "build video embed html" do
     it "builds from youtube" do
-      expect(build_video_embed('HK0pBDZiWgk')).to eq('<iframe src="https://www.youtube.com/embed/HK0pBDZiWgk" frameborder="0" allowfullscreen></iframe>')
+      expect(embed('HK0pBDZiWgk')).to eq('<iframe src="https://www.youtube.com/embed/HK0pBDZiWgk" frameborder="0" allowfullscreen></iframe>')
     end
 
     it "builds from vimeo" do
-      expect(build_video_embed('143243001')).to eq('<iframe src="https://player.vimeo.com/video/143243001?title=0&byline=0&portrait=0&badge=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>')
+      expect(embed('143243001')).to eq('<iframe src="https://player.vimeo.com/video/143243001?title=0&byline=0&portrait=0&badge=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>')
     end
   end
 end
