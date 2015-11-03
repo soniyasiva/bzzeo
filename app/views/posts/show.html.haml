@@ -2,7 +2,7 @@
 
 %p
   %b Image url:
-  = @post.image_url
+  = image_tag(@post.image_url)
 %p
   %b Video url:
   = embed(@post.video_url).html_safe unless @post.video_url.nil?

@@ -5,10 +5,6 @@
       %ul
         - @post.errors.full_messages.each do |msg|
           %li= msg
-
-  .field
-    = f.label :image_url
-    = f.text_field :image_url
   .field
     = f.label :video_url
     = f.text_field :video_url
@@ -16,7 +12,7 @@
     = f.label :description
     = f.text_area :description
   .field
-    = f.label :profile
-    = f.text_field :profile
+    = f.label :image_url
+    = f.uploadcare_uploader :image_url, :data => { "images-only" => "true", "crop" => "" }
   .actions
     = f.submit 'Save'

@@ -14,8 +14,8 @@
   %tbody
     - @posts.each do |post|
       %tr
-        %td= post.image_url
-        %td= embed(post.video_url).html_safe
+        %td= image_tag(post.image_url)
+        %td= embed(post.video_url).html_safe unless post.video_url.nil?
         %td= post.description
         %td= post.profile.name
         %td= link_to 'Show', post
