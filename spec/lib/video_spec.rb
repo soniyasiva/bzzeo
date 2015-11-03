@@ -1,5 +1,5 @@
 require 'rails_helper'
-require_relative '../../lib/video.rb'
+
 # Specs in this file have access to a helper object that includes
 # the CategoriesHelper. For example:
 #
@@ -11,7 +11,7 @@ require_relative '../../lib/video.rb'
 #   end
 # end
 
-include VideoModule
+include Video
 
 describe "url manipulation" do
   context "from youtube" do

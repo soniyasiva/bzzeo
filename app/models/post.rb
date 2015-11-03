@@ -1,5 +1,4 @@
-require_relative '../../lib/video.rb'
-include VideoModule
+include Video
 
 class Post < ActiveRecord::Base
   belongs_to :profile
