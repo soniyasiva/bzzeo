@@ -9,4 +9,5 @@ class Profile < ActiveRecord::Base
   has_many :shares
 
   validates :user, presence: true
+  validates_uniqueness_of :user_id
 end

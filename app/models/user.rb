@@ -8,5 +8,5 @@ class User < ActiveRecord::Base
 
   after_create do
     Profile.create(:user => self)
-  end
+  end unless Rails.env.test?
 end
