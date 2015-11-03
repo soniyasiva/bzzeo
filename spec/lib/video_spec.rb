@@ -14,19 +14,31 @@ require_relative '../../lib/video.rb'
 include VideoModule
 
 describe "url manipulation" do
-  it "extracts video id from share url" do
-    expect(extract_video_id("https://youtu.be/HK0pBDZiWgk")).to eq("HK0pBDZiWgk")
+  context "from youtube" do
+    it "extracts video id from share url" do
+      expect(extract_video_id("https://youtu.be/HK0pBDZiWgk")).to eq("HK0pBDZiWgk")
+    end
+
+    it "extracts video id from normal url" do
+      expect(extract_video_id("https://www.youtube.com/watch?v=HK0pBDZiWgk")).to eq("HK0pBDZiWgk")
+    end
+
+    it "extracts video id from polluted url" do
+      expect(extract_video_id("https://www.youtube.com/watch?v=HK0pBDZiWgk&ok=nok")).to eq("HK0pBDZiWgk")
+    end
+
+    it "returns nil on bad url" do
+      expect(extract_video_id("http://google.com/")).to eq(nil)
+    end
   end
 
-  it "extracts video id from normal url" do
-    expect(extract_video_id("https://www.youtube.com/watch?v=HK0pBDZiWgk")).to eq("HK0pBDZiWgk")
-  end
+  context "from vimeo" do
+    it "extracts video id from normal and share urls" do
+      expect(extract_video_id("https://vimeo.com/143243001")).to eq("143243001")
+    end
 
-  it "extracts video id from polluted url" do
-    expect(extract_video_id("https://www.youtube.com/watch?v=HK0pBDZiWgk&ok=nok")).to eq("HK0pBDZiWgk")
-  end
-
-  it "returns nil on bad url" do
-    expect(extract_video_id("http://google.com/")).to eq(nil)
+    it "extracts video id from polluted urls" do
+      expect(extract_video_id("https://vimeo.com/143243001?ok=nok")).to eq("143243001")
+    end
   end
 end
