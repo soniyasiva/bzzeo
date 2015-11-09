@@ -1,0 +1,34 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:charset => "utf-8"}
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}
+    %title Starter Template for Bootstrap
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+    = include_uploadcare_widget_from_cdn version: "2.5.5", min: true
+    = uploadcare_settings
+  %body
+    %nav.navbar.navbar-inverse.navbar-fixed-top
+      .container
+        .navbar-header
+          %button.navbar-toggle.collapsed{"aria-controls" => "navbar", "aria-expanded" => "false", "data-target" => "#navbar", "data-toggle" => "collapse", :type => "button"}
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.navbar-brand{:href => "#"} Project name
+        #navbar.collapse.navbar-collapse
+          %ul.nav.navbar-nav
+            %li.active
+              %a{:href => "#"} Home
+            %li
+              %a{:href => "#about"} About
+            %li
+              %a{:href => "#contact"} Contact
+    .container
+      %p.notice= notice
+      %p.alert= alert
+      = yield

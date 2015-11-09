@@ -19,6 +19,8 @@ gem "haml-rails", "~> 0.9"
 gem 'devise'
 # uploadcare
 gem 'uploadcare-rails'
+# bootstrap
+gem 'bootstrap-sass', '~> 3.3.4'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
