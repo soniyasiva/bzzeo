@@ -28,7 +28,7 @@ RSpec.describe PostsController, type: :controller do
   let(:valid_attributes) {
     profile = create(:profile)
     {
-      image_url: "http://placehold.it/600x400",
+      image_url: "https://youtu.be/HK0pBDZiWgk",
       video_url: nil,
       description: "This is a really good post description",
       profile_id: profile.id
@@ -37,7 +37,7 @@ RSpec.describe PostsController, type: :controller do
 
   let(:invalid_attributes) {
     {
-      image_url: "http://placehold.it/600x400",
+      image_url: "https://youtu.be/HK0pBDZiWgk",
       video_url: nil,
       description: "This is a really good post description",
       profile_id: nil
