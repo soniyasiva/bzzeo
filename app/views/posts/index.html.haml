@@ -1,27 +1,4 @@
 %h1 Listing posts
 
-%table
-  %thead
-    %tr
-      %th Image url
-      %th Video url
-      %th Description
-      %th Profile
-      %th
-      %th
-      %th
-
-  %tbody
-    - @posts.each do |post|
-      %tr
-        %td= image_tag(post.image_url)
-        %td= embed(post.video_url).html_safe unless post.video_url.nil?
-        %td= post.description
-        %td= post.profile.name
-        %td= link_to 'Show', post
-        %td= link_to 'Edit', edit_post_path(post)
-        %td= link_to 'Destroy', post, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Post', new_post_path
+- @posts.each do |post|
+  = render 'shared/post', post: post

@@ -33,6 +33,7 @@ $(document).on 'ajax:success', 'a.like', (status,data,xhr)->
 
 $(document).on 'ajax:success', '.new_comment', (status,data,xhr)->
   console.log "comment"
+  console.log data
 
 # document ready
 $ ->

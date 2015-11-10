@@ -1,9 +1,19 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :like, :comment]
+
+  # handles comments for posts
+  def comment
+    @comment = Comment.create(comment_params)
+
+    if request.xhr?
+      render json: { comment: @comment, id: @post.id }
+    else
+      redirect_to @comment
+    end
+  end
 
   # handles likes and unlikes for posts
   def like
-    @post = Post.find(params[:id])
     @like = Like.find_by(profile: current_user.profile, post: @post)
     if @like.nil?
       @like = Like.create(profile: current_user.profile, post: @post)
@@ -87,7 +97,15 @@ class PostsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
       params.require(:post).permit(:image_url, :video_url, :description).merge(
-        profile_id: current_user.id
+        profile_id: current_user.profile.id
+      )
+    end
+
+    # custom strong params for comment action
+    def comment_params
+      params.require(:comment).permit(:description).merge(
+        profile_id: current_user.profile.id,
+        post_id: @post.id
       )
     end
 end

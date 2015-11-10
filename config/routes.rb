@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :posts do
     member do
       put "like", to: "posts#like"
+      post "comment", to: "posts#comment"
     end
   end
   resources :tags
