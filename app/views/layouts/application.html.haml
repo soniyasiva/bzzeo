@@ -50,6 +50,8 @@
               %li
                 = link_to('Login', new_user_session_path)
     .container
-      %p.notice= notice
-      %p.alert= alert
+      -unless notice.nil?
+        %p.notice= notice
+      -unless alert.nil?
+        %p.alert= alert
       = yield
