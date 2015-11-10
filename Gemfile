@@ -22,6 +22,8 @@ gem 'uploadcare-rails'
 # bootstrap
 gem 'bootstrap-sass', '~> 3.3.4'
 gem 'bootstrap_form'
+# social
+gem 'shareable'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
