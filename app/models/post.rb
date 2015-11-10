@@ -23,4 +23,8 @@ class Post < ActiveRecord::Base
   def does_not_have_video_and_image
     errors[:base] << "Post cannot have both an image and video" if !image_url.blank? && !video_url.blank?
   end
+
+  def liked? user
+    likes.where(profile_id: user.profile.id).any?
+  end
 end

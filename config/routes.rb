@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   resources :shares
   resources :likes
   resources :comments
-  resources :posts
+  resources :posts do
+    member do
+      put "like", to: "posts#like"
+    end
+  end
   resources :tags
   resources :profiles
   devise_for :users

@@ -1,6 +1,23 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
+  # handles likes and unlikes for posts
+  def like
+    @post = Post.find(params[:id])
+    @like = Like.find_by(profile: current_user.profile, post: @post)
+    if @like.nil?
+      @like = Like.create(profile: current_user.profile, post: @post)
+    else
+      @like.destroy
+    end
+
+    if request.xhr?
+      render json: { count: @post.likes.size, id: @post.id }
+    else
+      redirect_to @post
+    end
+  end
+
   # GET /posts
   # GET /posts.json
   def index
