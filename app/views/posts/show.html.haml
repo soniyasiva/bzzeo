@@ -1,18 +1,37 @@
 %p#notice= notice
 
-%p
-  %b Image url:
-  = image_tag(@post.image_url)
-%p
-  %b Video url:
-  = embed(@post.video_url).html_safe unless @post.video_url.nil?
-%p
-  %b Description:
-  = @post.description
-%p
-  %b Profile:
-  = @post.profile.name
-
-= link_to 'Edit', edit_post_path(@post)
-\|
-= link_to 'Back', posts_path
+.row
+  .col-xs-12.col-sm-6.col-sm-offset-3
+    .row.post
+      .col-xs-12
+        .row.profile
+          .col-xs-12
+            = @post.profile.name
+        .row.image
+          -# image, if there is one
+          .col-xs-12
+            = image_tag(@post.image_url, :class => "img-responsive")
+        .row.video
+          -# video, if there is one
+          .col-xs-12
+            = embed(@post.video_url).html_safe unless @post.video_url.nil?
+        .row.description
+          -# text for the post
+          .col-xs-12
+            = @post.description
+        .row.comments
+          -# all comments for the post
+          .col-xs-12
+          - @post.comments.each do |comment|
+            .row.comment
+              .col-xs-12
+                .row.profile
+                  = comment.profile.name
+                .row.description
+                  = comment.description
+        .row.options
+          -# share, like, comment buttons
+          .col-xs-12
+            = link_to "Like", new_like_path(), { :class => "button btn btn-primary" }
+            = link_to "Comment", new_comment_path(), { :class => "button btn btn-default" }
+            = link_to "Share", new_share_path(), { :class => "button btn btn-success" }
