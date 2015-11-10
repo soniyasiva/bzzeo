@@ -30,3 +30,16 @@ $(document).on 'ajax:success', 'a.like', (status,data,xhr)->
       $(this).text("Like")
     else
       $(this).text("Unlike")
+
+$(document).on 'ajax:success', '.new_comment', (status,data,xhr)->
+  console.log "comment"
+
+# document ready
+$ ->
+  # toggle comment box for post
+  $(".new-comment-toggle").on('click', ->
+    console.log 'comment toggle'
+    post_id = $(this).data('new-comment-id')
+    $(".new-comment[data-new-comment-id=#{post_id}]").toggle()
+    false # prevent default
+  )
