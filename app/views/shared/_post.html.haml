@@ -12,7 +12,7 @@
         .row.video
           -# video, if there is one
           .col-xs-12
-            = embed(post.video_url).html_safe unless post.video_url.nil?
+            = embed(post.video_url).html_safe unless post.video_url.blank?
         .row.description
           -# text for the post
           .col-xs-12

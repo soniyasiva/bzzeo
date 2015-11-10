@@ -1,11 +1,11 @@
 %p#notice= notice
+    %p
+      %b Video:
+      = embed(@profile.video).html_safe unless @profile.video.blank?
 
 %p
   %b Name:
   = @profile.name
-%p
-  %b Video:
-  = @profile.video
 %p
   %b Representitive:
   = @profile.representitive
