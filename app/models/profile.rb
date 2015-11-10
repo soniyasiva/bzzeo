@@ -9,6 +9,8 @@ class Profile < ActiveRecord::Base
   has_many :shares
   has_many :frienders, :class_name => 'Friend', :foreign_key => 'profile_id'
   has_many :friendeds, :class_name => 'Friend', :foreign_key => 'friend_id'
+  has_many :senders, :class_name => 'Conversation', :foreign_key => 'sender_id'
+  has_many :receivers, :class_name => 'Conversation', :foreign_key => 'receiver_id'
 
   validates :user, presence: true
   validates_uniqueness_of :user_id
@@ -21,5 +23,9 @@ class Profile < ActiveRecord::Base
 
   def friends
     frienders + friendeds
+  end
+
+  def conversations
+    senders + receivers
   end
 end

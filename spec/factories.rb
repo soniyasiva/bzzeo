@@ -1,4 +1,10 @@
-FactoryGirl.define do  factory :friend do
+FactoryGirl.define do  factory :conversation do
+    sender nil
+receiver nil
+message "MyText"
+read false
+  end
+  factory :friend do
     profile nil
 friend nil
 mutual false

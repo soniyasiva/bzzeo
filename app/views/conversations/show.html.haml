@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Sender:
+  = @conversation.sender
+%p
+  %b Receiver:
+  = @conversation.receiver
+%p
+  %b Message:
+  = @conversation.message
+%p
+  %b Read:
+  = @conversation.read
+
+= link_to 'Edit', edit_conversation_path(@conversation)
+\|
+= link_to 'Back', conversations_path
