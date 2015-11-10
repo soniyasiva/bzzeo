@@ -1,4 +1,8 @@
-FactoryGirl.define do  factory :conversation do
+FactoryGirl.define do  factory :page do
+    html "MyText"
+slug "MyString"
+  end
+  factory :conversation do
     sender nil
 receiver nil
 message "MyText"
