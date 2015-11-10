@@ -42,7 +42,7 @@
               %li
                 = link_to "Comment", '#', :data => { "new-comment-id" => post.id }, :class => "button btn btn-default new-comment-toggle"
               %li
-                = link_to "Share", new_share_path(), { :class => "button btn btn-success" }
+                = link_to "Share", new_share_path( post_id: post.id ), { :class => "button btn btn-success" }
         .row.new-comment.collapse{:data => { "new-comment-id" => post.id }}
           .col-xs-12
             = bootstrap_form_for(Comment.new, url: comment_post_path(post), remote: true) do |f|

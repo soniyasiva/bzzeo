@@ -15,6 +15,7 @@ class SharesController < ApplicationController
   # GET /shares/new
   def new
     @share = Share.new
+    @post = Post.find(params[:post_id])
   end
 
   # GET /shares/1/edit
@@ -69,6 +70,8 @@ class SharesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def share_params
-      params.require(:share).permit(:post_id, :profile_id)
+      params.require(:share).permit(:post_id).merge(
+        profile_id: current_user.profile.id
+      )
     end
 end
