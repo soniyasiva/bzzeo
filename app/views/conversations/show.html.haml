@@ -1,5 +1,3 @@
-%p#notice= notice
-
 %p
   %b Sender:
   = @conversation.sender
@@ -12,7 +10,3 @@
 %p
   %b Read:
   = @conversation.read
-
-= link_to 'Edit', edit_conversation_path(@conversation)
-\|
-= link_to 'Back', conversations_path

@@ -1,12 +1,6 @@
-%p#notice= notice
-
 %p
   %b Profile:
   = @like.profile.name
 %p
   %b Post:
   = @like.post.description
-
-= link_to 'Edit', edit_like_path(@like)
-\|
-= link_to 'Back', likes_path
