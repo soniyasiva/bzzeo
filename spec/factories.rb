@@ -1,4 +1,9 @@
-FactoryGirl.define do
+FactoryGirl.define do  factory :friend do
+    profile nil
+friend nil
+mutual false
+  end
+
 
   factory :share do
     post

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :friends
   resources :shares
   resources :likes
   resources :comments
@@ -9,7 +10,11 @@ Rails.application.routes.draw do
     end
   end
   resources :tags
-  resources :profiles
+  resources :profiles do
+    member do
+      put "friend", to: "profiles#friend"
+    end
+  end
   devise_for :users
   root to: "categories#index"
   resources :categories

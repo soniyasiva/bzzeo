@@ -1,6 +1,10 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
 
+  def friend
+    puts "===== friend ====="
+  end
+
   # GET /profiles
   # GET /profiles.json
   def index
