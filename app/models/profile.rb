@@ -7,19 +7,19 @@ class Profile < ActiveRecord::Base
   has_many :comments
   has_many :likes
   has_many :shares
-  has_many :friender, :class_name => 'Friend', :foreign_key => 'profile_id'
-  has_many :friended, :class_name => 'Friend', :foreign_key => 'friend_id'
+  has_many :frienders, :class_name => 'Friend', :foreign_key => 'profile_id'
+  has_many :friendeds, :class_name => 'Friend', :foreign_key => 'friend_id'
 
   validates :user, presence: true
   validates_uniqueness_of :user_id
 
   # implement
-  # checks to see whether the current profile is friended by the current user
+  # checks to see whether the current profile is friended by the user. should be passed current_user
   def friend? user
-    true
+    frienders.where(friend_id: user.profile.id).any? || friendeds.where(profile_id: user.profile.id).any?
   end
 
   def friends
-    friender + friended
+    frienders + friendeds
   end
 end
