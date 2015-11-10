@@ -1,36 +1,36 @@
-%p#notice= notice
+.row
+  .col-xs-12
+    %h1= @profile.name
     %p
       %b Video:
       = embed(@profile.video).html_safe unless @profile.video.blank?
+    %p
+      %b Representitive:
+      = @profile.representitive
+    %p
+      %b Phone:
+      = @profile.phone
+    %p
+      %b Status:
+      = @profile.status
+    %p
+      %b Facebook:
+      = @profile.facebook
+    %p
+      %b Twitter:
+      = @profile.twitter
+    %p
+      %b Instagram:
+      = @profile.instagram
+    %p
+      %b Category:
+      = @profile.category.name unless @profile.category.nil?
+    %p
+      %b User:
+      = @profile.user.email unless @profile.user.nil?
 
-%p
-  %b Name:
-  = @profile.name
-%p
-  %b Representitive:
-  = @profile.representitive
-%p
-  %b Phone:
-  = @profile.phone
-%p
-  %b Status:
-  = @profile.status
-%p
-  %b Facebook:
-  = @profile.facebook
-%p
-  %b Twitter:
-  = @profile.twitter
-%p
-  %b Instagram:
-  = @profile.instagram
-%p
-  %b Category:
-  = @profile.category.name unless @profile.category.nil?
-%p
-  %b User:
-  = @profile.user.email unless @profile.user.nil?
-
-= link_to 'Edit', edit_profile_path(@profile)
-\|
-= link_to 'Back', profiles_path
+    = link_to 'Edit', edit_profile_path(@profile)
+.row
+  .col-xs-12
+    = link_to friend_profile_path(@profile), :class => "button btn btn-primary friend", method: :put, remote: true, :data => { :id => @profile.id } do
+      = @profile.friend?(current_user) ? "Unfollow" : "Follow"

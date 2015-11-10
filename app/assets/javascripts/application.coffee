@@ -18,8 +18,7 @@
 
 
 
-# Rails creates this event, when the link_to(remote: true)
-# successfully executes
+# Rails creates this event, when the link_to(remote: true) successfully executes
 $(document).on 'ajax:success', 'a.like', (status,data,xhr)->
   # update counter
   $(".likes-count[data-id=#{data.id}]").text data.count
@@ -30,6 +29,16 @@ $(document).on 'ajax:success', 'a.like', (status,data,xhr)->
       $(this).text("Like")
     else
       $(this).text("Unlike")
+
+# Rails creates this event, when the link_to(remote: true) successfully executes
+$(document).on 'ajax:success', 'a.friend', (status,data,xhr)->
+  console.log 'friend'
+  # toggle links text
+  $("a.friend[data-id=#{data.id}]").each ->
+    if $(this).text().indexOf("Un") > -1
+      $(this).text("Follow")
+    else
+      $(this).text("Unfollow")
 
 $(document).on 'ajax:success', '.new_comment', (status,data,xhr)->
   console.log "comment"

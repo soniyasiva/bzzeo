@@ -1,8 +1,24 @@
 class ProfilesController < ApplicationController
-  before_action :set_profile, only: [:show, :edit, :update, :destroy]
+  before_action :set_profile, only: [:show, :edit, :update, :destroy, :friend]
 
   def friend
     puts "===== friend ====="
+    puts params.inspect
+    if @profile.friend? current_user
+      # destroy all friendships with the profile
+      @profile.frienders.where(friend_id: current_user.profile.id).destroy_all
+      @profile.friendeds.where(profile_id: current_user.profile.id).destroy_all
+    else
+      # create a friendship
+      @friend = Friend.create(friend: @profile, profile_id: current_user.profile.id)
+    end
+    puts @friend
+
+    if request.xhr?
+      render json: { friend: @friend, id: @profile.id }
+    else
+      redirect_to @friend
+    end
   end
 
   # GET /profiles
@@ -74,5 +90,12 @@ class ProfilesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
       params.require(:profile).permit(:name, :video, :representitive, :phone, :status, :category_id, :user_id, :facebook, :twitter, :instagram)
+    end
+
+    # custom strong params for friend action
+    def friend_params
+      params.require(:friend).permit(:friend_id).merge(
+        profile_id: current_user.profile.id
+      )
     end
 end
