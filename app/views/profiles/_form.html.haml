@@ -14,5 +14,6 @@
   = f.text_field :facebook
   = f.text_field :twitter
   = f.text_field :instagram
+  = f.text_field :all_tags, placeholder: "Tags separated with comma"
   = f.select(:category, Category.all.collect {|c| [c.name, c.id]})
   = f.submit 'Save'
