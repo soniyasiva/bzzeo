@@ -1,4 +1,9 @@
 class Profile < ActiveRecord::Base
+  # geo
+  acts_as_mappable
+  before_validation :geocode_address, :on => [:create, :update]
+
+  # associations
   belongs_to :category
   belongs_to :user
   has_many :profile_tags
@@ -39,5 +44,12 @@ class Profile < ActiveRecord::Base
   # tag form helper on display
   def all_tags
     self.tags.map(&:name).join(", ")
+  end
+
+  private
+  def geocode_address
+    geo=Geokit::Geocoders::MultiGeocoder.geocode (address)
+    errors.add(:address, "Could not Geocode address") if !geo.success
+    self.lat, self.lng = geo.lat,geo.lng if geo.success
   end
 end

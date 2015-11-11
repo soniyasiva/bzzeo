@@ -11,6 +11,12 @@
       %b Phone:
       = @profile.phone
     %p
+      %b Address:
+      = @profile.address
+    %p
+      %b Geo Codeded:
+      = "#{@profile.lat}, #{@profile.lng}"
+    %p
       %b Status:
       = @profile.status
     %p

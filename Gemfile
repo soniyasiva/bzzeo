@@ -26,6 +26,9 @@ gem 'bootstrap_form'
 gem 'shareable'
 # slugs
 gem 'friendly_id', '~> 5.1.0'
+# geo
+gem 'geokit'
+gem 'geokit-rails'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
