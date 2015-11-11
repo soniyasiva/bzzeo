@@ -17,10 +17,10 @@ class Profile < ActiveRecord::Base
   has_many :senders, :class_name => 'Conversation', :foreign_key => 'sender_id'
   has_many :receivers, :class_name => 'Conversation', :foreign_key => 'receiver_id'
 
+  # validations
   validates :user, presence: true
   validates_uniqueness_of :user_id
 
-  # implement
   # checks to see whether the current profile is friended by the user. should be passed current_user
   def friend? user
     frienders.where(friend_id: user.profile.id).any? || friendeds.where(profile_id: user.profile.id).any?
@@ -47,6 +47,7 @@ class Profile < ActiveRecord::Base
   end
 
   private
+  # geocodes address to lat lng on create and update
   def geocode_address
     geo=Geokit::Geocoders::MultiGeocoder.geocode (address)
     errors.add(:address, "Could not Geocode address") if !geo.success
