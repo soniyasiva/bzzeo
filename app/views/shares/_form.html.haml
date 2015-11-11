@@ -1,10 +1,5 @@
 = bootstrap_form_for @share do |f|
-  - if @share.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@share.errors.count, "error")} prohibited this share from being saved:"
-      %ul
-        - @share.errors.full_messages.each do |msg|
-          %li= msg
+  = render 'shared/form_errors', model: @share
 
   = f.hidden_field :post_id, value: @post.id
   = f.submit 'Share'
