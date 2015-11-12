@@ -1,3 +1,5 @@
+include Video
+
 class Profile < ActiveRecord::Base
   # geo
   acts_as_mappable
@@ -18,10 +20,13 @@ class Profile < ActiveRecord::Base
   has_many :receivers, :class_name => 'Conversation', :foreign_key => 'receiver_id'
   has_many :partners, :class_name => 'Partner', :foreign_key => 'profile_id'
   has_many :partnered, :class_name => 'Partner', :foreign_key => 'partner_id'
+  has_many :partner_profiles, through: :partners, :source => :partner
 
   # validations
   validates :user, presence: true
   validates_uniqueness_of :user_id
+
+  before_save :format_video
 
   # checks to see whether the current profile is friended by the user. should be passed current_user
   def friend? user
@@ -51,6 +56,10 @@ class Profile < ActiveRecord::Base
   # tag form helper on display
   def all_tags
     self.tags.map(&:name).join(", ")
+  end
+
+  def format_video
+    self.video = extract_video_id video
   end
 
   private
