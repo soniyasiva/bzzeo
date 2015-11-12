@@ -33,13 +33,13 @@
           .row.category
             .col-xs-12
               %h4 Category
-              %button.btn.btn-default= @profile.category.name unless @profile.category.nil?
+              .non-btn= @profile.category.name unless @profile.category.nil?
         .col-xs-12.col-sm-6
           .row.tags
             .col-xs-12
               %h4 Tags
               - @profile.tags.each do |tag|
-                %button.btn.btn-default= tag.name
+                .non-btn= tag.name
       .row
         .col-xs-12.col-sm-6
           .row.contact

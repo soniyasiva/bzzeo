@@ -27,6 +27,25 @@ body {
     height: 300px;
   }
 }
+.non-btn {
+  display: inline-block;
+  margin-bottom: 0px;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857;
+  border-radius: 4px;
+  -moz-user-select: none;
+  // default
+  color: #333;
+  background-color: #FFF;
+  border-color: #CCC;
+}
 // BASE
 // POST START
 .post {
@@ -88,6 +107,37 @@ body {
   }
 }
 // PROFILE END
+// PROFILE LIST START
+.profiles {
+  .profile {
+    .left-panel {
+      .thumb {
+        margin-top: 1.7em;
+      }
+    }
+    .right-panel {
+      .name {
+
+      }
+      .status {
+
+      }
+      .category-header {
+
+      }
+      .category {
+
+      }
+      .distance-header {
+
+      }
+      .distance {
+
+      }
+    }
+  }
+}
+// PROFILE LIST END
 // SHARE START
 nav.share {display:inline-block;} /* shareable's nav tag */
 nav.share div {float:left;}
