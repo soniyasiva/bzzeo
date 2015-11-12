@@ -42,3 +42,5 @@
       = @profile.friend?(current_user) ? "Unfollow" : "Follow"
     = link_to partner_profile_path(@profile), :class => "button btn btn-primary partner", method: :put, remote: true, :data => { :id => @profile.id } do
       = @profile.partner?(current_user) ? "Unpartner" : "Partner"
+    = link_to new_conversation_path(profile_id: @profile.id), :class => "button btn btn-primary" do
+      Message

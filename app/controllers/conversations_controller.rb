@@ -15,6 +15,7 @@ class ConversationsController < ApplicationController
   # GET /conversations/new
   def new
     @conversation = Conversation.new
+    @conversation.receiver_id = params[:profile_id] unless params[:profile_id].nil?
   end
 
   # GET /conversations/1/edit
