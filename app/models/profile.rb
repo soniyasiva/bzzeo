@@ -16,6 +16,8 @@ class Profile < ActiveRecord::Base
   has_many :friendeds, :class_name => 'Friend', :foreign_key => 'friend_id'
   has_many :senders, :class_name => 'Conversation', :foreign_key => 'sender_id'
   has_many :receivers, :class_name => 'Conversation', :foreign_key => 'receiver_id'
+  has_many :partners, :class_name => 'Partner', :foreign_key => 'profile_id'
+  has_many :partnered, :class_name => 'Partner', :foreign_key => 'partner_id'
 
   # validations
   validates :user, presence: true
@@ -24,6 +26,11 @@ class Profile < ActiveRecord::Base
   # checks to see whether the current profile is friended by the user. should be passed current_user
   def friend? user
     frienders.where(friend_id: user.profile.id).any? || friendeds.where(profile_id: user.profile.id).any?
+  end
+
+  # checks to see whether the current profile is partners by the user. should be passed current_user
+  def partner? user
+    partnered.where(profile_id: user.profile.id).any?
   end
 
   def friends

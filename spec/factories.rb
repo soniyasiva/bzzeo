@@ -1,19 +1,26 @@
-FactoryGirl.define do  factory :page do
-    html "MyText"
-slug "MyString"
-  end
-  factory :conversation do
-    sender nil
-receiver nil
-message "MyText"
-read false
-  end
-  factory :friend do
+FactoryGirl.define do
+  factory :partner do
     profile nil
-friend nil
-mutual false
+    partner nil
   end
 
+  factory :page do
+    html "MyText"
+    slug "MyString"
+  end
+
+  factory :conversation do
+    sender nil
+    receiver nil
+    message "MyText"
+    read false
+  end
+
+  factory :friend do
+    profile nil
+    friend nil
+    mutual false
+  end
 
   factory :share do
     post

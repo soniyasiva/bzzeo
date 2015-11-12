@@ -40,6 +40,16 @@ $(document).on 'ajax:success', 'a.friend', (status,data,xhr)->
     else
       $(this).text("Unfollow")
 
+# Rails creates this event, when the link_to(remote: true) successfully executes
+$(document).on 'ajax:success', 'a.partner', (status,data,xhr)->
+  console.log 'partner'
+  # toggle links text
+  $("a.partner[data-id=#{data.id}]").each ->
+    if $(this).text().indexOf("Un") > -1
+      $(this).text("Partner")
+    else
+      $(this).text("Unpartner")
+
 $(document).on 'ajax:success', '.new_comment', (status,data,xhr)->
   console.log "comment"
   console.log data

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151111161406) do
+ActiveRecord::Schema.define(version: 20151111174641) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,6 +83,15 @@ ActiveRecord::Schema.define(version: 20151111161406) do
   end
 
   add_index "pages", ["slug"], name: "index_pages_on_slug", unique: true, using: :btree
+
+  create_table "partners", force: :cascade do |t|
+    t.integer  "profile_id"
+    t.integer  "partner_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "partners", ["profile_id"], name: "index_partners_on_profile_id", using: :btree
 
   create_table "posts", force: :cascade do |t|
     t.string   "image_url"
@@ -165,6 +174,7 @@ ActiveRecord::Schema.define(version: 20151111161406) do
   add_foreign_key "friends", "profiles"
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "profiles"
+  add_foreign_key "partners", "profiles"
   add_foreign_key "posts", "profiles"
   add_foreign_key "profile_tags", "profiles"
   add_foreign_key "profile_tags", "tags"

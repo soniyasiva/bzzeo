@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :partners
   resources :pages
   resources :conversations
   resources :friends
@@ -15,6 +16,7 @@ Rails.application.routes.draw do
   resources :profiles do
     member do
       put "friend", to: "profiles#friend"
+      put "partner", to: "profiles#partner"
     end
   end
   devise_for :users

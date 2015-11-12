@@ -1,6 +1,7 @@
 class ProfilesController < ApplicationController
-  before_action :set_profile, only: [:show, :edit, :update, :destroy, :friend]
+  before_action :set_profile, only: [:show, :edit, :update, :destroy, :friend, :partner]
 
+  # for friending
   def friend
     puts "===== friend ====="
     puts params.inspect
@@ -18,6 +19,25 @@ class ProfilesController < ApplicationController
       render json: { friend: @friend, id: @profile.id }
     else
       redirect_to @friend
+    end
+  end
+
+  # for preferred partnerships
+  def partner
+    puts "===== partner ====="
+    puts params.inspect
+    if @profile.partner? current_user
+      @profile.partnered.where(profile_id: current_user.profile.id).destroy_all
+    else
+      # create a partner
+      @partner = Partner.create(partner: @profile, profile_id: current_user.profile.id)
+    end
+    puts @partner
+
+    if request.xhr?
+      render json: { partner: @partner, id: @profile.id }
+    else
+      redirect_to @partner
     end
   end
 
