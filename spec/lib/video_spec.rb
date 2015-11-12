@@ -14,18 +14,23 @@ require 'rails_helper'
 include Video
 
 describe Video do
+
+  # helper vars
+  vimeo_id = '143243001'
+  youtube_id = 'HK0pBDZiWgk'
+
   describe "url manipulation" do
     context "from youtube" do
       it "extracts video id from share url" do
-        expect(extract_video_id("https://youtu.be/HK0pBDZiWgk")).to eq("HK0pBDZiWgk")
+        expect(extract_video_id("https://youtu.be/#{youtube_id}")).to eq(youtube_id)
       end
 
       it "extracts video id from normal url" do
-        expect(extract_video_id("https://www.youtube.com/watch?v=HK0pBDZiWgk")).to eq("HK0pBDZiWgk")
+        expect(extract_video_id("https://www.youtube.com/watch?v=#{youtube_id}")).to eq(youtube_id)
       end
 
       it "extracts video id from polluted url" do
-        expect(extract_video_id("https://www.youtube.com/watch?v=HK0pBDZiWgk&ok=nok")).to eq("HK0pBDZiWgk")
+        expect(extract_video_id("https://www.youtube.com/watch?v=#{youtube_id}&ok=nok")).to eq(youtube_id)
       end
 
       it "returns nil on bad url" do
@@ -35,22 +40,22 @@ describe Video do
 
     context "from vimeo" do
       it "extracts video id from normal and share urls" do
-        expect(extract_video_id("https://vimeo.com/143243001")).to eq("143243001")
+        expect(extract_video_id("https://vimeo.com/#{vimeo_id}")).to eq(vimeo_id)
       end
 
       it "extracts video id from polluted urls" do
-        expect(extract_video_id("https://vimeo.com/143243001?ok=nok")).to eq("143243001")
+        expect(extract_video_id("https://vimeo.com/#{vimeo_id}?ok=nok")).to eq(vimeo_id)
       end
     end
   end
 
   describe "video platform" do
     it "returns youtube platform" do
-      expect(video_platform? "HK0pBDZiWgk").to eq('youtube')
+      expect(video_platform? youtube_id).to eq('youtube')
     end
 
     it "returns vimeo platform" do
-      expect(video_platform? "143243001").to eq('vimeo')
+      expect(video_platform? vimeo_id).to eq('vimeo')
     end
 
     it "returns no platform" do
@@ -60,11 +65,11 @@ describe Video do
 
   describe "thumbnails" do
     it "gets youtube thumbnail" do
-      expect(get_thumbnail("HK0pBDZiWgk")).to eq("https://img.youtube.com/vi/HK0pBDZiWgk/mqdefault.jpg")
+      expect(get_thumbnail(youtube_id)).to eq("https://img.youtube.com/vi/#{youtube_id}/mqdefault.jpg")
     end
 
     it "gets vimeo thumbnail" do
-      expect(get_thumbnail("143243001")).to eq("https://i.vimeocdn.com/video/540773028_640.jpg")
+      expect(get_thumbnail(vimeo_id)).to eq("https://i.vimeocdn.com/video/540773028_640.jpg")
     end
   end
 
