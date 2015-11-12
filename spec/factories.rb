@@ -66,7 +66,7 @@ FactoryGirl.define do
 
   factory :profile do
     name "First Exit Media"
-    video "-9dAhOsyXBk"
+    video_url "-9dAhOsyXBk"
     representitive "Zach Levy"
     phone "647 667 5215"
     status "Coding until dawn"

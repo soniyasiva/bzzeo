@@ -2,7 +2,7 @@
   = render 'shared/form_errors', model: @profile
 
   = f.text_field :name
-  = f.text_field :video
+  = f.text_field :video_url, :value => render_url(@profile.video_url)
   = f.text_field :representitive
   = f.text_field :phone
   = f.text_field :address

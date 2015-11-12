@@ -59,7 +59,8 @@ class Profile < ActiveRecord::Base
   end
 
   def format_video
-    self.video = extract_video_id video
+    self.video_url = extract_video_id video_url
+    self.thumbnail_url = get_thumbnail video_url
   end
 
   private

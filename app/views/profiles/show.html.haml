@@ -2,10 +2,12 @@
   .col-xs-12
     .row.video
       .col-xs-12
-        = embed(@profile.video).html_safe unless @profile.video.blank?
+        = embed(@profile.video_url).html_safe unless @profile.video_url.blank?
     .row.info
       .col-xs-12
         .col-xs-12.col-sm-4.basic
+          -# .pull-left
+          -#   %img{ :src => @profile.thumbnail_url, :class => "img-responsive" }
           %h2.name= @profile.name
           %p= @profile.status
         .col-xs-12.col-sm-3.options
@@ -62,7 +64,7 @@
         .row.partner
           = link_to profile_path(partner), :class => "col-xs-12" do
             .col-xs-5
-              %img{ :src => "https://img.youtube.com/vi/#{partner.video}/mqdefault.jpg", :class => "img-responsive" }
+              %img{ :src => partner.thumbnail_url, :class => "img-responsive" }
             .col-xs-7
               %h5= partner.name
               %p= partner.category.name unless partner.category.nil?

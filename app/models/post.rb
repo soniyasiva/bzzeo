@@ -14,6 +14,7 @@ class Post < ActiveRecord::Base
 
   def format_video
     self.video_url = extract_video_id video_url
+    self.thumbnail_url = get_thumbnail video_url
   end
 
   def has_content

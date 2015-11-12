@@ -8,7 +8,7 @@ RSpec.describe "profiles/show", type: :view do
   it "renders attributes in <p>" do
     render
     expect(rendered).to match(/Name/)
-    expect(rendered).to match(/Video/)
+    expect(rendered).to match(/Video Url/)
     expect(rendered).to match(/Representitive/)
     expect(rendered).to match(/Phone/)
     expect(rendered).to match(/Status/)

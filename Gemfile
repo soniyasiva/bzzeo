@@ -24,6 +24,7 @@ gem 'bootstrap-sass', '~> 3.3.4'
 gem 'bootstrap_form'
 # social
 gem 'shareable'
+gem 'vimeo'
 # slugs
 gem 'friendly_id', '~> 5.1.0'
 # geo

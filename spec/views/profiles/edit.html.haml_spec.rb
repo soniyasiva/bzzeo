@@ -12,7 +12,7 @@ RSpec.describe "profiles/edit", type: :view do
 
       assert_select "input#profile_name[name=?]", "profile[name]"
 
-      assert_select "input#profile_video[name=?]", "profile[video]"
+      assert_select "input#profile_video[name=?]", "profile[video_url]"
 
       assert_select "input#profile_representitive[name=?]", "profile[representitive]"
 

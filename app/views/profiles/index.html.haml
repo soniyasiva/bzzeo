@@ -5,7 +5,7 @@
     %thead
       %tr
         %th Name
-        %th Video
+        %th Video Url
         %th Representitive
         %th Phone
         %th Status
@@ -22,7 +22,7 @@
       - @profiles.each do |profile|
         %tr
           %td= profile.name
-          %td= profile.video
+          %td= profile.video_url
           %td= profile.representitive
           %td= profile.phone
           %td= profile.status
