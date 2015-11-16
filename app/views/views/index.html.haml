@@ -1,0 +1,23 @@
+%h1 Listing views
+
+%table
+  %thead
+    %tr
+      %th Profile
+      %th Viewed
+      %th
+      %th
+      %th
+
+  %tbody
+    - @views.each do |view|
+      %tr
+        %td= view.profile
+        %td= view.viewed
+        %td= link_to 'Show', view
+        %td= link_to 'Edit', edit_view_path(view)
+        %td= link_to 'Destroy', view, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New View', new_view_path

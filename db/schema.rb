@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151112210058) do
+ActiveRecord::Schema.define(version: 20151116200241) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -171,6 +171,15 @@ ActiveRecord::Schema.define(version: 20151112210058) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  create_table "views", force: :cascade do |t|
+    t.integer  "profile_id"
+    t.integer  "viewed_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "views", ["profile_id"], name: "index_views_on_profile_id", using: :btree
+
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "profiles"
   add_foreign_key "friends", "profiles"
@@ -184,4 +193,5 @@ ActiveRecord::Schema.define(version: 20151112210058) do
   add_foreign_key "profiles", "users"
   add_foreign_key "shares", "posts"
   add_foreign_key "shares", "profiles"
+  add_foreign_key "views", "profiles"
 end

@@ -1,0 +1,16 @@
+= form_for @view do |f|
+  - if @view.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@view.errors.count, "error")} prohibited this view from being saved:"
+      %ul
+        - @view.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :profile
+    = f.text_field :profile
+  .field
+    = f.label :viewed
+    = f.text_field :viewed
+  .actions
+    = f.submit 'Save'

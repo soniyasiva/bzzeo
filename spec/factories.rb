@@ -1,4 +1,10 @@
 FactoryGirl.define do
+
+  factory :view do
+    profile nil
+    viewed nil
+  end
+
   factory :partner do
     profile nil
     partner nil

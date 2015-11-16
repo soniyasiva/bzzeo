@@ -21,6 +21,10 @@ class Profile < ActiveRecord::Base
   has_many :partners, :class_name => 'Partner', :foreign_key => 'profile_id'
   has_many :partnered, :class_name => 'Partner', :foreign_key => 'partner_id'
   has_many :partner_profiles, through: :partners, :source => :partner
+  has_many :views
+  has_many :viewed, :class_name => 'View', :foreign_key => 'viewed_id'
+  has_many :view_profiles, through: :views, :source => :profile
+  has_many :viewed_profiles, through: :viewed, :source => :viewed
 
   # validations
   validates :user, presence: true
