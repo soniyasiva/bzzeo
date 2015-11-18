@@ -1,0 +1,151 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+*/
+
+ // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
+ @import "bootstrap-sprockets";
+ @import "bootstrap";
+ @import "rails_bootstrap_forms";
+
+// BASE
+body {
+  padding-top: 51px;
+}
+.video {
+  iframe {
+    width: 100%;
+    height: 300px;
+  }
+}
+.non-btn {
+  display: inline-block;
+  margin-bottom: 0px;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857;
+  border-radius: 4px;
+  -moz-user-select: none;
+  // default
+  color: #333;
+  background-color: #FFF;
+  border-color: #CCC;
+}
+// BASE
+// POST START
+.post {
+  .profile {
+
+  }
+  .image {
+
+  }
+  .description {
+
+  }
+  .video {
+
+  }
+}
+.comments {
+  .comment {
+    .profile {
+
+    }
+    .description {
+
+    }
+  }
+}
+// POST END
+// PROFILE START
+.profile {
+  .video {
+
+  }
+  .info {
+    .basic {
+
+    }
+    .options {
+      .social-share {
+
+      }
+    }
+  }
+  .category {
+
+  }
+  .tags {
+
+  }
+  .contact {
+
+  }
+  .address {
+
+  }
+  .partners {
+    .partner {
+
+    }
+  }
+}
+// PROFILE END
+// PROFILE LIST START
+.profiles {
+  .profile {
+    .left-panel {
+      .thumb {
+        margin-top: 1.7em;
+      }
+    }
+    .right-panel {
+      .name {
+
+      }
+      .status {
+
+      }
+      .category-header {
+
+      }
+      .category {
+
+      }
+      .distance-header {
+
+      }
+      .distance {
+
+      }
+    }
+  }
+}
+// PROFILE LIST END
+// SHARE START
+nav.share {display:inline-block;} /* shareable's nav tag */
+nav.share div {float:left;}
+nav.share iframe {border:0; margin-top:0; padding-top:0;} /* if using medium sized buttons */
+#___plusone_0 {font-size: default !important;}
+.fb_iframe_widget span { vertical-align: top; }
+.fb_edge_widget_with_comment { vertical-align: top;}
+.fb-like{display:inline-block}
+* html .fb-like{display:inline}/* ie6 inline block fix*/
+*+html .fb-like{display:inline}/* ie7 inline block fix*/
+// SHARE END

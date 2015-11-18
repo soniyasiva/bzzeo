@@ -1,0 +1,22 @@
+%h1 Listing pages
+
+.table-responsive
+  %table.table.table-striped
+    %thead
+      %tr
+        %th Html
+        %th Slug
+        %th
+        %th
+        %th
+
+    %tbody
+      - @pages.each do |page|
+        %tr
+          %td= page.html
+          %td= page.slug
+          %td= link_to 'Show', page
+          %td= link_to 'Edit', edit_page_path(page)
+          %td= link_to 'Destroy', page, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+= link_to 'New Page', new_page_path

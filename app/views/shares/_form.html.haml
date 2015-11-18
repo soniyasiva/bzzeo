@@ -1,0 +1,7 @@
+= bootstrap_form_for @share do |f|
+  = render 'shared/form_errors', model: @share
+
+  = f.hidden_field :post_id, value: @post.id
+  = f.submit 'Share'
+
+= render 'shared/post', post: @post

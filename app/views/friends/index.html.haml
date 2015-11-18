@@ -1,0 +1,25 @@
+%h1 Listing friends
+
+%table
+  %thead
+    %tr
+      %th Profile
+      %th Friend
+      %th Mutual
+      %th
+      %th
+      %th
+
+  %tbody
+    - @friends.each do |friend|
+      %tr
+        %td= friend.profile
+        %td= friend.friend
+        %td= friend.mutual
+        %td= link_to 'Show', friend
+        %td= link_to 'Edit', edit_friend_path(friend)
+        %td= link_to 'Destroy', friend, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Friend', new_friend_path

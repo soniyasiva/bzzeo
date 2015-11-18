@@ -1,0 +1,5 @@
+= bootstrap_form_for @tag do |f|
+  = render 'shared/form_errors', model: @tag
+
+  = f.text_field :name
+  = f.submit 'Save'

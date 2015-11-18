@@ -5,3 +5,39 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+users = User.create([
+  {
+    email: "zacharyalevy@gmail.com",
+    password: "password",
+    password_confirmation: "password"
+  }, {
+    email: "zach@firstexitmedia.com",
+    password: "password",
+    password_confirmation: "password"
+  }
+])
+
+profiles = Profile.create([
+  {
+    user: User.first,
+    name: "Zach Levy"
+  }, {
+    user: User.second,
+    name: "Josh Levy"
+  }
+])
+
+category = Category.create([
+  { name: "Software" },
+  { name: "Real Estate" },
+  { name: "Sales" }
+])
+
+post_categories = PostCategory.create([
+  { name: "Review" },
+  { name: "Job" },
+  { name: "Status" },
+  { name: "Portfolio" },
+  { name: "Promotion" }
+])

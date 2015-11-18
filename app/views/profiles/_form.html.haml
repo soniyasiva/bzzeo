@@ -1,0 +1,14 @@
+= bootstrap_form_for @profile do |f|
+  = render 'shared/form_errors', model: @profile
+
+  = f.text_field :name
+  = f.text_field :video_url, :value => render_url(@profile.video_url)
+  = f.text_field :representitive
+  = f.text_field :phone
+  = f.text_field :address
+  = f.text_field :facebook
+  = f.text_field :twitter
+  = f.text_field :instagram
+  = f.text_field :all_tags, placeholder: "Tags separated with comma"
+  = f.select(:category_id, Category.all.collect {|c| [c.name, c.id]})
+  = f.submit 'Save'

@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Profile:
+  = @partner.profile
+%p
+  %b Partner:
+  = @partner.partner
+
+= link_to 'Edit', edit_partner_path(@partner)
+\|
+= link_to 'Back', partners_path

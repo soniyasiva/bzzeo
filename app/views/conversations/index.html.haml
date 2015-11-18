@@ -1,0 +1,26 @@
+%h1 Listing conversations
+
+.table-responsive
+  %table.table.table-striped
+    %thead
+      %tr
+        %th Sender
+        %th Receiver
+        %th Message
+        %th Read
+        %th
+        %th
+        %th
+
+    %tbody
+      - @conversations.each do |conversation|
+        %tr
+          %td= conversation.sender.name
+          %td= conversation.receiver.name
+          %td= conversation.message
+          %td= conversation.read
+          %td= link_to 'Show', conversation
+          %td= link_to 'Edit', edit_conversation_path(conversation)
+          %td= link_to 'Destroy', conversation, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+= link_to 'New Conversation', new_conversation_path

@@ -1,4 +1,29 @@
 Rails.application.routes.draw do
+  resources :post_categories
+  resources :views
+  resources :partners
+  resources :pages
+  resources :conversations
+  resources :friends
+  resources :shares
+  resources :likes
+  resources :comments
+  resources :posts do
+    member do
+      put "like", to: "posts#like"
+      post "comment", to: "posts#comment"
+    end
+  end
+  resources :tags
+  resources :profiles do
+    member do
+      put "friend", to: "profiles#friend"
+      put "partner", to: "profiles#partner"
+    end
+  end
+  devise_for :users
+  root to: "posts#index"
+  resources :categories
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

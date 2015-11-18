@@ -1,0 +1,73 @@
+.row.profile
+  .col-xs-12
+    .row.video
+      .col-xs-12
+        = embed(@profile.video_url).html_safe unless @profile.video_url.blank?
+    .row.info
+      .col-xs-12
+        .col-xs-12.col-sm-4.basic
+          -# .pull-left
+          -#   %img{ :src => @profile.thumbnail_url, :class => "img-responsive" }
+          %h2.name= @profile.name
+        .col-xs-12.col-sm-3.options
+          .ul.list-inline
+            %li
+              = link_to friend_profile_path(@profile), :class => "button btn btn-primary friend", method: :put, remote: true, :data => { :id => @profile.id } do
+                = @profile.friend?(current_user) ? "Unfollow" : "Follow"
+            %li
+              = link_to partner_profile_path(@profile), :class => "button btn btn-primary partner", method: :put, remote: true, :data => { :id => @profile.id } do
+                = @profile.partner?(current_user) ? "Unpartner" : "Partner"
+            %li
+              = link_to new_conversation_path(profile_id: @profile.id), :class => "button btn btn-primary" do
+                Message
+            %li
+              = link_to new_post_path(params: { mention_id: @profile.id, post_category_id: PostCategory.find_by(name: 'review').id }), :class => "button btn btn-primary" do
+                Review
+        .col-xs-12.col-sm-5.social-share
+          %ul.list-inline
+            %li= twitter_button
+            %li= facebook_button
+            %li= linkedin_button
+            %li= google_plus_button
+    .col-xs-12.col-sm-8.more-info
+      .row
+        .col-xs-12.col-sm-6
+          .row.category
+            .col-xs-12
+              %h4 Category
+              .non-btn= @profile.category.name unless @profile.category.nil?
+        .col-xs-12.col-sm-6
+          .row.tags
+            .col-xs-12
+              %h4 Tags
+              - @profile.tags.each do |tag|
+                .non-btn= tag.name
+      .row
+        .col-xs-12.col-sm-6
+          .row.contact
+            .col-xs-12
+              %h4 Contact Info
+              %p= @profile.representitive
+              %p= @profile.phone
+              %p= @profile.user.email unless @profile.user.nil?
+              %p= link_to @profile.facebook, "https://www.facebook.com/#{@profile.facebook}", {:target => "_blank"} unless @profile.facebook.blank?
+              %p= link_to @profile.twitter, "https://twitter.com/#{@profile.twitter}", {:target => "_blank"} unless @profile.twitter.blank?
+              %p= link_to @profile.instagram, "https://www.instagram.com/#{@profile.instagram}", {:target => "_blank"} unless @profile.instagram.blank?
+        .col-xs-12.col-sm-6
+          .row.address
+            .col-xs-12
+              %h4 Address
+              %p= @profile.address
+              %p= "#{@profile.lat}, #{@profile.lng}" unless @profile.lat.nil?
+
+    .col-xs-12.col-sm-4.partners
+      %h4 Preferred Partners
+      - @profile.partner_profiles.each do |partner|
+        .row.partner
+          = link_to profile_path(partner), :class => "col-xs-12" do
+            .col-xs-5
+              %img{ :src => partner.thumbnail_url, :class => "img-responsive" }
+            .col-xs-7
+              %h5= partner.name
+              %p= partner.category.name unless partner.category.nil?
+            %hr

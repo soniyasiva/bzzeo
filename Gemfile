@@ -13,6 +13,23 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
+# .haml instead of .html
+gem "haml-rails", "~> 0.9"
+# users
+gem 'devise'
+# uploadcare
+gem 'uploadcare-rails'
+# bootstrap
+gem 'bootstrap-sass', '~> 3.3.4'
+gem 'bootstrap_form'
+# social
+gem 'shareable'
+gem 'vimeo'
+# slugs
+gem 'friendly_id', '~> 5.1.0'
+# geo
+gem 'geokit'
+gem 'geokit-rails'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -41,5 +58,15 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-end
 
+  # testing
+  gem 'rspec-rails', '~> 3.0'
+  gem 'factory_girl_rails'
+  gem 'guard-rails', require: false
+  gem 'guard-rspec', require: false
+
+  # debug user interaction
+  gem 'capybara'
+  gem 'launchy'
+  # gem 'database_cleaner'
+end
