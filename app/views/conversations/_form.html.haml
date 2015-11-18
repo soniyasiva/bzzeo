@@ -3,5 +3,4 @@
 
   = f.select(:receiver_id, Profile.all.collect {|c| [c.name, c.id]})
   = f.text_area :message
-  = f.check_box :read
-  = f.submit 'Save'
+  = f.submit 'Send'

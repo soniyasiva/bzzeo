@@ -1,0 +1,12 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+  %body
+    %h1
+      New Message from
+      = @conversation.sender.name
+    %p
+      You can view your message here
+    %p
+      = link_to "View Message", conversation_path(@conversation)
