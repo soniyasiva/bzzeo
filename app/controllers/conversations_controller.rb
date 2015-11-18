@@ -10,6 +10,7 @@ class ConversationsController < ApplicationController
   # GET /conversations/1
   # GET /conversations/1.json
   def show
+    @conversation.update(read: true) if @conversation.receiver_id == current_user.id
   end
 
   # GET /conversations/new
