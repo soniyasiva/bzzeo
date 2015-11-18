@@ -79,6 +79,7 @@ class Profile < ActiveRecord::Base
   private
   # geocodes address to lat lng on create and update
   def geocode_address
+    return if address.blank?
     geo=Geokit::Geocoders::MultiGeocoder.geocode (address)
     errors.add(:address, "Could not Geocode address") if !geo.success
     self.lat, self.lng = geo.lat,geo.lng if geo.success
