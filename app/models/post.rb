@@ -3,6 +3,7 @@ include Video
 class Post < ActiveRecord::Base
   belongs_to :profile
   belongs_to :post_category
+  belongs_to :mention, class_name: "Profile"
   has_many :comments
   has_many :likes
   has_many :shares
@@ -10,6 +11,7 @@ class Post < ActiveRecord::Base
   validates :profile, presence: true
   validate :has_content
   validate :does_not_have_video_and_image
+  validate :has_mention_for_review
 
   before_save :format_video
 
@@ -24,6 +26,10 @@ class Post < ActiveRecord::Base
 
   def does_not_have_video_and_image
     errors[:base] << "Post cannot have both an image and video" if !image_url.blank? && !video_url.blank?
+  end
+
+  def has_mention_for_review
+    errors[:base] << "Review must mention a profile" if post_category_id == PostCategory.find_by(name: 'review').id && mention_id.blank?
   end
 
   def liked? user

@@ -20,6 +20,9 @@
             %li
               = link_to new_conversation_path(profile_id: @profile.id), :class => "button btn btn-primary" do
                 Message
+            %li
+              = link_to new_post_path(params: { mention_id: @profile.id, post_category_id: PostCategory.find_by(name: 'review').id }), :class => "button btn btn-primary" do
+                Review
         .col-xs-12.col-sm-5.social-share
           %ul.list-inline
             %li= twitter_button

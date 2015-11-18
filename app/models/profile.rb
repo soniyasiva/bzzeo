@@ -11,6 +11,7 @@ class Profile < ActiveRecord::Base
   has_many :profile_tags
   has_many :tags, through: :profile_tags
   has_many :posts
+  has_many :mentions, :class_name => 'Post', :foreign_key => 'mention_id'
   has_many :comments
   has_many :likes
   has_many :shares
