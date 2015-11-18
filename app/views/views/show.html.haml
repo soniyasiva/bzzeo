@@ -1,12 +1,6 @@
-%p#notice= notice
-
 %p
   %b Profile:
-  = @view.profile
+  = @view.profile.name
 %p
   %b Viewed:
-  = @view.viewed
-
-= link_to 'Edit', edit_view_path(@view)
-\|
-= link_to 'Back', views_path
+  = @view.viewed.name

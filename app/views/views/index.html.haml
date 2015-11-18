@@ -12,8 +12,8 @@
   %tbody
     - @views.each do |view|
       %tr
-        %td= view.profile
-        %td= view.viewed
+        %td= view.profile.name
+        %td= view.viewed.name
         %td= link_to 'Show', view
         %td= link_to 'Edit', edit_view_path(view)
         %td= link_to 'Destroy', view, :method => :delete, :data => { :confirm => 'Are you sure?' }

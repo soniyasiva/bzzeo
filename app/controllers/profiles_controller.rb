@@ -50,6 +50,8 @@ class ProfilesController < ApplicationController
   # GET /profiles/1
   # GET /profiles/1.json
   def show
+    # viewed profile tracker
+    @view = View.create(profile_id: current_user.id, viewed_id: @profile.id)
   end
 
   # GET /profiles/new
