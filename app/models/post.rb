@@ -2,6 +2,7 @@ include Video
 
 class Post < ActiveRecord::Base
   belongs_to :profile
+  belongs_to :post_category
   has_many :comments
   has_many :likes
   has_many :shares

@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @post_category.name
+
+= link_to 'Edit', edit_post_category_path(@post_category)
+\|
+= link_to 'Back', post_categories_path

@@ -1,4 +1,7 @@
-FactoryGirl.define do
+FactoryGirl.define do  factory :post_category do
+    name "MyString"
+  end
+
 
   factory :view do
     profile nil

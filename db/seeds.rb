@@ -5,3 +5,17 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+category = Category.create([
+  { name: "Software" },
+  { name: "Real Estate" },
+  { name: "Sales" }
+])
+
+post_categories = PostCategory.create([
+  { name: "Review" },
+  { name: "Job" },
+  { name: "Status" },
+  { name: "Portfolio" },
+  { name: "Promotion" }
+])

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151116200241) do
+ActiveRecord::Schema.define(version: 20151118195033) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,16 +93,24 @@ ActiveRecord::Schema.define(version: 20151116200241) do
 
   add_index "partners", ["profile_id"], name: "index_partners_on_profile_id", using: :btree
 
+  create_table "post_categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string   "image_url"
     t.string   "video_url"
     t.text     "description"
     t.integer  "profile_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.string   "thumbnail_url"
+    t.integer  "post_category_id"
   end
 
+  add_index "posts", ["post_category_id"], name: "index_posts_on_post_category_id", using: :btree
   add_index "posts", ["profile_id"], name: "index_posts_on_profile_id", using: :btree
 
   create_table "profile_tags", force: :cascade do |t|
@@ -186,6 +194,7 @@ ActiveRecord::Schema.define(version: 20151116200241) do
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "profiles"
   add_foreign_key "partners", "profiles"
+  add_foreign_key "posts", "post_categories"
   add_foreign_key "posts", "profiles"
   add_foreign_key "profile_tags", "profiles"
   add_foreign_key "profile_tags", "tags"

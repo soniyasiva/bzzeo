@@ -3,6 +3,7 @@
 
   = f.text_field :video_url, :value => render_url(@post.video_url)
   = f.text_area :description
+  = f.select(:post_category_id, PostCategory.all.collect {|c| [c.name, c.id]})
   = f.uploadcare_uploader :image_url, :data => { "images-only" => "true", "crop" => "" }
   %br
   = f.submit 'Save'
