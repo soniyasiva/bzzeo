@@ -32,6 +32,7 @@ class Profile < ActiveRecord::Base
   validates_uniqueness_of :user_id
 
   before_save :format_video
+  before_save :validate_social_media_profiles
 
   # checks to see whether the current profile is friended by the user. should be passed current_user
   def friend? user
@@ -66,6 +67,13 @@ class Profile < ActiveRecord::Base
   def format_video
     self.video_url = extract_video_id video_url
     self.thumbnail_url = get_thumbnail video_url
+  end
+
+  # not implemented
+  def validate_social_media_profiles
+    # "https://www.facebook.com/#{facebook}"
+    # "https://twitter.com/#{twitter}"
+    # "https://www.instagram.com/#{instagram}/" # can't easily validate
   end
 
   private

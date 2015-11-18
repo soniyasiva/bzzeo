@@ -50,9 +50,9 @@
               %p= @profile.representitive
               %p= @profile.phone
               %p= @profile.user.email unless @profile.user.nil?
-              %p= @profile.facebook
-              %p= @profile.twitter
-              %p= @profile.instagram
+              %p= link_to @profile.facebook, "https://www.facebook.com/#{@profile.facebook}", {:target => "_blank"} unless @profile.facebook.blank?
+              %p= link_to @profile.twitter, "https://twitter.com/#{@profile.twitter}", {:target => "_blank"} unless @profile.twitter.blank?
+              %p= link_to @profile.instagram, "https://www.instagram.com/#{@profile.instagram}", {:target => "_blank"} unless @profile.instagram.blank?
         .col-xs-12.col-sm-6
           .row.address
             .col-xs-12
