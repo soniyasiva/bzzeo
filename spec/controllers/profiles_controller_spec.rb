@@ -33,7 +33,6 @@ RSpec.describe ProfilesController, type: :controller do
       video_url: "-9dAhOsyXBk",
       representitive: "Zach Levy",
       phone: "647 667 5215",
-      status: "Coding until dawn",
       category_id: category.id,
       user_id: user.id,
       facebook: "zacharyaaronlevy",

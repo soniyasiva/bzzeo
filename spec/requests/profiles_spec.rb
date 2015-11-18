@@ -33,7 +33,6 @@ RSpec.describe "Profiles", type: :feature do
       fill_in 'Video', :with => 'https://www.youtube.com/watch?v=pt8VYOfr8To'
       fill_in 'Representitive', :with => 'Josh Levy'
       fill_in 'Phone', :with => '902 220 3560'
-      fill_in 'Status', :with => 'Driving a car'
       fill_in 'Facebook', :with => 'levyhvac'
       fill_in 'Twitter', :with => '@levyhvac'
       fill_in 'Instagram', :with => ''

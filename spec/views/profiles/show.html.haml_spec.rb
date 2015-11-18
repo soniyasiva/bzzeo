@@ -11,7 +11,6 @@ RSpec.describe "profiles/show", type: :view do
     expect(rendered).to match(/Video Url/)
     expect(rendered).to match(/Representitive/)
     expect(rendered).to match(/Phone/)
-    expect(rendered).to match(/Status/)
     expect(rendered).to match(//)
     expect(rendered).to match(//)
   end

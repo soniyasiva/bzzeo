@@ -78,7 +78,6 @@ FactoryGirl.define do  factory :post_category do
     video_url "-9dAhOsyXBk"
     representitive "Zach Levy"
     phone "647 667 5215"
-    status "Coding until dawn"
     facebook "zacharyaaronlevy"
     twitter "@zachary_levy"
     instagram "zachary_levy"
