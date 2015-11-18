@@ -17,7 +17,7 @@
           -# text for the post
           .col-xs-12
             = post.description
-        .row.comments
+        .row.comments{ :data => {:id => post.id} }
           -# all comments for the post
           .col-xs-12
             - post.comments.each do |comment|

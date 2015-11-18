@@ -53,6 +53,25 @@ $(document).on 'ajax:success', 'a.partner', (status,data,xhr)->
 $(document).on 'ajax:success', '.new_comment', (status,data,xhr)->
   console.log "comment"
   console.log data
+  comment = data.comment
+  # insert comment with template into posts
+  $(".comments[data-id=#{data.id}] > .col-xs-12").append("
+    <div class=\"row comment\">
+      <div class=\"col-xs-12\">
+        <div class=\"row profile\">
+          <div class=\"col-xs-12\">
+            #{data.profile.name}
+          </div>
+        </div>
+        <div class=\"row description\">
+          <div class=\"col-xs-12\">
+            #{data.comment.description}
+          </div>
+        </div>
+      </div>
+    </div>")
+  # empty the box
+  $('.new-comment textarea').val('')
 
 # document ready
 $ ->

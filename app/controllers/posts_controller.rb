@@ -6,7 +6,7 @@ class PostsController < ApplicationController
     @comment = Comment.create(comment_params)
 
     if request.xhr?
-      render json: { comment: @comment, id: @post.id }
+      render json: { comment: @comment, id: @post.id, profile: @comment.profile }
     else
       redirect_to @comment
     end
