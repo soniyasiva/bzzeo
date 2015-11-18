@@ -18,7 +18,7 @@
 
 
 
-# Rails creates this event, when the link_to(remote: true) successfully executes
+# on post like success
 $(document).on 'ajax:success', 'a.like', (status,data,xhr)->
   # update counter
   $(".likes-count[data-id=#{data.id}]").text data.count
@@ -30,7 +30,7 @@ $(document).on 'ajax:success', 'a.like', (status,data,xhr)->
     else
       $(this).text("Unlike")
 
-# Rails creates this event, when the link_to(remote: true) successfully executes
+# on profile friend success
 $(document).on 'ajax:success', 'a.friend', (status,data,xhr)->
   console.log 'friend'
   # toggle links text
@@ -40,7 +40,7 @@ $(document).on 'ajax:success', 'a.friend', (status,data,xhr)->
     else
       $(this).text("Unfollow")
 
-# Rails creates this event, when the link_to(remote: true) successfully executes
+# on profile partner button success
 $(document).on 'ajax:success', 'a.partner', (status,data,xhr)->
   console.log 'partner'
   # toggle links text
@@ -50,9 +50,9 @@ $(document).on 'ajax:success', 'a.partner', (status,data,xhr)->
     else
       $(this).text("Unpartner")
 
+# on new comment for post success
 $(document).on 'ajax:success', '.new_comment', (status,data,xhr)->
   console.log "comment"
-  console.log data
   comment = data.comment
   # insert comment with template into posts
   $(".comments[data-id=#{data.id}] > .col-xs-12").append("
