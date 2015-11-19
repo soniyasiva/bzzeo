@@ -5,3 +5,6 @@
   .col-xs-12
     - @profiles.each do |profile|
       = render 'shared/profile', profile: profile
+.row.pagination
+  .col-xs-12
+    = will_paginate @profiles

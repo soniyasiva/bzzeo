@@ -2,3 +2,7 @@
 
 - @posts.each do |post|
   = render 'shared/post', post: post, social: false
+
+.row.pagination
+  .col-xs-12
+    = will_paginate @posts

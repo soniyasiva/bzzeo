@@ -3,9 +3,10 @@ class FeedsController < ApplicationController
   # GET /feeds
   # GET /feeds.json
   def index
-    posts = Post.all.includes(:profile, {comments: :profile}, :likes)
-    shares = Share.all.includes(:profile, post: [:profile, {comments: :profile}, :likes])
-    @items = (posts.to_a + shares.to_a).sort_by(&:created_at)
+    # hacky pagination
+    @posts = Post.all.includes(:profile, {comments: :profile}, :likes).paginate(:page => params[:page], :per_page => 10)
+    @shares = Share.all.includes(:profile, post: [:profile, {comments: :profile}, :likes]).paginate(:page => params[:page], :per_page => 10)
+    @items = (@posts.to_a + @shares.to_a).sort_by(&:created_at)
   end
 
   def search

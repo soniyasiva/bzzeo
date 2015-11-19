@@ -7,3 +7,11 @@
     = render 'shared/post', post: item, social: false
   - elsif item.is_a? Share
     = render 'shared/share', share: item, social: false
+
+.row.pagination
+  .col-xs-12
+    -# hacky pagination, paginates the most numerous model
+    - if @posts.count > @shares.count
+      = will_paginate @posts
+    - else
+      = will_paginate @shares
