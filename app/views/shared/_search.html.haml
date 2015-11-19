@@ -1,5 +1,11 @@
 %h3 Search
 
 = bootstrap_form_tag url: search_feeds_path, method: 'get' do |f|
-  = f.text_field :query, placeholder: "Search"
-  = f.submit "Search"
+  .col-xs-12.col-sm-5
+    = f.text_field :query, placeholder: "Search Profiles and Posts"
+  .col-xs-12.col-sm-2
+    = f.select(:category_id, Category.all.collect {|c| [c.name, c.id]}, :include_blank => true)
+  .col-xs-12.col-sm-3
+    = f.text_field :address, placeholder: "Address"
+  .col-xs-12.col-sm-2
+    = f.submit "Search"
