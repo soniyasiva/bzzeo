@@ -30,6 +30,8 @@ gem 'friendly_id', '~> 5.1.0'
 # geo
 gem 'geokit'
 gem 'geokit-rails'
+# ui
+gem 'rails_autolink'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

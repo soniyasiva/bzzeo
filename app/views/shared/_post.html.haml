@@ -19,7 +19,7 @@
         .row.description
           -# text for the post
           .col-xs-12
-            = post.description
+            = auto_link(post.description, :html => { :target => '_blank' }) unless post.description.nil?
         .row.comments{ :data => {:id => post.id} }
           -# all comments for the post
           .col-xs-12
@@ -31,7 +31,7 @@
                       = comment.profile.name
                   .row.description
                     .col-xs-12
-                      = comment.description
+                      = auto_link(comment.description, :html => { :target => '_blank' })
         .row.options
           -# share, like, comment buttons
           .col-xs-12
