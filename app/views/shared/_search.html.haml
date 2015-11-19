@@ -1,0 +1,5 @@
+%h3 Search
+
+= bootstrap_form_tag url: search_feeds_path, method: 'get' do |f|
+  = f.text_field :query, placeholder: "Search"
+  = f.submit "Search"

@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  get "feeds", to: "feeds#index"
+  resources :feeds, :only => [:index] do
+    collection do
+      get 'search', to: "feeds#search"
+    end
+  end
   resources :post_categories
   resources :views
   resources :partners
