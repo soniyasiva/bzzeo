@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "feeds", to: "feeds#index"
   resources :post_categories
   resources :views
   resources :partners
