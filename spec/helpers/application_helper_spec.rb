@@ -18,11 +18,11 @@ RSpec.describe ApplicationHelper, type: :helper do
 
   describe "build video embed html" do
     it "builds from youtube" do
-      expect(embed(youtube_id)).to eq('<iframe src="https://www.youtube.com/embed/HK0pBDZiWgk" frameborder="0" allowfullscreen></iframe>')
+      expect(embed({video_url: youtube_id})).to eq('<iframe src="https://www.youtube.com/embed/HK0pBDZiWgk" frameborder="0" allowfullscreen></iframe>')
     end
 
     it "builds from vimeo" do
-      expect(embed(vimeo_id)).to eq('<iframe src="https://player.vimeo.com/video/143243001?title=0&byline=0&portrait=0&badge=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>')
+      expect(embed({video_url: vimeo_id})).to eq('<iframe src="https://player.vimeo.com/video/143243001?title=0&byline=0&portrait=0&badge=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>')
     end
   end
 

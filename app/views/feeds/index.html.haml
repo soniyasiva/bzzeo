@@ -2,6 +2,6 @@
 
 - @items.each do |item|
   - if item.is_a? Post
-    = render 'shared/post', post: item
+    = render 'shared/post', post: item, social: false
   - elsif item.is_a? Share
-    = render 'shared/share', share: item
+    = render 'shared/share', share: item, social: false

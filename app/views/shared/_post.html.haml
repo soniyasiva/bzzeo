@@ -12,7 +12,10 @@
         .row.video
           -# video, if there is one
           .col-xs-12
-            = embed(post.video_url).html_safe unless post.video_url.blank?
+            -#
+              = link_to '#', { data: { id: post.id }, class: "thumb-wrap" } do
+                %img{ :src => post.thumbnail_url, :class => "img-responsive thumb" }
+            = embed(post).html_safe unless post.video_url.blank?
         .row.description
           -# text for the post
           .col-xs-12
@@ -48,10 +51,11 @@
             = bootstrap_form_for(Comment.new, url: comment_post_path(post), remote: true) do |f|
               = f.text_area :description
               = f.submit "Post Comment", :class => "btn btn-primary submit-comment"
-        .row.social-share
-          .col-xs-12
-            %ul.list-inline
-              %li= twitter_button
-              %li= facebook_button
-              %li= linkedin_button
-              %li= google_plus_button
+        - if social
+          .row.social-share
+            .col-xs-12
+              %ul.list-inline
+                %li= twitter_button
+                %li= facebook_button
+                %li= linkedin_button
+                %li= google_plus_button

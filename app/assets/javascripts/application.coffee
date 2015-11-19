@@ -82,3 +82,12 @@ $ ->
     $(".new-comment[data-new-comment-id=#{post_id}]").toggle()
     false # prevent default
   )
+  # toggle comment box for post
+  $(".post .video a").on('click', ->
+    console.log 'post video thumb clicked'
+    postId = $(this).data('id')
+    $(".post iframe[data-id=#{postId}]").show()
+    $(this).hide()
+    # $(".post .thumb-wrap[data-id=#{postId}]").hide()
+    false # prevent default
+  )

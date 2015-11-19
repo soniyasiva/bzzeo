@@ -2,7 +2,7 @@
   .col-xs-12
     .row.video
       .col-xs-12
-        = embed(@profile.video_url).html_safe unless @profile.video_url.blank?
+        = embed(@profile).html_safe unless @profile.video_url.blank?
     .row.info
       .col-xs-12
         .col-xs-12.col-sm-4.basic
