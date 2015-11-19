@@ -1,15 +1,7 @@
-%h1 Listing feeds
+%h1 Feed
 
-%table
-  %thead
-    %tr
-      %th
-      %th
-      %th
-
-  %tbody
-    - @feeds.each do |feed|
-      %tr
-        %td= feed.id
-
-%br
+- @items.each do |item|
+  - if item.is_a? Post
+    = render 'shared/post', post: item
+  - elsif item.is_a? Share
+    = render 'shared/share', share: item
