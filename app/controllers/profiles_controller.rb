@@ -1,4 +1,7 @@
 class ProfilesController < ApplicationController
+  load_and_authorize_resource
+  check_authorization
+
   before_action :set_profile, only: [:show, :edit, :update, :destroy, :friend, :partner]
 
   # for friending

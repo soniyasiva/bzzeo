@@ -1,4 +1,7 @@
 class PostsController < ApplicationController
+  load_and_authorize_resource
+  check_authorization
+
   before_action :set_post, only: [:show, :edit, :update, :destroy, :like, :comment]
 
   # handles comments for posts

@@ -1,4 +1,7 @@
 class LikesController < ApplicationController
+  load_and_authorize_resource
+  check_authorization
+
   before_action :set_like, only: [:show, :edit, :update, :destroy]
 
   # GET /likes
