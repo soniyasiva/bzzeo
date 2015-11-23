@@ -13,18 +13,29 @@
 */
 
  // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
- @import "bootstrap-sprockets";
- @import "bootstrap";
- @import "rails_bootstrap_forms";
+@import "bootstrap-sprockets";
+// CUSTOM VARIABLES START
+$brand-primary: #0dcccb;
+$brand-secondary: #007f7f;
+// $navbar-inverse-bg:
+// CUSTOM VARIABLES END
+@import "bootswatch/yeti/variables";
+@import "bootstrap";
+@import "rails_bootstrap_forms";
+@import "bootswatch/yeti/bootswatch";
+@import "font-awesome-sprockets";
+@import "font-awesome";
 
 // BASE
 body {
   padding-top: 51px;
+  padding-bottom: 50px;
 }
+body { padding-top: 60px; } // cerulean
 .video {
   iframe {
     width: 100%;
-    height: 300px;
+    //height: 450px;
   }
 }
 .non-btn {
@@ -76,8 +87,26 @@ body {
   }
 }
 // POST END
+// POST SM START
+.post-sm {
+  position: relative;
+  .description {
+    height: 100%;
+    background: $brand-primary;
+    color: #fff;
+  }
+  .type {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+}
+// POST SM END
 // PROFILE START
 .profile {
+  .name {
+    margin: 0;
+  }
   .video {
 
   }
@@ -85,11 +114,14 @@ body {
     .basic {
 
     }
-    .options {
-      .social-share {
-
-      }
+  }
+  .options {
+    a {
+      margin-bottom: 0.5em;
     }
+  }
+  .social-share {
+
   }
   .category {
 

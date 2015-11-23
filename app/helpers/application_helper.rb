@@ -6,9 +6,9 @@ module ApplicationHelper
   def embed video_object, hidden=false
     case video_platform? video_object.video_url
     when 'vimeo'
-      "<iframe data-id=\"#{video_object.id}\" class=\"#{"collapse" if hidden}\" src=\"https://player.vimeo.com/video/#{video_object.video_url}?title=0&byline=0&portrait=0&badge=0\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>"
+      "<div class=\"embed-responsive embed-responsive-16by9\"><iframe data-id=\"#{video_object.id}\" class=\"embed-responsive-item #{"collapse" if hidden}\" src=\"https://player.vimeo.com/video/#{video_object.video_url}?title=0&byline=0&portrait=0&badge=0\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>"
     when 'youtube'
-      "<iframe data-id=\"#{video_object.id}\" class=\"#{"collapse" if hidden}\" src=\"https://www.youtube.com/embed/#{video_object.video_url}\" frameborder=\"0\" allowfullscreen></iframe>"
+      "<div class=\"embed-responsive embed-responsive-16by9\"><iframe data-id=\"#{video_object.id}\" class=\"embed-responsive-item #{"collapse" if hidden}\" src=\"https://www.youtube.com/embed/#{video_object.video_url}\" frameborder=\"0\" allowfullscreen></iframe></div>"
     else
       nil
     end

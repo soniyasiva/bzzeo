@@ -1,0 +1,12 @@
+.col-xs-12.col-sm-3.post-sm
+  = link_to post_path(post) do
+    - if !post.thumbnail_url.blank?
+      %img{ :src => post.thumbnail_url, :class => "img-responsive thumb" }
+    - elsif !post.image_url.blank?
+      = embed(post).html_safe unless post.video_url.blank?
+    - else
+      .description
+        %p.text-center
+        = post.description
+  .type
+    = icon 'briefcase'
