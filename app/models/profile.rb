@@ -33,6 +33,7 @@ class Profile < ActiveRecord::Base
 
   before_save :format_video
   before_save :validate_social_media_profiles
+  before_save :extract_hash_tags
 
   # checks to see whether the current profile is friended by the user. should be passed current_user
   def friend? user
@@ -55,7 +56,7 @@ class Profile < ActiveRecord::Base
   # tag form helper on submit
   def all_tags=(names)
     self.tags = names.split(",").map do |name|
-        Tag.where(name: name.strip).first_or_create!
+      Tag.where(name: name.strip).first_or_create!
     end
   end
 
@@ -79,6 +80,15 @@ class Profile < ActiveRecord::Base
   # magic formula for score
   def score
     views.count + likes.count
+  end
+
+  # takes in strin
+  # returns array of hashtags
+  def extract_hash_tags
+    self.tags.destroy_all
+    description.scan(/\B#\w+/).each do |name|
+      self.tags << Tag.where(name: name.strip).first_or_create!
+    end
   end
 
   private

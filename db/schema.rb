@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151120222015) do
+ActiveRecord::Schema.define(version: 20151125021924) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -140,6 +140,7 @@ ActiveRecord::Schema.define(version: 20151120222015) do
     t.float    "lat"
     t.float    "lng"
     t.string   "thumbnail_url"
+    t.text     "description"
   end
 
   add_index "profiles", ["category_id"], name: "index_profiles_on_category_id", using: :btree

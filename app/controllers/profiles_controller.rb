@@ -114,7 +114,7 @@ class ProfilesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
-      params.require(:profile).permit(:all_tags, :name, :video_url, :representitive, :phone, :address, :category_id, :user_id, :facebook, :twitter, :instagram)
+      params.require(:profile).permit(:all_tags, :name, :video_url, :representitive, :phone, :address, :category_id, :user_id, :facebook, :twitter, :instagram, :description)
     end
 
     # custom strong params for friend action
