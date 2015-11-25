@@ -7,8 +7,9 @@
       .image{:style => "background-image: url(#{post.image_url}-/scale_crop/400x400/center/);"}
     - else
       .description
-        %p.text-center
-        = post.description
+        %p
+          = post.description.truncate 250
+        .image
     -# %img.img.img-responsive.full-width{:src => post.thumbnail_url}
   -#
   -#   - if !post.thumbnail_url.blank?
