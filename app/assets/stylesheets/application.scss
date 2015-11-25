@@ -92,10 +92,10 @@ a {
   }
   .comments {
     .comment {
-      &:first-child {
-        border-top: 1px solid #f0f0f0;
-      }
-      border-bottom: 1px solid #f0f0f0;
+      // &:first-child {
+      //   border-top: 1px solid #f0f0f0;
+      // }
+      border-top: 1px solid #f0f0f0;
       padding: 1em 0;
       .profile {
 
@@ -106,6 +106,7 @@ a {
     }
   }
   .options {
+    border-top: 1px solid #f0f0f0;
     padding: 1em;
     ul {
       margin-bottom: 0;

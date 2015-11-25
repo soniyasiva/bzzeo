@@ -8,21 +8,17 @@
         .row.image
           -# image, if there is one
           .col-xs-12
-            = link_to post_path(post) do
-              = image_tag(post.image_url, :class => "img-responsive")
+            = image_tag(post.image_url, :class => "img-responsive")
         .row.video
           -# video, if there is one
           .col-xs-12
-            -#
-              = link_to '#', { data: { id: post.id }, class: "thumb-wrap" } do
-                %img{ :src => post.thumbnail_url, :class => "img-responsive thumb" }
-            = link_to post_path(post) do
-              = embed(post).html_safe unless post.video_url.blank?
+            -# = link_to '#', { data: { id: post.id }, class: "thumb-wrap" } do
+            -#   %img{ :src => post.thumbnail_url, :class => "img-responsive thumb" }
+            = embed(post).html_safe unless post.video_url.blank?
         .row.description
           -# text for the post
           .col-xs-12
-            = link_to post_path(post) do
-              = auto_link(post.description, :html => { :target => '_blank' }) unless post.description.nil?
+            = auto_link(post.description, :html => { :target => '_blank' }) unless post.description.nil?
         .row.comments{ :data => {:id => post.id} }
           -# all comments for the post
           .col-xs-12
