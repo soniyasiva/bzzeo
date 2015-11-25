@@ -108,6 +108,9 @@ body { padding-top: 60px; } // cerulean
     position: absolute;
     bottom: 0;
     right: 0;
+    background: #fff;
+    padding: 0.1em 0.5em;
+
   }
   .image{
     padding-bottom: 100%;
@@ -126,6 +129,7 @@ body { padding-top: 60px; } // cerulean
 
   }
   .social-share {
+    // bugfix
     .facebook {
       .fb-like {
         position: absolute;
@@ -137,6 +141,13 @@ body { padding-top: 60px; } // cerulean
     }
     .linkedin {
 
+    }
+  }
+  // bugfix
+  .friend, .partner {
+    &:active,
+    &:focus {
+      background: $brand-primary;
     }
   }
 }

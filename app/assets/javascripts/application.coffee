@@ -36,9 +36,9 @@ $(document).on 'ajax:success', 'a.friend', (status,data,xhr)->
   # toggle links text
   $("a.friend[data-id=#{data.id}]").each ->
     if $(this).text().indexOf("Un") > -1
-      $(this).text("Follow")
+      $(this).html($(this).html().replace('Unf', 'F'))
     else
-      $(this).text("Unfollow")
+      $(this).html($(this).html().replace('F', 'Unf'))
 
 # on profile partner button success
 $(document).on 'ajax:success', 'a.partner', (status,data,xhr)->

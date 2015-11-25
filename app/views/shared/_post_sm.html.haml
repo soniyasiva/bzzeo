@@ -10,15 +10,5 @@
         %p
           = post.description.truncate 250
         .image
-    -# %img.img.img-responsive.full-width{:src => post.thumbnail_url}
-  -#
-  -#   - if !post.thumbnail_url.blank?
-  -#     %img{ :src => post.thumbnail_url, :class => "img-responsive thumb" }
-  -#   - elsif !post.image_url.blank?
-  -#     = embed(post).html_safe unless post.video_url.blank?
-  -#   - else
-  -#     .description
-  -#       %p.text-center
-  -#       = post.description
-  -# .type
-  -#   = icon 'briefcase'
+    .type
+      = icon 'briefcase'
