@@ -1,12 +1,76 @@
 .row.profile
   .col-xs-12
     .row.video
-      .col-xs-12.col-sm-8
+      .col-xs-12.col-sm-6
         = embed(@profile).html_safe unless @profile.video_url.blank?
-      .col-xs-12.col-sm-4
+      .col-xs-12.col-sm-6
         .row
-          .col-xs-12
+          .col-xs-12.col-sm-6
             %h2.name= @profile.name
+          .col-sm-6.text-center
+            .col-sm-4
+              %h4 8457
+              %p Followers
+            .col-sm-4
+              %h4 27
+              %p mentions
+            .col-sm-4
+              %h4 3098
+              %p score
+        - unless @profile.address.blank?
+          .row
+            .col-xs-12
+              %p
+                = link_to '#', :class => 'location-button' do
+                  Location
+                  = icon 'map-marker'
+                %iframe.profile-map.hidden{:allowfullscreen => "", :frameborder => "0", :src => "https://www.google.com/maps/embed/v1/place?key=AIzaSyAcyVJVLnLZvy1UaUP86D7GfeU5vS7Fspw&q=#{h @profile.address}", :style => "border:0"}
+        .row
+          .col-xs-12.more-info
+            .btn-group
+              %button.btn.btn-default.btn-sm.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                = icon 'plus'
+                Connect
+                %span.caret
+              %ul.dropdown-menu
+                %li
+                  = link_to partner_profile_path(@profile), :class => "partner", method: :put, remote: true, :data => { :id => @profile.id } do
+                    = icon 'user'
+                    = @profile.partner?(current_user) ? "Unpartner" : "Partner"
+            .btn-group
+              %button.btn.btn-default.btn-sm.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                = icon 'at'
+                Contact
+                %span.caret
+              %ul.dropdown-menu
+                - unless @profile.representitive.blank?
+                  %li
+                    %a
+                      = @profile.representitive
+                - unless @profile.phone.blank?
+                  %li
+                    %a
+                      = @profile.phone
+                %li
+                  = mail_to @profile.user.email, @profile.user.email
+                - unless @profile.facebook.blank?
+                  %li
+                    = link_to "https://www.facebook.com/#{@profile.facebook}", {:target => "_blank"} do
+                      = icon 'facebook'
+                      = @profile.facebook
+                - unless @profile.twitter.blank?
+                  %li
+                    = link_to "https://twitter.com/#{@profile.twitter}", {:target => "_blank"} do
+                      = icon 'twitter'
+                      = @profile.twitter
+                - unless @profile.instagram.blank?
+                  %li
+                    = link_to "https://www.instagram.com/#{@profile.instagram}", {:target => "_blank"} do
+                      = icon 'instagram'
+                      = @profile.instagram
+            = link_to new_post_path(params: { mention_id: @profile.id, post_category_id: PostCategory.find_by(name: 'review').id }), :class => "btn btn-sm btn-default" do
+              = icon 'binoculars'
+              Review
         .row
           .col-xs-12.more-info
             .row.category

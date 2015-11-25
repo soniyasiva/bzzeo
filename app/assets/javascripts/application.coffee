@@ -91,3 +91,10 @@ $ ->
     # $(".post .thumb-wrap[data-id=#{postId}]").hide()
     false # prevent default
   )
+  # reveals profile map on location click
+  $('.location-button').on('click', ->
+    console.log 'location button clicked'
+    # show map
+    $('.profile-map').toggleClass('hidden')
+    false # prevent default
+  )
