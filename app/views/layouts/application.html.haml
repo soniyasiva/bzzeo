@@ -1,0 +1,26 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:charset => "utf-8"}
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}
+    %title Bzzeo
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+    = include_uploadcare_widget_from_cdn version: "2.5.5", min: true
+    = uploadcare_settings
+  %body
+    = render 'layouts/menu'
+    .container
+      -unless notice.nil?
+        .alert.alert-info.alert-dismissible{:role => "alert"}
+          %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
+            %span{"aria-hidden" => "true"} &times;
+          = notice
+      -unless alert.nil?
+        .alert.alert-danger.alert-dismissible{:role => "alert"}
+          %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
+            %span{"aria-hidden" => "true"} &times;
+          = alert
+      = yield
