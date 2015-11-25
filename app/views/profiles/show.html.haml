@@ -95,24 +95,39 @@
                   = facebook_button
               -# %li= google_plus_button
 
-    .row
-      .col-xs-12
-        %h3 Posts
     .row.posts
       .col-xs-12
-        - @profile.posts.in_groups_of(4, false) do |post_group|
-          .row
-            .col-xs-12
-              - post_group.each do |post|
-                = render 'shared/post_sm', post: post
-    -# .col-xs-12.col-sm-4.partners
-    -#   %h4 Preferred Partners
-    -#   - @profile.partner_profiles.each do |partner|
-    -#     .row.partner
-    -#       = link_to profile_path(partner), :class => "col-xs-12" do
-    -#         .col-xs-5
-    -#           %img{ :src => partner.thumbnail_url, :class => "img-responsive" }
-    -#         .col-xs-7
-    -#           %h5= partner.name
-    -#           %p= partner.category.name unless partner.category.nil?
-    -#         %hr
+        / Nav tabs
+        %ul.nav.nav-tabs{:role => "tablist"}
+          %li.active{:role => "presentation"}
+            %a{"aria-controls" => "home", "data-toggle" => "tab", :href => "#posts-tab", :role => "tab"} Posts
+          %li{:role => "presentation"}
+            %a{"aria-controls" => "profile", "data-toggle" => "tab", :href => "#mentions-tab", :role => "tab"} Mentions
+          %li{:role => "presentation"}
+            %a{"aria-controls" => "messages", "data-toggle" => "tab", :href => "#partners-tab", :role => "tab"} Partners
+        / Tab panes
+        .tab-content
+          #posts-tab.tab-pane.active{:role => "tabpanel"}
+            .row.posts
+              .col-xs-12
+                - @profile.posts.in_groups_of(4, false) do |post_group|
+                  .row
+                    .col-xs-12
+                      - post_group.each do |post|
+                        = render 'shared/post_sm', post: post
+          #mentions-tab.tab-pane{:role => "tabpanel"}
+            .row.mentions
+              .col-xs-12
+                - @profile.mentions.in_groups_of(4, false) do |mention_group|
+                  .row
+                    .col-xs-12
+                      - mention_group.each do |mention|
+                        = render 'shared/post_sm', post: mention
+          #partners-tab.tab-pane{:role => "tabpanel"}
+            .row.partners
+              .col-xs-12
+                - @profile.partnered.in_groups_of(4, false) do |partner_group|
+                  .row
+                    .col-xs-12
+                      - partner_group.each do |partner|
+                        = render 'shared/profile_sm', profile: partner.profile
