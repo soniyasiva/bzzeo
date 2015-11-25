@@ -105,38 +105,22 @@ body { padding-top: 60px; } // cerulean
 // PROFILE START
 .profile {
   .name {
-    margin: 0;
+    // margin: 0;
   }
   .video {
 
   }
-  .info {
-    .basic {
-
-    }
-  }
-  .options {
-    a {
-      margin-bottom: 0.5em;
-    }
-  }
   .social-share {
+    .facebook {
+      .fb-like {
+        position: absolute;
+        top: -1px;
+      }
+    }
+    .twitter {
 
-  }
-  .category {
-
-  }
-  .tags {
-
-  }
-  .contact {
-
-  }
-  .address {
-
-  }
-  .partners {
-    .partner {
+    }
+    .linkedin {
 
     }
   }

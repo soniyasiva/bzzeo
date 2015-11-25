@@ -34,6 +34,10 @@
                 %span.caret
               %ul.dropdown-menu
                 %li
+                  = link_to friend_profile_path(@profile), :class => "friend", method: :put, remote: true, :data => { :id => @profile.id } do
+                    = icon 'eye'
+                    = @profile.friend?(current_user) ? "Unfollow" : "Follow"
+                %li
                   = link_to partner_profile_path(@profile), :class => "partner", method: :put, remote: true, :data => { :id => @profile.id } do
                     = icon 'user'
                     = @profile.partner?(current_user) ? "Unpartner" : "Partner"
@@ -75,70 +79,20 @@
           .col-xs-12
             %h4
               = @profile.category.name unless @profile.category.nil?
-        .row
-          .col-xs-12.more-info
-            .row.category
-              .col-xs-12
-                %h5 Category
-                .non-btn= @profile.category.name unless @profile.category.nil?
-            .row.tags
-              .col-xs-12
-                %h5 Tags
-                - @profile.tags.each do |tag|
-                  .non-btn= tag.name
-            .row
-              .contact
-                .col-xs-12.col-sm-6
-                  %h4 Contact Info
-                  %p= @profile.representitive
-                  %p= @profile.phone
-                  %p= @profile.user.email unless @profile.user.nil?
-                  %p
-                    = link_to "https://www.facebook.com/#{@profile.facebook}", {:target => "_blank"} do
-                      = icon 'facebook'
-                      = @profile.facebook
-                    - end unless @profile.facebook.blank?
-                  %p
-                    = link_to "https://twitter.com/#{@profile.twitter}", {:target => "_blank"} do
-                      = icon 'twitter'
-                      = @profile.twitter
-                    - end unless @profile.twitter.blank?
-                  %p
-                    = link_to "https://www.instagram.com/#{@profile.instagram}", {:target => "_blank"} do
-                      = icon 'instagram'
-                      = @profile.instagram
-                    - end unless @profile.instagram.blank?
-              .address
-                .col-xs-12.col-sm-6
-                  %h4 Address
-                  %p= @profile.address
-                  %p= "#{@profile.lat}, #{@profile.lng}" unless @profile.lat.nil?
-        .row
-          .col-xs-12.options
-            .row
-              .col-xs-12.col-sm-6
-                = link_to friend_profile_path(@profile), :class => "button btn btn-sm btn-primary btn-block friend", method: :put, remote: true, :data => { :id => @profile.id } do
-                  = icon 'eye'
-                  = @profile.friend?(current_user) ? "Unfollow" : "Follow"
-              .col-xs-12.col-sm-6
-                = link_to partner_profile_path(@profile), :class => "button btn btn-sm btn-primary btn-block partner", method: :put, remote: true, :data => { :id => @profile.id } do
-                  = icon 'user'
-                  = @profile.partner?(current_user) ? "Unpartner" : "Partner"
-            .row
-              .col-xs-12.col-sm-6
-                = link_to new_conversation_path(profile_id: @profile.id), :class => "button btn btn-sm btn-primary btn-block" do
-                  = icon 'comment'
-                  Message
-              .col-xs-12.col-sm-6
-                = link_to new_post_path(params: { mention_id: @profile.id, post_category_id: PostCategory.find_by(name: 'review').id }), :class => "button btn btn-sm btn-primary btn-block" do
-                  = icon 'binoculars'
-                  Review
+            %p
+              = @profile.description
         .row
           .col-xs-12.social-share
             %ul.list-inline
-              %li= twitter_button
-              %li= facebook_button
-              %li= linkedin_button
+              %li
+                .twitter
+                  = twitter_button
+              %li
+                .linkedin
+                  = linkedin_button
+              %li
+                .facebook
+                  = facebook_button
               -# %li= google_plus_button
 
     .row
