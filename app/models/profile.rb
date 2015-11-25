@@ -83,11 +83,11 @@ class Profile < ActiveRecord::Base
   end
 
   # takes in strin
-  # returns array of hashtags
+  # returns array of tags
   def extract_hash_tags
     self.tags.destroy_all
     description.scan(/\B#\w+/).each do |name|
-      self.tags << Tag.where(name: name.strip).first_or_create!
+      self.tags << Tag.where(name: name.delete!('#')).first_or_create!
     end
   end
 
