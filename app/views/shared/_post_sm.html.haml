@@ -1,5 +1,4 @@
 .col-xs-12.col-sm-3.post-sm
-
   = link_to post_path(post) do
     - if !post.thumbnail_url.blank?
       .image{:style => "background-image: url(#{post.thumbnail_url});"}
@@ -7,8 +6,9 @@
       .image{:style => "background-image: url(#{post.image_url}-/scale_crop/400x400/center/);"}
     - else
       .description
-        %p
-          = post.description.truncate 250
+        .text-wrap
+          %p
+            = post.description.truncate 250
         .image
     .type
       = icon 'briefcase'

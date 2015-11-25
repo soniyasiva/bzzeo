@@ -1,0 +1,8 @@
+.col-xs-12.col-sm-3.profile-sm
+  = link_to profile do
+    .description
+      .text-wrap
+        %h3.name= profile.name
+        %h4.category= profile.category.name unless profile.category.nil?
+        %p.distance= "#{profile.lat}, #{profile.lng}" unless profile.lat.nil?
+      .image{:style => "background-image: url(#{profile.thumbnail_url});"}

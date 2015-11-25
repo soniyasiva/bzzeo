@@ -4,7 +4,7 @@
       %img{ :src => profile.thumbnail_url, :class => "img-responsive thumb" }
   .col-xs-12.col-sm-9.right-panel
     = link_to profile do
-      %h2.name= profile.name
+      %h3.name= profile.name
     %h4.category-header Category
     .category.non-btn= profile.category.name unless profile.category.nil?
     %h4.distance-header Distance
