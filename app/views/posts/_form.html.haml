@@ -8,6 +8,6 @@
     = f.select(:post_category_id, PostCategory.where.not(name: 'review').collect {|c| [c.name, c.id]}, :include_blank => true )
   - else
     = f.hidden_field :post_category_id, value: params[:post_category_id]
-  = f.uploadcare_uploader :image_url, :data => { "images-only" => "true", "crop" => "" }
+  = f.uploadcare_uploader :image_url, :data => { "images-only" => "true"}
   %br
   = f.submit 'Save'

@@ -99,8 +99,12 @@
       .col-xs-12
         %h3 Posts
     .row.posts
-      - @profile.posts.each do |post|
-        = render 'shared/post_sm', post: post
+      - @profile.posts.in_groups_of(4, false) do |post_group|
+        .row
+          - post_group.each do |post|
+            = render 'shared/post_sm', post: post
+      -# - @profile.posts.each do |post|
+      -#   = render 'shared/post_sm', post: post
     -# .col-xs-12.col-sm-4.partners
     -#   %h4 Preferred Partners
     -#   - @profile.partner_profiles.each do |partner|
