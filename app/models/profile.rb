@@ -76,6 +76,11 @@ class Profile < ActiveRecord::Base
     # "https://www.instagram.com/#{instagram}/" # can't easily validate
   end
 
+  # magic formula for score
+  def score
+    views.count + likes.count
+  end
+
   private
   # geocodes address to lat lng on create and update
   def geocode_address

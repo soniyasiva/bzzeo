@@ -9,13 +9,13 @@
             %h2.name= @profile.name
           .col-sm-6.text-center
             .col-sm-4
-              %h4 8457
+              %h4= @profile.friendeds.count
               %p Followers
             .col-sm-4
               %h4 27
               %p mentions
             .col-sm-4
-              %h4 3098
+              %h4= @profile.score
               %p score
         - unless @profile.address.blank?
           .row
@@ -28,7 +28,7 @@
         .row
           .col-xs-12.more-info
             .btn-group
-              %button.btn.btn-default.btn-sm.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+              %button.btn.btn-primary.btn-sm.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
                 = icon 'plus'
                 Connect
                 %span.caret
@@ -38,19 +38,19 @@
                     = icon 'user'
                     = @profile.partner?(current_user) ? "Unpartner" : "Partner"
             .btn-group
-              %button.btn.btn-default.btn-sm.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+              %button.btn.btn-primary.btn-sm.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
                 = icon 'at'
                 Contact
                 %span.caret
               %ul.dropdown-menu
-                - unless @profile.representitive.blank?
-                  %li
-                    %a
-                      = @profile.representitive
+                %li
+                  = link_to new_conversation_path(profile_id: @profile.id) do
+                    = icon 'comment'
+                    Message
+                    = @profile.representitive unless @profile.representitive.blank?
                 - unless @profile.phone.blank?
                   %li
-                    %a
-                      = @profile.phone
+                    = tel_to @profile.phone
                 %li
                   = mail_to @profile.user.email, @profile.user.email
                 - unless @profile.facebook.blank?
@@ -68,9 +68,13 @@
                     = link_to "https://www.instagram.com/#{@profile.instagram}", {:target => "_blank"} do
                       = icon 'instagram'
                       = @profile.instagram
-            = link_to new_post_path(params: { mention_id: @profile.id, post_category_id: PostCategory.find_by(name: 'review').id }), :class => "btn btn-sm btn-default" do
+            = link_to new_post_path(params: { mention_id: @profile.id, post_category_id: PostCategory.find_by(name: 'review').id }), :class => "btn btn-sm btn-primary" do
               = icon 'binoculars'
               Review
+        .row
+          .col-xs-12
+            %h4
+              = @profile.category.name unless @profile.category.nil?
         .row
           .col-xs-12.more-info
             .row.category
