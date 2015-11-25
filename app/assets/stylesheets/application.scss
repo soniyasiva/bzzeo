@@ -28,10 +28,17 @@ $brand-secondary: #007f7f;
 
 // BASE
 body {
-  padding-top: 51px;
+  padding-top: 60px;
   padding-bottom: 50px;
+  background: #f9f9f9;
 }
-body { padding-top: 60px; } // cerulean
+a {
+  &:hover,
+  &:focus,
+  &:active {
+    text-decoration: none;
+  }
+}
 .video {
   iframe {
     width: 100%;
@@ -60,6 +67,14 @@ body { padding-top: 60px; } // cerulean
 // BASE
 // POST START
 .post {
+  background: #ffffff;
+  padding-top: 0.5em;
+  border-radius: 5px;
+  border: 1px solid #f0f0f0;
+  margin-bottom: 1em;
+  .name {
+
+  }
   .thumb {
     width: 100%;
   }
@@ -67,23 +82,40 @@ body { padding-top: 60px; } // cerulean
 
   }
   .image {
-
+    margin-bottom: 0.5em;
   }
   .description {
-
+    margin-bottom: 1em;
   }
   .video {
-
+    margin-bottom: 0.5em;
   }
-}
-.comments {
-  .comment {
-    .profile {
+  .comments {
+    .comment {
+      &:first-child {
+        border-top: 1px solid #f0f0f0;
+      }
+      border-bottom: 1px solid #f0f0f0;
+      padding: 1em 0;
+      .profile {
+
+      }
+      .comment-description {
+
+      }
+    }
+  }
+  .options {
+    padding: 1em;
+    ul {
+      margin-bottom: 0;
+    }
+    .likes-count {
 
     }
-    .description {
-
-    }
+  }
+  .new-comment {
+    margin-bottom: 1em;
   }
 }
 // POST END
@@ -120,6 +152,23 @@ body { padding-top: 60px; } // cerulean
   }
 }
 // POST SM END
+// SOCIAL SHARE START
+.social-share {
+  // bugfix
+  .facebook {
+    .fb-like {
+      position: absolute;
+      top: -1px;
+    }
+  }
+  .twitter {
+
+  }
+  .linkedin {
+
+  }
+}
+// SOCIAL SHARE END
 // PROFILE START
 .profile {
   .name {
@@ -127,21 +176,6 @@ body { padding-top: 60px; } // cerulean
   }
   .video {
 
-  }
-  .social-share {
-    // bugfix
-    .facebook {
-      .fb-like {
-        position: absolute;
-        top: -1px;
-      }
-    }
-    .twitter {
-
-    }
-    .linkedin {
-
-    }
   }
   // bugfix
   .friend, .partner {

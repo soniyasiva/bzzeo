@@ -21,7 +21,7 @@
 # on post like success
 $(document).on 'ajax:success', 'a.like', (status,data,xhr)->
   # update counter
-  $(".likes-count[data-id=#{data.id}]").text data.count
+  $(".likes-count span[data-id=#{data.id}]").text data.count
 
   # toggle links text
   $("a.like[data-id=#{data.id}]").each ->

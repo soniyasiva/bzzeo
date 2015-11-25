@@ -4,22 +4,25 @@
       .col-xs-12
         .row.profile
           .col-xs-12
-            = post.profile.name
+            %h4= link_to post.profile.name, profile_path(post.profile)
         .row.image
           -# image, if there is one
           .col-xs-12
-            = image_tag(post.image_url, :class => "img-responsive")
+            = link_to post_path(post) do
+              = image_tag(post.image_url, :class => "img-responsive")
         .row.video
           -# video, if there is one
           .col-xs-12
             -#
               = link_to '#', { data: { id: post.id }, class: "thumb-wrap" } do
                 %img{ :src => post.thumbnail_url, :class => "img-responsive thumb" }
-            = embed(post).html_safe unless post.video_url.blank?
+            = link_to post_path(post) do
+              = embed(post).html_safe unless post.video_url.blank?
         .row.description
           -# text for the post
           .col-xs-12
-            = auto_link(post.description, :html => { :target => '_blank' }) unless post.description.nil?
+            = link_to post_path(post) do
+              = auto_link(post.description, :html => { :target => '_blank' }) unless post.description.nil?
         .row.comments{ :data => {:id => post.id} }
           -# all comments for the post
           .col-xs-12
@@ -28,34 +31,42 @@
                 .col-xs-12
                   .row.profile
                     .col-xs-12
-                      = comment.profile.name
-                  .row.description
+                      = link_to profile_path(comment.profile) do
+                        = comment.profile.name
+                  .row.comment-description
                     .col-xs-12
                       = auto_link(comment.description, :html => { :target => '_blank' })
         .row.options
           -# share, like, comment buttons
           .col-xs-12
             %ul.list-inline
-              %li
-                %span.likes-count{ :data => {:id => post.id} }
+              %li.likes-count
+                %span{ :data => {:id => post.id} }
                   = post.likes.size
-                people like this
-                = link_to like_post_path(post), :class => "button btn btn-primary like", method: :put, remote: true, :data => { :id => post.id } do
+                likes
+              %li
+                = link_to like_post_path(post), :class => "button btn btn-primary btn-sm like", method: :put, remote: true, :data => { :id => post.id } do
                   = post.liked?(current_user) ? "Unlike" : "Like"
               %li
-                = link_to "Comment", '#', :data => { "new-comment-id" => post.id }, :class => "button btn btn-default new-comment-toggle"
+                = link_to "Comment", '#', :data => { "new-comment-id" => post.id }, :class => "button btn btn-primary btn-sm new-comment-toggle"
               %li
-                = link_to "Share", new_share_path( post_id: post.id ), { :class => "button btn btn-success" }
+                = link_to "Share", new_share_path( post_id: post.id ), { :class => "button btn btn-primary btn-sm" }
         .row.new-comment.collapse{:data => { "new-comment-id" => post.id }}
           .col-xs-12
             = bootstrap_form_for(Comment.new, url: comment_post_path(post), remote: true) do |f|
-              = f.text_area :description
-              = f.submit "Post Comment", :class => "btn btn-primary submit-comment"
+              = f.text_area :description, label: "New Comment"
+              = f.submit "Post Comment", :class => "btn btn-primary btn-sm submit-comment"
         - if social
           .row.social-share
             .col-xs-12
               %ul.list-inline
-                %li= twitter_button
-                %li= facebook_button
-                %li= linkedin_button
-                %li= google_plus_button
+                %li
+                  .twitter
+                    = twitter_button
+                %li
+                  .linkedin
+                    = linkedin_button
+                %li
+                  .facebook
+                    = facebook_button
+                -# %li= google_plus_button

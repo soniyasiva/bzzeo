@@ -25,8 +25,8 @@
                   Location
                   = icon 'map-marker'
                 %iframe.profile-map.hidden{:allowfullscreen => "", :frameborder => "0", :src => "https://www.google.com/maps/embed/v1/place?key=AIzaSyAcyVJVLnLZvy1UaUP86D7GfeU5vS7Fspw&q=#{h @profile.address}", :style => "border:0"}
-        .row
-          .col-xs-12.more-info
+        .row.more-info
+          .col-xs-12
             .btn-group
               %button.btn.btn-primary.btn-sm.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
                 = icon 'plus'
@@ -81,8 +81,8 @@
               = @profile.category.name unless @profile.category.nil?
             %p
               = @profile.description
-        .row
-          .col-xs-12.social-share
+        .row.social-share
+          .col-xs-12
             %ul.list-inline
               %li
                 .twitter
@@ -105,8 +105,6 @@
             .col-xs-12
               - post_group.each do |post|
                 = render 'shared/post_sm', post: post
-      -# - @profile.posts.each do |post|
-      -#   = render 'shared/post_sm', post: post
     -# .col-xs-12.col-sm-4.partners
     -#   %h4 Preferred Partners
     -#   - @profile.partner_profiles.each do |partner|
