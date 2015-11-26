@@ -1,4 +1,7 @@
 class PagesController < ApplicationController
+  load_and_authorize_resource
+  check_authorization
+  
   before_action :set_page, only: [:show, :edit, :update, :destroy]
 
   # GET /pages

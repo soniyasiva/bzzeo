@@ -15,6 +15,18 @@ class Post < ActiveRecord::Base
 
   before_save :format_video
 
+  after_create :notify
+
+  # notifications
+  def notify
+    return if mention.nil?
+    Notification.create(
+      profile: mention,
+      message: "#{profile.name} mentioned you in a post.",
+      link: "/posts/#{id}"
+    )
+  end
+
   def format_video
     self.video_url = extract_video_id video_url
     self.thumbnail_url = get_thumbnail video_url

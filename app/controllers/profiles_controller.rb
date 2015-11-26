@@ -1,4 +1,7 @@
 class ProfilesController < ApplicationController
+  load_and_authorize_resource
+  check_authorization
+
   before_action :set_profile, only: [:show, :edit, :update, :destroy, :friend, :partner]
 
   # for friending
@@ -44,7 +47,7 @@ class ProfilesController < ApplicationController
   # GET /profiles
   # GET /profiles.json
   def index
-    @profiles = Profile.all
+    @profiles = Profile.all.paginate(:page => params[:page], :per_page => 20)
   end
 
   # GET /profiles/1
@@ -111,7 +114,7 @@ class ProfilesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
-      params.require(:profile).permit(:all_tags, :name, :video_url, :representitive, :phone, :address, :category_id, :user_id, :facebook, :twitter, :instagram)
+      params.require(:profile).permit(:all_tags, :name, :video_url, :representitive, :phone, :address, :category_id, :user_id, :facebook, :twitter, :instagram, :description)
     end
 
     # custom strong params for friend action

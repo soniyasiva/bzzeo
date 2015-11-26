@@ -1,73 +1,133 @@
 .row.profile
   .col-xs-12
     .row.video
-      .col-xs-12
-        = embed(@profile.video_url).html_safe unless @profile.video_url.blank?
-    .row.info
-      .col-xs-12
-        .col-xs-12.col-sm-4.basic
-          -# .pull-left
-          -#   %img{ :src => @profile.thumbnail_url, :class => "img-responsive" }
-          %h2.name= @profile.name
-        .col-xs-12.col-sm-3.options
-          .ul.list-inline
-            %li
-              = link_to friend_profile_path(@profile), :class => "button btn btn-primary friend", method: :put, remote: true, :data => { :id => @profile.id } do
-                = @profile.friend?(current_user) ? "Unfollow" : "Follow"
-            %li
-              = link_to partner_profile_path(@profile), :class => "button btn btn-primary partner", method: :put, remote: true, :data => { :id => @profile.id } do
-                = @profile.partner?(current_user) ? "Unpartner" : "Partner"
-            %li
-              = link_to new_conversation_path(profile_id: @profile.id), :class => "button btn btn-primary" do
-                Message
-            %li
-              = link_to new_post_path(params: { mention_id: @profile.id, post_category_id: PostCategory.find_by(name: 'review').id }), :class => "button btn btn-primary" do
-                Review
-        .col-xs-12.col-sm-5.social-share
-          %ul.list-inline
-            %li= twitter_button
-            %li= facebook_button
-            %li= linkedin_button
-            %li= google_plus_button
-    .col-xs-12.col-sm-8.more-info
-      .row
-        .col-xs-12.col-sm-6
-          .row.category
+      .col-xs-12.col-sm-6
+        = embed(@profile).html_safe unless @profile.video_url.blank?
+      .col-xs-12.col-sm-6
+        .row
+          .col-xs-12.col-sm-6
+            %h3.name= @profile.name
+          .col-sm-6.text-center
+            .col-sm-4
+              %h4= @profile.friendeds.count
+              %p Followers
+            .col-sm-4
+              %h4= @profile.mentions.count
+              %p mentions
+            .col-sm-4
+              %h4= @profile.score
+              %p score
+        - unless @profile.address.blank?
+          .row
             .col-xs-12
-              %h4 Category
-              .non-btn= @profile.category.name unless @profile.category.nil?
-        .col-xs-12.col-sm-6
-          .row.tags
-            .col-xs-12
-              %h4 Tags
-              - @profile.tags.each do |tag|
-                .non-btn= tag.name
-      .row
-        .col-xs-12.col-sm-6
-          .row.contact
-            .col-xs-12
-              %h4 Contact Info
-              %p= @profile.representitive
-              %p= @profile.phone
-              %p= @profile.user.email unless @profile.user.nil?
-              %p= link_to @profile.facebook, "https://www.facebook.com/#{@profile.facebook}", {:target => "_blank"} unless @profile.facebook.blank?
-              %p= link_to @profile.twitter, "https://twitter.com/#{@profile.twitter}", {:target => "_blank"} unless @profile.twitter.blank?
-              %p= link_to @profile.instagram, "https://www.instagram.com/#{@profile.instagram}", {:target => "_blank"} unless @profile.instagram.blank?
-        .col-xs-12.col-sm-6
-          .row.address
-            .col-xs-12
-              %h4 Address
-              %p= @profile.address
-              %p= "#{@profile.lat}, #{@profile.lng}" unless @profile.lat.nil?
+              %p
+                = link_to '#', :class => 'location-button' do
+                  Location
+                  = icon 'map-marker'
+                %iframe.profile-map.hidden{:allowfullscreen => "", :frameborder => "0", :src => "https://www.google.com/maps/embed/v1/place?key=AIzaSyAcyVJVLnLZvy1UaUP86D7GfeU5vS7Fspw&q=#{h @profile.address}", :style => "border:0"}
+        .row.more-info
+          .col-xs-12
+            .btn-group
+              %button.btn.btn-primary.btn-sm.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                = icon 'plus'
+                Connect
+                %span.caret
+              %ul.dropdown-menu
+                %li
+                  = link_to friend_profile_path(@profile), :class => "friend", method: :put, remote: true, :data => { :id => @profile.id } do
+                    = icon 'eye'
+                    = @profile.friend?(current_user) ? "Unfollow" : "Follow"
+                %li
+                  = link_to partner_profile_path(@profile), :class => "partner", method: :put, remote: true, :data => { :id => @profile.id } do
+                    = icon 'user'
+                    = @profile.partner?(current_user) ? "Unpartner" : "Partner"
+            .btn-group
+              %button.btn.btn-primary.btn-sm.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                = icon 'at'
+                Contact
+                %span.caret
+              %ul.dropdown-menu
+                %li
+                  = link_to new_conversation_path(profile_id: @profile.id) do
+                    = icon 'comment'
+                    Message
+                    = @profile.representitive unless @profile.representitive.blank?
+                - unless @profile.phone.blank?
+                  %li
+                    = tel_to @profile.phone
+                %li
+                  = mail_to @profile.user.email, @profile.user.email
+                - unless @profile.facebook.blank?
+                  %li
+                    = link_to "https://www.facebook.com/#{@profile.facebook}", {:target => "_blank"} do
+                      = icon 'facebook'
+                      = @profile.facebook
+                - unless @profile.twitter.blank?
+                  %li
+                    = link_to "https://twitter.com/#{@profile.twitter}", {:target => "_blank"} do
+                      = icon 'twitter'
+                      = @profile.twitter
+                - unless @profile.instagram.blank?
+                  %li
+                    = link_to "https://www.instagram.com/#{@profile.instagram}", {:target => "_blank"} do
+                      = icon 'instagram'
+                      = @profile.instagram
+            = link_to new_post_path(params: { mention_id: @profile.id, post_category_id: PostCategory.find_by(name: 'review').id }), :class => "btn btn-sm btn-primary" do
+              = icon 'binoculars'
+              Review
+        .row
+          .col-xs-12
+            %h4
+              = @profile.category.name unless @profile.category.nil?
+            %p
+              = @profile.description
+        .row.social-share
+          .col-xs-12
+            %ul.list-inline
+              %li
+                .twitter
+                  = twitter_button
+              %li
+                .linkedin
+                  = linkedin_button
+              %li
+                .facebook
+                  = facebook_button
+              -# %li= google_plus_button
 
-    .col-xs-12.col-sm-4.partners
-      %h4 Preferred Partners
-      - @profile.partner_profiles.each do |partner|
-        .row.partner
-          = link_to profile_path(partner), :class => "col-xs-12" do
-            .col-xs-5
-              %img{ :src => partner.thumbnail_url, :class => "img-responsive" }
-            .col-xs-7
-              %h5= partner.name
-              %p= partner.category.name unless partner.category.nil?
-            %hr
+    .row.posts
+      .col-xs-12
+        / Nav tabs
+        %ul.nav.nav-tabs{:role => "tablist"}
+          %li.active{:role => "presentation"}
+            %a{"aria-controls" => "home", "data-toggle" => "tab", :href => "#posts-tab", :role => "tab"} Posts
+          %li{:role => "presentation"}
+            %a{"aria-controls" => "profile", "data-toggle" => "tab", :href => "#mentions-tab", :role => "tab"} Mentions
+          %li{:role => "presentation"}
+            %a{"aria-controls" => "messages", "data-toggle" => "tab", :href => "#partners-tab", :role => "tab"} Partners
+        / Tab panes
+        .tab-content
+          #posts-tab.tab-pane.active{:role => "tabpanel"}
+            .row.posts
+              .col-xs-12
+                - @profile.posts.order(created_at: :desc).in_groups_of(4, false) do |post_group|
+                  .row
+                    .col-xs-12
+                      - post_group.each do |post|
+                        = render 'shared/post_sm', post: post
+          #mentions-tab.tab-pane{:role => "tabpanel"}
+            .row.mentions
+              .col-xs-12
+                - @profile.mentions.order(created_at: :desc).in_groups_of(4, false) do |mention_group|
+                  .row
+                    .col-xs-12
+                      - mention_group.each do |mention|
+                        = render 'shared/post_sm', post: mention
+          #partners-tab.tab-pane{:role => "tabpanel"}
+            .row.partners
+              .col-xs-12
+                - @profile.partnered.in_groups_of(4, false) do |partner_group|
+                  .row
+                    .col-xs-12
+                      - partner_group.each do |partner|
+                        = render 'shared/profile_sm', profile: partner.profile

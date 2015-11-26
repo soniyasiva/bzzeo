@@ -9,4 +9,4 @@
     %p
       You can view your message here
     %p
-      = link_to "View Message", conversation_path(@conversation)
+      = link_to "View Message", "#{ENV['SITE']}/conversations/#{@conversation.id}"

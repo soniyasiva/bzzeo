@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151118200638) do
+ActiveRecord::Schema.define(version: 20151126044233) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,16 @@ ActiveRecord::Schema.define(version: 20151118200638) do
 
   add_index "likes", ["post_id"], name: "index_likes_on_post_id", using: :btree
   add_index "likes", ["profile_id"], name: "index_likes_on_profile_id", using: :btree
+
+  create_table "notifications", force: :cascade do |t|
+    t.string   "message"
+    t.string   "link"
+    t.integer  "profile_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "notifications", ["profile_id"], name: "index_notifications_on_profile_id", using: :btree
 
   create_table "pages", force: :cascade do |t|
     t.text     "html"
@@ -140,6 +150,7 @@ ActiveRecord::Schema.define(version: 20151118200638) do
     t.float    "lat"
     t.float    "lng"
     t.string   "thumbnail_url"
+    t.text     "description"
   end
 
   add_index "profiles", ["category_id"], name: "index_profiles_on_category_id", using: :btree
@@ -174,6 +185,7 @@ ActiveRecord::Schema.define(version: 20151118200638) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "admin"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -193,6 +205,7 @@ ActiveRecord::Schema.define(version: 20151118200638) do
   add_foreign_key "friends", "profiles"
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "profiles"
+  add_foreign_key "notifications", "profiles"
   add_foreign_key "partners", "profiles"
   add_foreign_key "posts", "post_categories"
   add_foreign_key "posts", "profiles"

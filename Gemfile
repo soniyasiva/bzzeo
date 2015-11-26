@@ -17,11 +17,13 @@ gem 'coffee-rails', '~> 4.1.0'
 gem "haml-rails", "~> 0.9"
 # users
 gem 'devise'
+gem 'cancancan', '~> 1.10'
 # uploadcare
 gem 'uploadcare-rails'
 # bootstrap
 gem 'bootstrap-sass', '~> 3.3.4'
 gem 'bootstrap_form'
+gem 'bootswatch-rails'
 # social
 gem 'shareable'
 gem 'vimeo'
@@ -30,6 +32,10 @@ gem 'friendly_id', '~> 5.1.0'
 # geo
 gem 'geokit'
 gem 'geokit-rails'
+# ui
+gem 'rails_autolink'
+gem 'will_paginate', '~> 3.0.6'
+gem 'font-awesome-sass', '~> 4.4.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

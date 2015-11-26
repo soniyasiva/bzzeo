@@ -18,16 +18,6 @@ users = User.create([
   }
 ])
 
-profiles = Profile.create([
-  {
-    user: User.first,
-    name: "Zach Levy"
-  }, {
-    user: User.second,
-    name: "Josh Levy"
-  }
-])
-
 category = Category.create([
   { name: "Software" },
   { name: "Real Estate" },

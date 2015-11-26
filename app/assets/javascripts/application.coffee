@@ -21,7 +21,7 @@
 # on post like success
 $(document).on 'ajax:success', 'a.like', (status,data,xhr)->
   # update counter
-  $(".likes-count[data-id=#{data.id}]").text data.count
+  $(".likes-count span[data-id=#{data.id}]").text data.count
 
   # toggle links text
   $("a.like[data-id=#{data.id}]").each ->
@@ -36,9 +36,9 @@ $(document).on 'ajax:success', 'a.friend', (status,data,xhr)->
   # toggle links text
   $("a.friend[data-id=#{data.id}]").each ->
     if $(this).text().indexOf("Un") > -1
-      $(this).text("Follow")
+      $(this).html($(this).html().replace('Unf', 'F'))
     else
-      $(this).text("Unfollow")
+      $(this).html($(this).html().replace('F', 'Unf'))
 
 # on profile partner button success
 $(document).on 'ajax:success', 'a.partner', (status,data,xhr)->
@@ -46,9 +46,9 @@ $(document).on 'ajax:success', 'a.partner', (status,data,xhr)->
   # toggle links text
   $("a.partner[data-id=#{data.id}]").each ->
     if $(this).text().indexOf("Un") > -1
-      $(this).text("Partner")
+      $(this).html($(this).html().replace('Unp', 'P'))
     else
-      $(this).text("Unpartner")
+      $(this).html($(this).html().replace('P', 'Unp'))
 
 # on new comment for post success
 $(document).on 'ajax:success', '.new_comment', (status,data,xhr)->
@@ -80,5 +80,21 @@ $ ->
     console.log 'comment toggle'
     post_id = $(this).data('new-comment-id')
     $(".new-comment[data-new-comment-id=#{post_id}]").toggle()
+    false # prevent default
+  )
+  # toggle comment box for post
+  $(".post .video a").on('click', ->
+    console.log 'post video thumb clicked'
+    postId = $(this).data('id')
+    $(".post iframe[data-id=#{postId}]").show()
+    $(this).hide()
+    # $(".post .thumb-wrap[data-id=#{postId}]").hide()
+    false # prevent default
+  )
+  # reveals profile map on location click
+  $('.location-button').on('click', ->
+    console.log 'location button clicked'
+    # show map
+    $('.profile-map').toggleClass('hidden')
     false # prevent default
   )

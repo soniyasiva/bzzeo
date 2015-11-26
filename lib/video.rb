@@ -30,7 +30,7 @@ module Video
       video = Vimeo::Simple::Video.info(video_id)
       video.parsed_response.first["thumbnail_large"]
     when 'youtube'
-      "https://img.youtube.com/vi/#{video_id}/mqdefault.jpg"
+      "https://img.youtube.com/vi/#{video_id}/sddefault.jpg"
     else
       nil
     end

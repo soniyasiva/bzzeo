@@ -4,16 +4,7 @@
 .row.profiles
   .col-xs-12
     - @profiles.each do |profile|
-      .row.profile
-        .col-xs-12.col-sm-3.left-panel
-          = link_to profile do
-            %img{ :src => profile.thumbnail_url, :class => "img-responsive thumb" }
-        .col-xs-12.col-sm-9.right-panel
-          = link_to profile do
-            %h2.name= profile.name
-          %h4.category-header Category
-          .category.non-btn= profile.category.name unless profile.category.nil?
-          %h4.distance-header Distance
-          %p.distance= "#{profile.lat}, #{profile.lng}" unless profile.lat.nil?
-      .col-xs-12
-        %hr
+      = render 'shared/profile_sm', profile: profile
+.row.pagination
+  .col-xs-12
+    = will_paginate @profiles

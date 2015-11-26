@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :notifications
+  resources :feeds, :only => [:index] do
+    collection do
+      get 'search', to: "feeds#search"
+    end
+  end
   resources :post_categories
   resources :views
   resources :partners
@@ -22,7 +28,7 @@ Rails.application.routes.draw do
     end
   end
   devise_for :users
-  root to: "posts#index"
+  root to: "feeds#index"
   resources :categories
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

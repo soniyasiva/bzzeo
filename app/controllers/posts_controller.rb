@@ -1,4 +1,7 @@
 class PostsController < ApplicationController
+  load_and_authorize_resource
+  check_authorization
+
   before_action :set_post, only: [:show, :edit, :update, :destroy, :like, :comment]
 
   # handles comments for posts
@@ -31,7 +34,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.all.paginate(:page => params[:page], :per_page => 10)
   end
 
   # GET /posts/1
@@ -96,7 +99,7 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:image_url, :video_url, :description, :post_category_id, :mention_id).merge(
+      params.require(:post).permit(:image_url, :video_url, :description, :mention_id).merge(
         profile_id: current_user.profile.id
       )
     end

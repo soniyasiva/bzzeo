@@ -5,4 +5,15 @@ class Conversation < ActiveRecord::Base
   validates :sender, presence: true
   validates :receiver, presence: true
   validates :message, presence: { strict: true}
+
+  after_create :notify
+
+  # notifications
+  def notify
+    Notification.create(
+      profile: receiver,
+      message: "You have a new message from #{sender.name}.",
+      link: "/conversations/#{id}"
+    )
+  end
 end

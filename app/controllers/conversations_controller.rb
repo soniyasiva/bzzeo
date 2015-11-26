@@ -4,7 +4,8 @@ class ConversationsController < ApplicationController
   # GET /conversations
   # GET /conversations.json
   def index
-    @conversations = Conversation.all
+    @inbox = Conversation.where(receiver: current_user.profile)
+    @sent = Conversation.where(sender: current_user.profile)
   end
 
   # GET /conversations/1
