@@ -1,7 +1,7 @@
 User.create!([
   {email: "zach@firstexitmedia.com", password: "password", password_confirmation: "password", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 4, current_sign_in_at: "2015-11-20 22:21:51", last_sign_in_at: "2015-11-18 21:52:44", current_sign_in_ip: "::1", last_sign_in_ip: "::1", admin: nil},
   {email: "zacharyalevy@gmail.com", password: "password", password_confirmation: "password", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 18, current_sign_in_at: "2015-11-25 15:46:40", last_sign_in_at: "2015-11-24 23:23:51", current_sign_in_ip: "::1", last_sign_in_ip: "::1", admin: true},
-  {email: "zacharyalevy+test001@gmail.com", password: "password", password_confirmation: "password", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 4, current_sign_in_at: "2015-11-25 17:00:20", last_sign_in_at: "2015-11-25 16:14:27", current_sign_in_ip: "::1", last_sign_in_ip: "::1", admin: nil}
+  {email: "zach@zachlevy.me", password: "password", password_confirmation: "password", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 4, current_sign_in_at: "2015-11-25 17:00:20", last_sign_in_at: "2015-11-25 16:14:27", current_sign_in_ip: "::1", last_sign_in_ip: "::1", admin: nil}
 ])
 Profile.create!([
   {name: "Siva Real Estate", video_url: "5224064", representitive: "Soniya ", phone: "416 400 0444", category_id: 2, user_id: 2, facebook: "", twitter: "", instagram: "", address: "815 - 38 Dan Leckie Way, Toronto, ON", lat: 43.6374919, lng: -79.3979466, thumbnail_url: "https://i.vimeocdn.com/video/16212575_640.jpg", description: nil},
