@@ -20,6 +20,7 @@
 
 # on post like success
 $(document).on 'ajax:success', 'a.like', (status,data,xhr)->
+  'like'
   # update counter
   $(".likes-count span[data-id=#{data.id}]").text data.count
 
@@ -33,7 +34,6 @@ $(document).on 'ajax:success', 'a.like', (status,data,xhr)->
 # on post upvote success
 $(document).on 'ajax:success', 'a.upvote', (status,data,xhr)->
   console.log 'upvote'
-  console.log data
   # update counter
   $(".upvotes-count span[data-id=#{data.id}]").text data.count
 
@@ -43,6 +43,19 @@ $(document).on 'ajax:success', 'a.upvote', (status,data,xhr)->
       $(this).text("Upvote")
     else
       $(this).text("Unupvote")
+
+# on post downvote success
+$(document).on 'ajax:success', 'a.downvote', (status,data,xhr)->
+  console.log 'downvote'
+  # update counter
+  $(".downvotes-count span[data-id=#{data.id}]").text data.count
+
+  # toggle links text
+  $("a.downvote[data-id=#{data.id}]").each ->
+    if $(this).text().indexOf("Un") > -1
+      $(this).text("Downvote")
+    else
+      $(this).text("Undownvote")
 
 # on profile friend success
 $(document).on 'ajax:success', 'a.friend', (status,data,xhr)->

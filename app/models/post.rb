@@ -45,11 +45,36 @@ class Post < ActiveRecord::Base
   end
 
   # likes are dislike nil
+  def like user
+    # get if like exists
+    like = Like.find_by(profile: user.profile, post: self)
+    if like.nil?
+      like = Like.create(profile: user.profile, post: self)
+    else
+      like.destroy
+    end
+  end
+
   def liked? user
     likes.where(profile_id: user.profile.id).any?
   end
 
   # upvotes are dislike false
+  def upvote user
+    vote = Like.unscoped.find_by(profile: user.profile, post: self)
+    if vote.nil?
+      # upvote
+      vote = Like.create(profile: user.profile, post: self, dislike: false)
+    elsif vote.dislike == false
+      # already upvoted
+      vote.destroy
+    elsif vote.dislike.nil? || vote.dislike == true
+      # catch likes and turn downvotes into upvotes
+      vote.update(dislike: false)
+    end
+    return
+  end
+
   def upvotes
     likes.unscoped.where(dislike: false)
   end
@@ -59,6 +84,23 @@ class Post < ActiveRecord::Base
   end
 
   # downvotes are dislike true
+  def downvote user
+    puts "===== downvote ====="
+    vote = Like.unscoped.find_by(profile: user.profile, post: self)
+    puts vote.inspect
+    if vote.nil?
+      # upvote
+      vote = Like.create(profile: user.profile, post: self, dislike: true)
+    elsif vote.dislike == true
+      # already downvoted
+      vote.destroy
+    elsif vote.dislike.nil? || vote.dislike == false
+      # catch likes and turn upvotes into downvotes
+      vote.update(dislike: true)
+    end
+    return
+  end
+
   def downvotes
     likes.unscoped.where(dislike: true)
   end
@@ -66,4 +108,5 @@ class Post < ActiveRecord::Base
   def downvoted? user
     likes.unscoped.where(profile_id: user.profile.id).where(dislike: true).any?
   end
+
 end

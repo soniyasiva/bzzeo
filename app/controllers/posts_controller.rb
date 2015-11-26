@@ -17,43 +17,25 @@ class PostsController < ApplicationController
 
   # handles likes and unlikes for posts
   def like
-    # get if like exists
-    @like = Like.find_by(profile: current_user.profile, post: @post)
-    if @like.nil?
-      @like = Like.create(profile: current_user.profile, post: @post)
-    else
-      @like.destroy
-    end
-
+    @post.like current_user
     if request.xhr?
-      # return number of likes
       render json: { count: @post.likes.size, id: @post.id }
-    else
-      redirect_to @post
     end
   end
 
-  # handles likes and unlikes for posts
+  # handles upvotes for posts
   def upvote
-    puts "===== upvote ====="
-    # byebug
-    @vote = Like.unscoped.find_by(profile: current_user.profile, post: @post)
-    puts @vote.inspect
-    if @vote.nil?
-      # upvote
-      @vote = Like.unscoped.create(profile: current_user.profile, post: @post, dislike: false)
-    elsif @vote.dislike == false
-      # already upvoted
-      @vote.destroy
-    elsif @vote.dislike.nil? || @vote.dislike == true
-      # catch likes and turn downvotes into upvotes
-      @vote.update(dislike: false)
-    end
-
+    @post.upvote current_user
     if request.xhr?
       render json: { count: @post.upvotes.size, id: @post.id }
-    else
-      redirect_to @post
+    end
+  end
+
+  # handles downvotes for posts
+  def downvote
+    @post.downvote current_user
+    if request.xhr?
+      render json: { count: @post.downvotes.size, id: @post.id }
     end
   end
 
