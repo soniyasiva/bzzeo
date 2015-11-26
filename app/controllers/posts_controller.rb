@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   load_and_authorize_resource
   check_authorization
 
-  before_action :set_post, only: [:show, :edit, :update, :destroy, :like, :comment]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :like, :comment, :upvote, :downvote, :pin]
 
   # handles comments for posts
   def comment
@@ -17,17 +17,33 @@ class PostsController < ApplicationController
 
   # handles likes and unlikes for posts
   def like
-    @like = Like.find_by(profile: current_user.profile, post: @post)
-    if @like.nil?
-      @like = Like.create(profile: current_user.profile, post: @post)
-    else
-      @like.destroy
-    end
-
+    @post.like current_user
     if request.xhr?
       render json: { count: @post.likes.size, id: @post.id }
-    else
-      redirect_to @post
+    end
+  end
+
+  # handles upvotes for posts
+  def upvote
+    @post.upvote current_user
+    if request.xhr?
+      render json: { count: @post.upvotes.size, id: @post.id }
+    end
+  end
+
+  # handles downvotes for posts
+  def downvote
+    @post.downvote current_user
+    if request.xhr?
+      render json: { count: @post.downvotes.size, id: @post.id }
+    end
+  end
+
+  # handles pins for posts
+  def pin
+    @post.pin current_user
+    if request.xhr?
+      render json: { post: @post, id: @post.id }
     end
   end
 

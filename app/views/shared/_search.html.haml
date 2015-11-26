@@ -4,7 +4,7 @@
   .col-xs-12.col-sm-5
     = f.text_field :query, placeholder: "Search Profiles and Posts"
   .col-xs-12.col-sm-2
-    = f.select(:category_id, Category.all.collect {|c| [c.name, c.id]}, :include_blank => true)
+    = f.select(:category_id, PostCategory.all.collect {|c| [c.name.capitalize!, c.id]}, :include_blank => true)
   .col-xs-12.col-sm-3
     = f.text_field :address, placeholder: "Address"
   .col-xs-12.col-sm-2

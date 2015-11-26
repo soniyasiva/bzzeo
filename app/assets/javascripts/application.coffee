@@ -13,13 +13,13 @@
 #= require jquery
 #= require jquery_ujs
 #= require bootstrap-sprockets
-#= require turbolinks
 #= require_tree .
 
 
 
 # on post like success
 $(document).on 'ajax:success', 'a.like', (status,data,xhr)->
+  console.log 'like'
   # update counter
   $(".likes-count span[data-id=#{data.id}]").text data.count
 
@@ -29,6 +29,45 @@ $(document).on 'ajax:success', 'a.like', (status,data,xhr)->
       $(this).text("Like")
     else
       $(this).text("Unlike")
+
+# on post pin success
+$(document).on 'ajax:success', 'a.pin', (status,data,xhr)->
+  console.log 'pin'
+  # update counter
+  $("span.pinned[data-id=#{data.id}]").toggleClass('hidden')
+
+  # toggle links text
+  $("a.pin[data-id=#{data.id}]").each ->
+    if $(this).text().indexOf("Un") > -1
+      $(this).text("Pin")
+    else
+      $(this).text("Unpin")
+
+# on post upvote success
+$(document).on 'ajax:success', 'a.upvote', (status,data,xhr)->
+  console.log 'upvote'
+  # update counter
+  $(".upvotes-count span[data-id=#{data.id}]").text data.count
+
+  # toggle links text
+  $("a.upvote[data-id=#{data.id}]").each ->
+    if $(this).text().indexOf("Un") > -1
+      $(this).text("Upvote")
+    else
+      $(this).text("Unupvote")
+
+# on post downvote success
+$(document).on 'ajax:success', 'a.downvote', (status,data,xhr)->
+  console.log 'downvote'
+  # update counter
+  $(".downvotes-count span[data-id=#{data.id}]").text data.count
+
+  # toggle links text
+  $("a.downvote[data-id=#{data.id}]").each ->
+    if $(this).text().indexOf("Un") > -1
+      $(this).text("Downvote")
+    else
+      $(this).text("Undownvote")
 
 # on profile friend success
 $(document).on 'ajax:success', 'a.friend', (status,data,xhr)->
@@ -75,6 +114,14 @@ $(document).on 'ajax:success', '.new_comment', (status,data,xhr)->
 
 # document ready
 $ ->
+  $(".post-category-selector .category-option").on('click', ->
+    console.log 'category selected'
+    # console.log
+    $('.post-category-selector li').removeClass('active')
+    $(this).closest('li').addClass('active')
+    $('.post-category-selector #_category_id').val($(this).data('id'))
+
+  )
   # toggle comment box for post
   $(".new-comment-toggle").on('click', ->
     console.log 'comment toggle'

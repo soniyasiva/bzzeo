@@ -44,7 +44,80 @@ class Post < ActiveRecord::Base
     errors[:base] << "Review must mention a profile" if post_category_id == PostCategory.find_by(name: 'review').id && mention_id.blank?
   end
 
+  # likes are dislike nil
+  def like user
+    # get if like exists
+    like = Like.find_by(profile: user.profile, post: self)
+    if like.nil?
+      like = Like.create(profile: user.profile, post: self)
+    else
+      like.destroy
+    end
+  end
+
   def liked? user
     likes.where(profile_id: user.profile.id).any?
   end
+
+  # upvotes are dislike false
+  def upvote user
+    vote = Like.unscoped.find_by(profile: user.profile, post: self)
+    if vote.nil?
+      # upvote
+      vote = Like.create(profile: user.profile, post: self, dislike: false)
+    elsif vote.dislike == false
+      # already upvoted
+      vote.destroy
+    elsif vote.dislike.nil? || vote.dislike == true
+      # catch likes and turn downvotes into upvotes
+      vote.update(dislike: false)
+    end
+    return
+  end
+
+  def upvotes
+    likes.unscoped.where(dislike: false)
+  end
+
+  def upvoted? user
+    likes.unscoped.where(profile_id: user.profile.id).where(dislike: false).any?
+  end
+
+  # downvotes are dislike true
+  def downvote user
+    puts "===== downvote ====="
+    vote = Like.unscoped.find_by(profile: user.profile, post: self)
+    puts vote.inspect
+    if vote.nil?
+      # upvote
+      vote = Like.create(profile: user.profile, post: self, dislike: true)
+    elsif vote.dislike == true
+      # already downvoted
+      vote.destroy
+    elsif vote.dislike.nil? || vote.dislike == false
+      # catch likes and turn upvotes into downvotes
+      vote.update(dislike: true)
+    end
+    return
+  end
+
+  def downvotes
+    likes.unscoped.where(dislike: true)
+  end
+
+  def downvoted? user
+    likes.unscoped.where(profile_id: user.profile.id).where(dislike: true).any?
+  end
+
+  # pins posts to the top of the profile page
+  def pin user
+    # auth
+    return unless user == profile.user
+    if pinned == false
+      self.update(pinned: true)
+    else
+      self.update(pinned: false)
+    end
+  end
+
 end
