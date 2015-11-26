@@ -30,6 +30,20 @@ $(document).on 'ajax:success', 'a.like', (status,data,xhr)->
     else
       $(this).text("Unlike")
 
+# on post upvote success
+$(document).on 'ajax:success', 'a.upvote', (status,data,xhr)->
+  console.log 'upvote'
+  console.log data
+  # update counter
+  $(".upvotes-count span[data-id=#{data.id}]").text data.count
+
+  # toggle links text
+  $("a.upvote[data-id=#{data.id}]").each ->
+    if $(this).text().indexOf("Un") > -1
+      $(this).text("Upvote")
+    else
+      $(this).text("Unupvote")
+
 # on profile friend success
 $(document).on 'ajax:success', 'a.friend', (status,data,xhr)->
   console.log 'friend'

@@ -51,6 +51,13 @@
               %li
                 = link_to like_post_path(post), :class => "button btn btn-primary btn-sm like", method: :put, remote: true, :data => { :id => post.id } do
                   = post.liked?(current_user) ? "Unlike" : "Like"
+              %li.upvotes-count
+                %span{ :data => {:id => post.id} }
+                  = post.upvotes.size
+                upvotes
+              %li
+                = link_to upvote_post_path(post), :class => "button btn btn-primary btn-sm upvote", method: :put, remote: true, :data => { :id => post.id } do
+                  = post.upvoted?(current_user) ? "Unupvote" : "Upvote"
               %li
                 = link_to "Comment", '#', :data => { "new-comment-id" => post.id }, :class => "button btn btn-primary btn-sm new-comment-toggle"
               %li

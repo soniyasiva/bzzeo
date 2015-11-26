@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :posts do
     member do
       put "like", to: "posts#like"
+      put "upvote", to: "posts#upvote"
       post "comment", to: "posts#comment"
     end
   end

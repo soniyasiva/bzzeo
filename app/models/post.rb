@@ -44,7 +44,26 @@ class Post < ActiveRecord::Base
     errors[:base] << "Review must mention a profile" if post_category_id == PostCategory.find_by(name: 'review').id && mention_id.blank?
   end
 
+  # likes are dislike nil
   def liked? user
     likes.where(profile_id: user.profile.id).any?
+  end
+
+  # upvotes are dislike false
+  def upvotes
+    likes.unscoped.where(dislike: false)
+  end
+
+  def upvoted? user
+    likes.unscoped.where(profile_id: user.profile.id).where(dislike: false).any?
+  end
+
+  # downvotes are dislike true
+  def downvotes
+    likes.unscoped.where(dislike: true)
+  end
+
+  def downvoted? user
+    likes.unscoped.where(profile_id: user.profile.id).where(dislike: true).any?
   end
 end
