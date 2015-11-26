@@ -1,26 +1,47 @@
-%h1 Listing conversations
+%h1 Messages
+.row
+  .col-xs-12
+  / Nav tabs
+  %ul.nav.nav-tabs{:role => "tablist"}
+    %li.active{:role => "presentation"}
+      %a{"aria-controls" => "inbox", "data-toggle" => "tab", :href => "#inbox", :role => "tab"} Inbox
+    %li{:role => "presentation"}
+      %a{"aria-controls" => "sent", "data-toggle" => "tab", :href => "#sent", :role => "tab"} Sent
+  / Tab panes
+  .tab-content
+    #inbox.tab-pane.active{:role => "tabpanel"}
+      .table-responsive
+        %table.table.table-striped
+          %thead
+            %tr
+              %th From
+              %th Message
+              -# %th Read
+              %th
+              %th
+          %tbody
+            - @inbox.each do |conversation|
+              = link_to conversation_path(conversation) do
+                %tr{class: "#{"unread" unless conversation.read?}"}
+                  %td= conversation.sender.name
+                  %td= conversation.message
+                  -# %td= conversation.read
+                  %td= link_to 'View', conversation, :class => "btn btn-default btn-xs"
+                  %td= link_to 'Reply', new_conversation_path(profile_id: conversation.sender.id), :class => "btn btn-default btn-xs"
 
-.table-responsive
-  %table.table.table-striped
-    %thead
-      %tr
-        %th Sender
-        %th Receiver
-        %th Message
-        %th Read
-        %th
-        %th
-        %th
-
-    %tbody
-      - @conversations.each do |conversation|
-        %tr
-          %td= conversation.sender.name
-          %td= conversation.receiver.name
-          %td= conversation.message
-          %td= conversation.read
-          %td= link_to 'Show', conversation
-          %td= link_to 'Edit', edit_conversation_path(conversation)
-          %td= link_to 'Destroy', conversation, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-= link_to 'New Conversation', new_conversation_path
+    #sent.tab-pane{:role => "tabpanel"}
+      .table-responsive
+        %table.table.table-striped
+          %thead
+            %tr
+              %th To
+              %th Message
+              %th Read
+              %th
+          %tbody
+            - @sent.each do |conversation|
+              %tr
+                %td= conversation.receiver.name
+                %td= conversation.message
+                %td= conversation.read
+                %td= link_to 'View', conversation

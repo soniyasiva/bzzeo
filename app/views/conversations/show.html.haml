@@ -1,12 +1,15 @@
-%p
-  %b Sender:
-  = @conversation.sender.name
-%p
-  %b Receiver:
-  = @conversation.receiver.name
-%p
-  %b Message:
-  = @conversation.message
-%p
-  %b Read:
-  = @conversation.read
+.row
+  .col-xs-12
+    %h3 From
+    %h4
+      = link_to profile_path(@conversation.sender) do
+        = @conversation.sender.name
+    %h3 To
+    %h4
+      = link_to profile_path(@conversation.receiver) do
+        = @conversation.receiver.name
+    %h3 Message
+    %p= @conversation.message
+.row
+  .col-xs-12
+    = link_to 'Reply', new_conversation_path(profile_id: @conversation.sender.id), :class => "btn btn-default"
