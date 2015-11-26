@@ -115,6 +115,14 @@ $(document).on 'ajax:success', '.new_comment', (status,data,xhr)->
 
 # document ready
 $ ->
+  $(".post-category-selector .category-option").on('click', ->
+    console.log 'category selected'
+    # console.log
+    $('.post-category-selector li').removeClass('active')
+    $(this).closest('li').addClass('active')
+    $('.post-category-selector #_category_id').val($(this).data('id'))
+
+  )
   # toggle comment box for post
   $(".new-comment-toggle").on('click', ->
     console.log 'comment toggle'

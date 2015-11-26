@@ -10,6 +10,8 @@
         %img.img-responsive.logo{src: "http://placehold.it/500x100"}
     #navbar.collapse.navbar-collapse
       %ul.nav.navbar-nav.navbar-left
+        %li.menu-search
+          = render 'shared/menu_search'
         -# %li{class: "#{active? profiles_path}"}
         -#   = link_to "Directory", profiles_path
       %ul.nav.navbar-nav.pull-right
