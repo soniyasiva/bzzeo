@@ -1,22 +1,13 @@
-%h1 Listing notifications
+%h1 Notifications
 
-%table
-  %thead
-    %tr
-      %th Message
-      %th Link
-      %th Profile
-      %th
-      %th
-      %th
-
-  %tbody
-    - @notifications.each do |notification|
+.table-responsive
+  %table.table.table-striped
+    %thead
       %tr
-        %td= notification.message
-        %td= notification.link
-        %td= notification.profile.name
-
-%br
-
-= link_to 'New Notification', new_notification_path
+        %th Message
+        %th View
+    %tbody
+      - @notifications.each do |notification|
+        %tr
+          %td= notification.message
+          %td= link_to "View", notification.link, :class => "btn btn-default btn-xs"

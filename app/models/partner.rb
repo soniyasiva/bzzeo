@@ -4,4 +4,15 @@ class Partner < ActiveRecord::Base
 
   validates :profile, presence: true
   validates :partner, presence: true
+
+  after_create :notify
+
+  # notifications
+  def notify
+    Notification.create(
+      profile: partner,
+      message: "#{profile.name} added you as a partner.",
+      link: "/profiles/#{profile.id}"
+    )
+  end
 end

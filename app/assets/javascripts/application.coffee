@@ -46,9 +46,9 @@ $(document).on 'ajax:success', 'a.partner', (status,data,xhr)->
   # toggle links text
   $("a.partner[data-id=#{data.id}]").each ->
     if $(this).text().indexOf("Un") > -1
-      $(this).text("Partner")
+      $(this).html($(this).html().replace('Unp', 'P'))
     else
-      $(this).text("Unpartner")
+      $(this).html($(this).html().replace('P', 'Unp'))
 
 # on new comment for post success
 $(document).on 'ajax:success', '.new_comment', (status,data,xhr)->

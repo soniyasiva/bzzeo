@@ -21,13 +21,12 @@
               %th
           %tbody
             - @inbox.each do |conversation|
-              = link_to conversation_path(conversation) do
-                %tr{class: "#{"unread" unless conversation.read?}"}
-                  %td= conversation.sender.name
-                  %td= conversation.message
-                  -# %td= conversation.read
-                  %td= link_to 'View', conversation, :class => "btn btn-default btn-xs"
-                  %td= link_to 'Reply', new_conversation_path(profile_id: conversation.sender.id), :class => "btn btn-default btn-xs"
+              %tr{class: "#{"unread" unless conversation.read?}"}
+                %td= conversation.sender.name
+                %td= conversation.message
+                -# %td= conversation.read
+                %td= link_to 'View', conversation, :class => "btn btn-default btn-xs"
+                %td= link_to 'Reply', new_conversation_path(profile_id: conversation.sender.id), :class => "btn btn-default btn-xs"
 
     #sent.tab-pane{:role => "tabpanel"}
       .table-responsive

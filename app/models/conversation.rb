@@ -1,5 +1,3 @@
-include Rails.application.routes.url_helpers
-
 class Conversation < ActiveRecord::Base
   belongs_to :sender, class_name: "Profile"
   belongs_to :receiver, class_name: "Profile"
@@ -15,7 +13,7 @@ class Conversation < ActiveRecord::Base
     Notification.create(
       profile: receiver,
       message: "You have a new message from #{sender.name}.",
-      link: conversation_path(self)
+      link: "/conversations/#{id}"
     )
   end
 end
