@@ -28,9 +28,6 @@ module ApplicationHelper
 
   # menu active helper
   def active? check_path
-    puts "==== check path ===="
-    puts request.path
-    puts check_path
     return 'active' if request.path == check_path
     ''
   end

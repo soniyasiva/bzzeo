@@ -1,0 +1,22 @@
+%h1 Listing notifications
+
+%table
+  %thead
+    %tr
+      %th Message
+      %th Link
+      %th Profile
+      %th
+      %th
+      %th
+
+  %tbody
+    - @notifications.each do |notification|
+      %tr
+        %td= notification.message
+        %td= notification.link
+        %td= notification.profile.name
+
+%br
+
+= link_to 'New Notification', new_notification_path

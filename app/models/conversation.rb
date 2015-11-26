@@ -1,3 +1,5 @@
+include Rails.application.routes.url_helpers
+
 class Conversation < ActiveRecord::Base
   belongs_to :sender, class_name: "Profile"
   belongs_to :receiver, class_name: "Profile"
@@ -5,4 +7,15 @@ class Conversation < ActiveRecord::Base
   validates :sender, presence: true
   validates :receiver, presence: true
   validates :message, presence: { strict: true}
+
+  after_create :notify
+
+  # notifications
+  def notify
+    Notification.create(
+      profile: receiver,
+      message: "You have a new message from #{sender.name}.",
+      link: conversation_path(self)
+    )
+  end
 end

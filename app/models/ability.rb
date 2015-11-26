@@ -17,6 +17,9 @@ class Ability
       can [:friend, :partner], Profile
       can [:like, :comment, :create], Post
       can :create, Share
+      can :read, Notification do |notification|
+        profile.user == user
+      end
 
     end
 

@@ -26,6 +26,7 @@ class Profile < ActiveRecord::Base
   has_many :viewed, :class_name => 'View', :foreign_key => 'viewed_id'
   has_many :view_profiles, through: :views, :source => :profile
   has_many :viewed_profiles, through: :viewed, :source => :profile
+  has_many :notifications
 
   # validations
   validates :user, presence: true

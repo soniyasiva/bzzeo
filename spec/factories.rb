@@ -1,4 +1,9 @@
-FactoryGirl.define do  factory :post_category do
+FactoryGirl.define do  factory :notification do
+    message "MyString"
+link "MyString"
+profile nil
+  end
+  factory :post_category do
     name "MyString"
   end
 
