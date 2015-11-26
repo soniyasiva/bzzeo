@@ -17,7 +17,16 @@
 // CUSTOM VARIABLES START
 $brand-primary: #0dcccb;
 $brand-secondary: #007f7f;
-// $navbar-inverse-bg:
+$navbar-default-bg: #ffffff;
+$navbar-default-link-hover-bg: $brand-primary;
+$navbar-default-bg: #ffffff;
+$navbar-default-link-color: #222222;
+$navbar-default-link-hover-color: #ffffff;
+$navbar-default-link-active-color: #ffffff;
+$navbar-default-color: #222222;
+$navbar-default-link-active-bg: $brand-primary;
+$nav-link-hover-bg: $brand-primary;
+
 // CUSTOM VARIABLES END
 @import "bootswatch/yeti/variables";
 @import "bootstrap";
@@ -45,8 +54,12 @@ p {
 // BASE END
 // MENU START
 .navbar-fixed-top {
+  .logo {
+    max-height: 35px;
+    margin-top: -7px;
+  }
   .pull-right {
-    a.dropdown-toggle {
+    a.dropdown-toggle.user-menu {
       // padding-top: 6px;
       // padding-bottom: 6px;
       position: relative;

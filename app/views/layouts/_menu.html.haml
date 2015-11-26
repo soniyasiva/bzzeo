@@ -6,18 +6,29 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      %a.navbar-brand{:href => "/"} Bzzeo
+      %a.navbar-brand{:href => "/"}
+        %img.img-responsive.logo{src: "http://placehold.it/500x100"}
     #navbar.collapse.navbar-collapse
       %ul.nav.navbar-nav.navbar-left
+        -# %li{class: "#{active? profiles_path}"}
+        -#   = link_to "Directory", profiles_path
+      %ul.nav.navbar-nav.pull-right
         %li{class: "#{active? root_path}"}
           = link_to root_path do
-            = icon 'house'
+            = icon 'home'
             Home
-        %li{class: "#{active? conversations_path}"}
-          = link_to "Messages", conversations_path
-        %li{class: "#{active? profiles_path}"}
-          = link_to "Directory", profiles_path
-
+        %li{class: "#{active? posts_path}"}
+          = link_to posts_path do
+            = icon 'tag'
+            Hacks
+        %li{class: "#{active? posts_path}"}
+          = link_to posts_path do
+            = icon 'briefcase'
+            Jobs
+        %li{class: "#{active? new_post_path}"}
+          = link_to new_post_path do
+            = icon 'arrow-circle-right'
+            Bzz
         - if current_user.admin?
           %li.dropdown
             %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "#", :role => "button"}
@@ -26,28 +37,29 @@
             %ul.dropdown-menu{:role => "menu"}
               %li
                 = link_to "Pages", pages_path
-              %li
-                = link_to "Categories", categories_path
-              %li
-                = link_to "Likes", likes_path
-              %li
-                = link_to "Comments", comments_path
-              %li
-                = link_to "Tags", tags_path
-      %ul.nav.navbar-nav.pull-right
+              -# %li
+              -#   = link_to "Categories", categories_path
+              -# %li
+              -#   = link_to "Likes", likes_path
+              -# %li
+              -#   = link_to "Comments", comments_path
+              -# %li
+              -#   = link_to "Tags", tags_path
         %li.dropdown
-          %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+          %a.dropdown-toggle.user-menu{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "#", :role => "button"}
             .profile-avatar
               .circle-avatar{:style => "background-image:url(#{current_user.profile.thumbnail_url})"}
             = current_user.profile.name
             -# .icon-wrap
             -#   = icon 'bars'
           %ul.dropdown-menu{:role => "menu"}
-            %li
+            %li{class: "#{active? profile_path(current_user.profile)}"}
               = link_to "My Profile", profile_path(current_user.profile)
-            %li
+            %li{class: "#{active? edit_profile_path(current_user.profile)}"}
               = link_to "Edit Profile", edit_profile_path(current_user.profile)
-            %li
+            %li{class: "#{active? conversations_path}"}
+              = link_to "Messages", conversations_path
+            %li{class: "#{active? views_path}"}
               = link_to "Viewed My Profile", views_path
             %li
               = link_to('Logout', destroy_user_session_path, :method => :delete)
