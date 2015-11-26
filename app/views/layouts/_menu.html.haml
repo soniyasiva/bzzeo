@@ -7,7 +7,7 @@
         %span.icon-bar
         %span.icon-bar
       %a.navbar-brand{:href => "/"}
-        %img.img-responsive.logo{src: "http://placehold.it/500x100"}
+        %img.img-responsive.logo{src: "https://ucarecdn.com/be977ec3-0bb9-4f3e-ad1c-5cd5367b993a/"}
     #navbar.collapse.navbar-collapse
       %ul.nav.navbar-nav.navbar-left
         %li.menu-search
@@ -27,7 +27,7 @@
           = link_to posts_path do
             = icon 'briefcase'
             Jobs
-        %li{class: "#{active? new_post_path}"}
+        %li{class: "new-post #{active? new_post_path}"}
           = link_to new_post_path do
             = icon 'arrow-circle-right'
             Bzz

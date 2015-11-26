@@ -53,10 +53,21 @@ p {
 }
 // BASE END
 // MENU START
-.navbar-fixed-top {
+.navbar-default {
   .logo {
     max-height: 35px;
     margin-top: -7px;
+  }
+  .navbar-nav > li.new-post {
+    &.active a {
+      color: #ffffff;
+    }
+    a {
+      &:hover {
+        color: #ffffff;
+      }
+      color: $brand-primary;
+    }
   }
   .pull-right {
     a.dropdown-toggle.user-menu {
