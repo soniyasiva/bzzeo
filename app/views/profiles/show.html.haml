@@ -110,7 +110,7 @@
           #posts-tab.tab-pane.active{:role => "tabpanel"}
             .row.posts
               .col-xs-12
-                - @profile.posts.in_groups_of(4, false) do |post_group|
+                - @profile.posts.order(created_at: :desc).in_groups_of(4, false) do |post_group|
                   .row
                     .col-xs-12
                       - post_group.each do |post|
@@ -118,7 +118,7 @@
           #mentions-tab.tab-pane{:role => "tabpanel"}
             .row.mentions
               .col-xs-12
-                - @profile.mentions.in_groups_of(4, false) do |mention_group|
+                - @profile.mentions.order(created_at: :desc).in_groups_of(4, false) do |mention_group|
                   .row
                     .col-xs-12
                       - mention_group.each do |mention|

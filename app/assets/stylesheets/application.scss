@@ -26,7 +26,7 @@ $brand-secondary: #007f7f;
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
-// BASE
+// BASE START
 body {
   padding-top: 60px;
   padding-bottom: 50px;
@@ -42,32 +42,69 @@ a {
 p {
   color: $gray-dark;
 }
+// BASE END
+// MENU START
+.navbar-fixed-top {
+  .pull-right {
+    a.dropdown-toggle {
+      // padding-top: 6px;
+      // padding-bottom: 6px;
+      position: relative;
+      padding-left: 55px;
+    }
+    .profile-avatar {
+      position: absolute;
+      top: 6px;
+      left: 12px;
+      .circle-avatar {
+        min-width: 33px;
+      }
+    }
+    .icon-wrap {
+      float :right;
+      position: absolute;
+      right: 0;
+      top: 9px;
+      font-size: 28px;
+      color: $gray;
+    }
+  }
+}
+// MENU END
+// HELPER START
 .video {
   iframe {
     width: 100%;
-    //height: 450px;
   }
 }
-.non-btn {
-  display: inline-block;
-  margin-bottom: 0px;
-  font-weight: normal;
-  text-align: center;
-  vertical-align: middle;
-  background-image: none;
-  border: 1px solid transparent;
-  white-space: nowrap;
-  padding: 6px 12px;
-  font-size: 14px;
-  line-height: 1.42857;
-  border-radius: 4px;
-  -moz-user-select: none;
-  // default
-  color: #333;
-  background-color: #FFF;
-  border-color: #CCC;
+.circle-avatar{
+  /* make it responsive */
+  max-width: 100%;
+  width:100%;
+  height:auto;
+  display:block;
+  /* div height to be the same as width*/
+  padding-top:100%;
+
+  /* make it a cirkle */
+  border-radius:50%;
+
+  /* Centering on image`s center*/
+  background-position-y: center;
+  background-position-x: center;
+  background-repeat: no-repeat;
+
+  /* it makes the clue thing, takes smaller dimention to fill div */
+  background-size: cover;
+
+  /* it is optional, for making this div centered in parent*/
+  margin: 0 auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
-// BASE
+// HELPER END
 // POST START
 .post {
   background: #ffffff;

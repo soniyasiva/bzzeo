@@ -26,4 +26,18 @@ module ApplicationHelper
     end
   end
 
+  # menu active helper
+  def active? check_path
+    puts "==== check path ===="
+    puts request.path
+    puts check_path
+    return 'active' if request.path == check_path
+    ''
+  end
+
+  # helper for controller and action specific css
+  def styles
+    "controller-#{params[:controller].gsub '/', '-'} action-#{params[:action]} id-#{params[:id] ? params[:id] : 'none'}"
+  end
+
 end
