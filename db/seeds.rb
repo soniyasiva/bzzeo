@@ -3,38 +3,14 @@ User.create!([
   {email: "zacharyalevy@gmail.com", password: "password", password_confirmation: "password", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 18, current_sign_in_at: "2015-11-25 15:46:40", last_sign_in_at: "2015-11-24 23:23:51", current_sign_in_ip: "::1", last_sign_in_ip: "::1", admin: true},
   {email: "zacharyalevy+test001@gmail.com", password: "password", password_confirmation: "password", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 4, current_sign_in_at: "2015-11-25 17:00:20", last_sign_in_at: "2015-11-25 16:14:27", current_sign_in_ip: "::1", last_sign_in_ip: "::1", admin: nil}
 ])
+Profile.create!([
+  {name: "Siva Real Estate", video_url: "5224064", representitive: "Soniya ", phone: "416 400 0444", category_id: 2, user_id: 2, facebook: "", twitter: "", instagram: "", address: "815 - 38 Dan Leckie Way, Toronto, ON", lat: 43.6374919, lng: -79.3979466, thumbnail_url: "https://i.vimeocdn.com/video/16212575_640.jpg", description: nil},
+  {name: "Rachael", video_url: nil, representitive: "", phone: "", category_id: 2, user_id: 4, facebook: "", twitter: "", instagram: "", address: "", lat: nil, lng: nil, thumbnail_url: nil, description: nil},
+  {name: "First Exit Media", video_url: "tUu8hSiQXFM", representitive: "Zach Levy", phone: "647 667 5215", category_id: 1, user_id: 1, facebook: "zacharyaaronlevy", twitter: "zachary_levy", instagram: "", address: "1701 - 55 Maitland St, Toronto, ON", lat: 43.6642168, lng: -79.3815091, thumbnail_url: "https://img.youtube.com/vi/tUu8hSiQXFM/mqdefault.jpg", description: "great #number of #tags here #bro #nice"}
+])
 Category.create!([
   {name: "Business"},
   {name: "Real Estate"}
-])
-Comment.create!([
-  {profile_id: 1, post_id: 8, description: "ok cool"},
-  {profile_id: 1, post_id: 8, description: "sweet"},
-  {profile_id: 1, post_id: 8, description: "awesome"},
-  {profile_id: 1, post_id: 8, description: "noice"},
-  {profile_id: 1, post_id: 8, description: "great"},
-  {profile_id: 1, post_id: 8, description: "super"},
-  {profile_id: 1, post_id: 8, description: "epic"},
-  {profile_id: 1, post_id: 6, description: "black hole, cool"},
-  {profile_id: 1, post_id: 5, description: "lalalla"},
-  {profile_id: 1, post_id: 10, description: "great photo"},
-  {profile_id: 1, post_id: 7, description: "great"},
-  {profile_id: 1, post_id: 7, description: "sweet"},
-  {profile_id: 1, post_id: 7, description: "sweet"},
-  {profile_id: 1, post_id: 7, description: "sweet"},
-  {profile_id: 1, post_id: 7, description: "great"},
-  {profile_id: 1, post_id: 7, description: "nice"},
-  {profile_id: 1, post_id: 6, description: "great"},
-  {profile_id: 1, post_id: 6, description: "sweet"},
-  {profile_id: 1, post_id: 6, description: "nice"},
-  {profile_id: 1, post_id: 6, description: "ok"},
-  {profile_id: 1, post_id: 6, description: "no"},
-  {profile_id: 1, post_id: 6, description: "greaaaa"},
-  {profile_id: 1, post_id: 5, description: "noice"},
-  {profile_id: 1, post_id: 5, description: "sweet"},
-  {profile_id: 2, post_id: 5, description: "nice"},
-  {profile_id: 4, post_id: 5, description: "rock on"},
-  {profile_id: 1, post_id: 6, description: "awesome!!"}
 ])
 Conversation.create!([
   {sender_id: 1, receiver_id: 2, message: "cool story bro", read: false},
@@ -55,21 +31,7 @@ Conversation.create!([
   {sender_id: 4, receiver_id: 1, message: "hey!", read: nil},
   {sender_id: 4, receiver_id: 1, message: "hey!", read: true}
 ])
-Friend.create!([
-  {profile_id: 2, friend_id: 1, mutual: nil},
-  {profile_id: 4, friend_id: 1, mutual: nil}
-])
-Like.create!([
-  {profile_id: 1, post_id: 8},
-  {profile_id: 1, post_id: 9},
-  {profile_id: 1, post_id: 10},
-  {profile_id: 1, post_id: 7},
-  {profile_id: 2, post_id: 5},
-  {profile_id: 4, post_id: 5},
-  {profile_id: 1, post_id: 16},
-  {profile_id: 4, post_id: 6},
-  {profile_id: 1, post_id: 6}
-])
+
 Notification.create!([
   {message: "You have a new message from Rachael.", link: "/conversations/25", profile_id: 1},
   {message: "Rachael followed you.", link: "/profiles/4", profile_id: 1},
@@ -78,11 +40,6 @@ Notification.create!([
 ])
 Page.create!([
   {html: "<p>ok</p>", slug: "about"}
-])
-Partner.create!([
-  {profile_id: 2, partner_id: 1},
-  {profile_id: 1, partner_id: 1},
-  {profile_id: 4, partner_id: 1}
 ])
 Post.create!([
   {image_url: "https://ucarecdn.com/c0855e46-c926-4a98-ab3b-9a9b2ebca87d/", video_url: nil, description: "", profile_id: 1, thumbnail_url: nil, post_category_id: nil, mention_id: nil},
@@ -108,28 +65,6 @@ PostCategory.create!([
   {name: "portfolio"},
   {name: "promotion"}
 ])
-Profile.create!([
-  {name: "Siva Real Estate", video_url: "5224064", representitive: "Soniya ", phone: "416 400 0444", category_id: 2, user_id: 2, facebook: "", twitter: "", instagram: "", address: "815 - 38 Dan Leckie Way, Toronto, ON", lat: 43.6374919, lng: -79.3979466, thumbnail_url: "https://i.vimeocdn.com/video/16212575_640.jpg", description: nil},
-  {name: "Rachael", video_url: nil, representitive: "", phone: "", category_id: 2, user_id: 4, facebook: "", twitter: "", instagram: "", address: "", lat: nil, lng: nil, thumbnail_url: nil, description: nil},
-  {name: "First Exit Media", video_url: "tUu8hSiQXFM", representitive: "Zach Levy", phone: "647 667 5215", category_id: 1, user_id: 1, facebook: "zacharyaaronlevy", twitter: "zachary_levy", instagram: "", address: "1701 - 55 Maitland St, Toronto, ON", lat: 43.6642168, lng: -79.3815091, thumbnail_url: "https://img.youtube.com/vi/tUu8hSiQXFM/mqdefault.jpg", description: "great #number of #tags here #bro #nice"}
-])
-ProfileTag.create!([
-  {profile_id: 2, tag_id: 4},
-  {profile_id: 2, tag_id: 5},
-  {profile_id: 4, tag_id: 1},
-  {profile_id: 4, tag_id: 6},
-  {profile_id: 4, tag_id: 2},
-  {profile_id: 1, tag_id: 11},
-  {profile_id: 1, tag_id: 12},
-  {profile_id: 1, tag_id: 13},
-  {profile_id: 1, tag_id: 14}
-])
-Share.create!([
-  {post_id: 5, profile_id: 1},
-  {post_id: 10, profile_id: 1},
-  {post_id: 5, profile_id: 4},
-  {post_id: 5, profile_id: 1}
-])
 Tag.create!([
   {name: "money"},
   {name: "winning"},
@@ -145,6 +80,26 @@ Tag.create!([
   {name: "tags"},
   {name: "bro"},
   {name: "nice"}
+])
+Partner.create!([
+  {profile_id: 2, partner_id: 1},
+  {profile_id: 1, partner_id: 1},
+  {profile_id: 4, partner_id: 1}
+])
+Friend.create!([
+  {profile_id: 2, friend_id: 1, mutual: nil},
+  {profile_id: 4, friend_id: 1, mutual: nil}
+])
+Like.create!([
+  {profile_id: 1, post_id: 8},
+  {profile_id: 1, post_id: 9},
+  {profile_id: 1, post_id: 10},
+  {profile_id: 1, post_id: 7},
+  {profile_id: 2, post_id: 5},
+  {profile_id: 4, post_id: 5},
+  {profile_id: 1, post_id: 16},
+  {profile_id: 4, post_id: 6},
+  {profile_id: 1, post_id: 6}
 ])
 View.create!([
   {profile_id: 1, viewed_id: 2},
@@ -507,4 +462,50 @@ View.create!([
   {profile_id: 4, viewed_id: 1},
   {profile_id: 4, viewed_id: 1},
   {profile_id: 1, viewed_id: 4}
+])
+ProfileTag.create!([
+  {profile_id: 2, tag_id: 4},
+  {profile_id: 2, tag_id: 5},
+  {profile_id: 4, tag_id: 1},
+  {profile_id: 4, tag_id: 6},
+  {profile_id: 4, tag_id: 2},
+  {profile_id: 1, tag_id: 11},
+  {profile_id: 1, tag_id: 12},
+  {profile_id: 1, tag_id: 13},
+  {profile_id: 1, tag_id: 14}
+])
+Share.create!([
+  {post_id: 5, profile_id: 1},
+  {post_id: 10, profile_id: 1},
+  {post_id: 5, profile_id: 4},
+  {post_id: 5, profile_id: 1}
+])
+Comment.create!([
+  {profile_id: 1, post_id: 8, description: "ok cool"},
+  {profile_id: 1, post_id: 8, description: "sweet"},
+  {profile_id: 1, post_id: 8, description: "awesome"},
+  {profile_id: 1, post_id: 8, description: "noice"},
+  {profile_id: 1, post_id: 8, description: "great"},
+  {profile_id: 1, post_id: 8, description: "super"},
+  {profile_id: 1, post_id: 8, description: "epic"},
+  {profile_id: 1, post_id: 6, description: "black hole, cool"},
+  {profile_id: 1, post_id: 5, description: "lalalla"},
+  {profile_id: 1, post_id: 10, description: "great photo"},
+  {profile_id: 1, post_id: 7, description: "great"},
+  {profile_id: 1, post_id: 7, description: "sweet"},
+  {profile_id: 1, post_id: 7, description: "sweet"},
+  {profile_id: 1, post_id: 7, description: "sweet"},
+  {profile_id: 1, post_id: 7, description: "great"},
+  {profile_id: 1, post_id: 7, description: "nice"},
+  {profile_id: 1, post_id: 6, description: "great"},
+  {profile_id: 1, post_id: 6, description: "sweet"},
+  {profile_id: 1, post_id: 6, description: "nice"},
+  {profile_id: 1, post_id: 6, description: "ok"},
+  {profile_id: 1, post_id: 6, description: "no"},
+  {profile_id: 1, post_id: 6, description: "greaaaa"},
+  {profile_id: 1, post_id: 5, description: "noice"},
+  {profile_id: 1, post_id: 5, description: "sweet"},
+  {profile_id: 2, post_id: 5, description: "nice"},
+  {profile_id: 4, post_id: 5, description: "rock on"},
+  {profile_id: 1, post_id: 6, description: "awesome!!"}
 ])
