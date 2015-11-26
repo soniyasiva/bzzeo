@@ -53,9 +53,10 @@
               %li
                 = link_to like_post_path(post), :class => "button btn btn-primary btn-sm like", method: :put, remote: true, :data => { :id => post.id } do
                   = post.liked?(current_user) ? "Unlike" : "Like"
-              %li
-                = link_to pin_post_path(post), :class => "button btn btn-default btn-sm pin", method: :put, remote: true, :data => { :id => post.id } do
-                  = post.pinned? ? "Unpin" : "Pin"
+              - if post.profile.user == current_user
+                %li
+                  = link_to pin_post_path(post), :class => "button btn btn-default btn-sm pin", method: :put, remote: true, :data => { :id => post.id } do
+                    = post.pinned? ? "Unpin" : "Pin"
               -# %li.upvotes-count
               -#   %span{ :data => {:id => post.id} }
               -#     = post.upvotes.size
