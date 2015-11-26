@@ -13,6 +13,10 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
+
+# heroku
+gem 'rails_12factor', group: :production
+gem 'seed_dump'
 # .haml instead of .html
 gem "haml-rails", "~> 0.9"
 # users
