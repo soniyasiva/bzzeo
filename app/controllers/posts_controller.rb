@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   load_and_authorize_resource
   check_authorization
 
-  before_action :set_post, only: [:show, :edit, :update, :destroy, :like, :comment, :upvote]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :like, :comment, :upvote, :downvote, :pin]
 
   # handles comments for posts
   def comment
@@ -36,6 +36,14 @@ class PostsController < ApplicationController
     @post.downvote current_user
     if request.xhr?
       render json: { count: @post.downvotes.size, id: @post.id }
+    end
+  end
+
+  # handles pins for posts
+  def pin
+    @post.pin current_user
+    if request.xhr?
+      render json: { post: @post, id: @post.id }
     end
   end
 

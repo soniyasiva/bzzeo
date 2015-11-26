@@ -20,7 +20,7 @@
 
 # on post like success
 $(document).on 'ajax:success', 'a.like', (status,data,xhr)->
-  'like'
+  console.log 'like'
   # update counter
   $(".likes-count span[data-id=#{data.id}]").text data.count
 
@@ -30,6 +30,19 @@ $(document).on 'ajax:success', 'a.like', (status,data,xhr)->
       $(this).text("Like")
     else
       $(this).text("Unlike")
+
+# on post pin success
+$(document).on 'ajax:success', 'a.pin', (status,data,xhr)->
+  console.log 'pin'
+  # update counter
+  $("span.pinned[data-id=#{data.id}]").toggleClass('hidden')
+
+  # toggle links text
+  $("a.pin[data-id=#{data.id}]").each ->
+    if $(this).text().indexOf("Un") > -1
+      $(this).text("Pin")
+    else
+      $(this).text("Unpin")
 
 # on post upvote success
 $(document).on 'ajax:success', 'a.upvote', (status,data,xhr)->

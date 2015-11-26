@@ -109,4 +109,15 @@ class Post < ActiveRecord::Base
     likes.unscoped.where(profile_id: user.profile.id).where(dislike: true).any?
   end
 
+  # pins posts to the top of the profile page
+  def pin user
+    # auth
+    return unless user == profile.user
+    if pinned == false
+      self.update(pinned: true)
+    else
+      self.update(pinned: false)
+    end
+  end
+
 end

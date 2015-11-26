@@ -10,6 +10,8 @@
               posted
               = time_ago_in_words post.created_at
               ago
+              %span.pinned{:data => { :id => post.id }, :class => "#{'hidden' unless post.pinned?}"}
+                = icon 'thumb-tack'# if post.pinned?
         .row.image
           -# image, if there is one
           .col-xs-12
@@ -51,6 +53,9 @@
               %li
                 = link_to like_post_path(post), :class => "button btn btn-primary btn-sm like", method: :put, remote: true, :data => { :id => post.id } do
                   = post.liked?(current_user) ? "Unlike" : "Like"
+              %li
+                = link_to pin_post_path(post), :class => "button btn btn-default btn-sm pin", method: :put, remote: true, :data => { :id => post.id } do
+                  = post.pinned? ? "Unpin" : "Pin"
               -# %li.upvotes-count
               -#   %span{ :data => {:id => post.id} }
               -#     = post.upvotes.size
