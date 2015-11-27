@@ -126,4 +126,8 @@ class Post < ActiveRecord::Base
     end
   end
 
+  def promotion?
+    !post_category.nil? && post_category == PostCategory.find_by(name: 'promotion')
+  end
+
 end
