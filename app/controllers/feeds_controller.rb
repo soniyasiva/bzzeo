@@ -1,4 +1,7 @@
 class FeedsController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource
+  check_authorization
   # GET /feeds
   # GET /feeds.json
   def index

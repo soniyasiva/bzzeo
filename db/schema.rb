@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151126190228) do
+ActiveRecord::Schema.define(version: 20151127070216) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -120,6 +120,7 @@ ActiveRecord::Schema.define(version: 20151126190228) do
     t.string   "thumbnail_url"
     t.integer  "post_category_id"
     t.integer  "mention_id"
+    t.boolean  "hidden"
     t.boolean  "pinned"
   end
 

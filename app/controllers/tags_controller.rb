@@ -1,7 +1,8 @@
 class TagsController < ApplicationController
+  before_action :authenticate_user!
   load_and_authorize_resource
   check_authorization
-  
+
   before_action :set_tag, only: [:show, :edit, :update, :destroy]
 
   # GET /tags

@@ -60,5 +60,7 @@
               = link_to "Messages", conversations_path
             %li{class: "#{active? views_path}"}
               = link_to "Viewed My Profile", views_path
+            %li{class: "#{active? notifications_path}"}
+              = link_to "Notifications", notifications_path
             %li
               = link_to('Logout', destroy_user_session_path, :method => :delete)

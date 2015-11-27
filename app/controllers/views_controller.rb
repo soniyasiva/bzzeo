@@ -1,7 +1,8 @@
 class ViewsController < ApplicationController
+  before_action :authenticate_user!
   load_and_authorize_resource
   check_authorization
-  
+
   before_action :set_view, only: [:show, :edit, :update, :destroy]
 
   # GET /views
