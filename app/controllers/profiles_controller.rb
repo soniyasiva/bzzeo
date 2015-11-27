@@ -1,4 +1,5 @@
 class ProfilesController < ApplicationController
+  before_action :authenticate_user!, :except => :show
   load_and_authorize_resource
   check_authorization
 
@@ -54,7 +55,7 @@ class ProfilesController < ApplicationController
   # GET /profiles/1.json
   def show
     # viewed profile tracker
-    @view = View.create(profile_id: current_user.id, viewed_id: @profile.id)
+    @view = View.create(profile_id: current_user.id, viewed_id: @profile.id) unless current_user.nil?
   end
 
   # GET /profiles/new

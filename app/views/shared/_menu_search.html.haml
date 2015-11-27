@@ -8,8 +8,11 @@
           %li
             = link_to '#', :class => "category-option", :data => { :id => pg.id } do
               = pg.name.capitalize!
-    = f.text_field :query, placeholder: "Search Profiles and Posts", hide_label: true
+    = f.text_field :query, placeholder: "Search Profiles and Posts", hide_label: true, :value => @query
     = f.hidden_field :category_id, :value => nil
+    %span.input-group-btn
+      = link_to search_feeds_path, :class => "btn btn-default" do
+        = icon 'filter'
     %span.input-group-btn
       %button.btn.btn-default{:type => "submit"}
         = icon 'search'

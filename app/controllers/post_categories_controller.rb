@@ -1,4 +1,8 @@
 class PostCategoriesController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource
+  check_authorization
+  
   before_action :set_post_category, only: [:show, :edit, :update, :destroy]
 
   # GET /post_categories

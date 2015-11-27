@@ -1,3 +1,6 @@
+-# meta data
+- set_meta_tags "og:title" => "Bzzeo | #{@profile.name}", "og:description" => @profile.description, "og:image" => @profile.thumbnail_url
+
 .row.profile
   .col-xs-12
     .row.video
@@ -25,7 +28,7 @@
                   Location
                   = icon 'map-marker'
                 %iframe.profile-map.hidden{:allowfullscreen => "", :frameborder => "0", :src => "https://www.google.com/maps/embed/v1/place?key=AIzaSyAcyVJVLnLZvy1UaUP86D7GfeU5vS7Fspw&q=#{h @profile.address}", :style => "border:0"}
-        - unless current_user == @profile.user
+        - unless current_user.nil? || current_user == @profile.user
           .row.more-info
             .col-xs-12
               .btn-group
@@ -111,13 +114,12 @@
           #posts-tab.tab-pane.active{:role => "tabpanel"}
             .row.posts
               .col-xs-12
-                - if @profile.posts.any?
-                  - @profile.posts.order(created_at: :desc).in_groups_of(4, false) do |post_group|
-                    .row
-                      .col-xs-12
-                        - post_group.each do |post|
-                          = render 'shared/post_sm', post: post
-                - else
+                - @profile.posts.where.not(hidden: true).order(pinned: :asc, created_at: :desc).in_groups_of(4, false) do |post_group|
+                  .row
+                    .col-xs-12
+                      - post_group.each do |post|
+                        = render 'shared/post_sm', post: post
+                - unless @profile.posts.any?
                   %p No posts
           #mentions-tab.tab-pane{:role => "tabpanel"}
             .row.mentions

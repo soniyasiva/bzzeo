@@ -8,6 +8,7 @@
     = f.select(:post_category_id, PostCategory.where.not(name: 'review').collect {|c| [c.name.capitalize!, c.id]}, :include_blank => true )
   - else
     = f.hidden_field :post_category_id, value: params[:post_category_id]
+  = f.check_box :hidden, label: "Hidden on your profile"
   = f.uploadcare_uploader :image_url, :data => { "images-only" => "true"}
   %br
   = f.submit 'Save'

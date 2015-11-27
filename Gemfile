@@ -41,6 +41,8 @@ gem 'geokit-rails'
 gem 'rails_autolink'
 gem 'will_paginate', '~> 3.0.6'
 gem 'font-awesome-sass', '~> 4.4.0'
+# env vars
+gem "figaro"
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

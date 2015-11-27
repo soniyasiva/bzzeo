@@ -4,14 +4,17 @@
     %meta{:charset => "utf-8"}
     %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}
     %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}
-    %title Bzzeo
+    / meta tags
+    - set_meta_tags site: 'Bzzeo', "og:url" => "#{ENV['SITE']}#{request.path}"
+    = display_meta_tags
+
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
     = include_uploadcare_widget_from_cdn version: "2.5.5", min: true
     = uploadcare_settings
   %body{:class => styles()}
-    = render 'layouts/menu' if user_signed_in?
+    = render 'layouts/menu'
     .container
       -unless notice.nil?
         .alert.alert-info.alert-dismissible{:role => "alert"}

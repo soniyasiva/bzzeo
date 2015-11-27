@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!, :except => :show
   load_and_authorize_resource
   check_authorization
 
@@ -134,7 +135,7 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:image_url, :video_url, :description, :mention_id, :post_category_id).merge(
+      params.require(:post).permit(:image_url, :video_url, :description, :mention_id, :post_category_id, :hidden).merge(
         profile_id: current_user.profile.id
       )
     end
