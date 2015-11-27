@@ -19,12 +19,12 @@
           = link_to root_path do
             = icon 'home'
             Home
-        %li{class: "#{active? posts_path}"}
-          = link_to 'deals' do
+        %li{class: "#{active? '/deals'}"}
+          = link_to '/deals' do
             = icon 'tag'
             Hacks
-        %li{class: "#{active? posts_path}"}
-          = link_to posts_path do
+        %li{class: "#{active? '/posts/categories/job'}"}
+          = link_to '/posts/categories/job' do
             = icon 'briefcase'
             Jobs
         %li{class: "new-post #{active? new_post_path}"}
@@ -39,14 +39,6 @@
             %ul.dropdown-menu{:role => "menu"}
               %li
                 = link_to "Pages", pages_path
-              -# %li
-              -#   = link_to "Categories", categories_path
-              -# %li
-              -#   = link_to "Likes", likes_path
-              -# %li
-              -#   = link_to "Comments", comments_path
-              -# %li
-              -#   = link_to "Tags", tags_path
         %li.dropdown
           -# show profile photo only for users with on, otherwise name
           - if current_user.profile.thumbnail_url.blank?

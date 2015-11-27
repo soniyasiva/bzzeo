@@ -67,7 +67,9 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all.order(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
+    @posts = Post.all
+    @posts = @posts.where(post_category_id: PostCategory.find_by(name: params[:category_name])) unless params[:category_name].nil?
+    @posts = @posts.order(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
   end
 
   # GET /posts/1
