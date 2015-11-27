@@ -1,11 +1,12 @@
-%h3 Search
-
 = bootstrap_form_tag url: search_feeds_path, method: 'get' do |f|
   .col-xs-12.col-sm-5
-    = f.text_field :query, placeholder: "Search Profiles and Posts"
+    = f.text_field :query, placeholder: "Search Profiles and Posts", hide_label: true
   .col-xs-12.col-sm-2
-    = f.select(:category_id, PostCategory.all.collect {|c| [c.name.capitalize!, c.id]}, :include_blank => true)
+    = f.select(:category_id, PostCategory.all.collect {|c| [c.name.capitalize!, c.id]}, :include_blank => true, hide_label: true)
   .col-xs-12.col-sm-3
-    = f.text_field :address, placeholder: "Address"
+    = f.text_field :address, placeholder: "Address", hide_label: true
   .col-xs-12.col-sm-2
-    = f.submit "Search"
+    .form-group
+      -# styling hacky fix
+      -# %label &nbsp;
+      = f.submit "Search", :class => "btn btn-primary btn-sm show"

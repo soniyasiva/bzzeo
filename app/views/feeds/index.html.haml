@@ -1,17 +1,36 @@
-%h1 Feed
-
+.row
+  .col-xs-12
+    %ul.list-inline.pull-right
+      %li
+        = link_to feeds_path(view_type: 'grid') do
+          = icon 'th-large'
+        = link_to feeds_path do
+          = icon 'bars'
 = render 'shared/search'
-
-- @items.each do |item|
-  - if item.is_a? Post
-    = render 'shared/post', post: item, social: false
-  - elsif item.is_a? Share
-    = render 'shared/share', share: item, social: false
+.row
+  .col-xs-12
+    - if @view_type == 'grid'
+      - @items.each do |item|
+        - if item.is_a? Post
+          = render 'shared/post_sm', post: item
+        - elsif item.is_a? Share
+          = render 'shared/share_sm', share: item
+        - elsif item.is_a? Profile
+          = render 'shared/profile_sm', profile: item
+    - else
+      - @items.each do |item|
+        - if item.is_a? Post
+          = render 'shared/post', post: item, social: false
+        - elsif item.is_a? Share
+          = render 'shared/share', share: item, social: false
+        - elsif item.is_a? Profile
+          = render 'shared/profile', profile: item
 
 .row.pagination
   .col-xs-12
     -# hacky pagination, paginates the most numerous model
-    - if @posts.count > @shares.count
-      = will_paginate @posts
-    - else
-      = will_paginate @shares
+    - paginator = []
+    - paginator = @shares if !@shares.nil?
+    - paginator = @posts if !@posts.nil? && @posts.count > paginator.count
+    - paginator = @profiles if !@profiles.nil? && @profiles.count > paginator.count
+    = will_paginate paginator
