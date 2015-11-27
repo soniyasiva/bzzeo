@@ -1,7 +1,7 @@
 class FeedsController < ApplicationController
   before_action :authenticate_user!
-  load_and_authorize_resource
-  check_authorization
+  # load_and_authorize_resource
+  # check_authorization
   # GET /feeds
   # GET /feeds.json
   def index
@@ -15,7 +15,8 @@ class FeedsController < ApplicationController
     # sets vars or nil
     @category = params[:category_id] unless params[:category_id].blank?
     @query = params[:query] unless params[:query].blank?
-    @address = geocode_address params[:address] unless params[:address].blank?
+    @address_query = params[:address]
+    @address = geocode_address @address_query unless @address_query.blank?
 
     # gets profiles
     @profiles = Profile.all
