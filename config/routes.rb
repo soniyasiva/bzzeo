@@ -15,9 +15,6 @@ Rails.application.routes.draw do
   resources :likes
   resources :comments
   resources :posts do
-    # collection do
-    #   get ":view_type", to: "posts#index"
-    # end
     member do
       put "like", to: "posts#like"
       put "upvote", to: "posts#upvote"

@@ -2,21 +2,30 @@
   .col-xs-12
     %ul.list-inline.pull-right
       %li
-        = link_to posts_path(view_type: 'grid') do
+        = link_to posts_path do
           = icon 'th-large'
         = link_to posts_path do
           = icon 'bars'
 
-- if @view_type == 'grid'
-  - @posts.in_groups_of(4, false) do |post_group|
+.row
+  .col-xs-12
+    / Nav tabs
+    %ul.nav.nav-tabs{:role => "tablist"}
+      %li.active{:role => "presentation"}
+        %a{"aria-controls" => "grid-view", "data-toggle" => "tab", :href => "#grid-view", :role => "tab"} Grid
+      %li{:role => "presentation"}
+        %a{"aria-controls" => "list-view", "data-toggle" => "tab", :href => "#list-view", :role => "tab"} List
+    / Tab panes
     .row
       .col-xs-12
-        - post_group.each do |post|
-          = render 'shared/post_sm', post: post
-- else
-  - @posts.each do |post|
-    = render 'shared/post', post: post, social: false
-
+        %br
+        .tab-content
+          #grid-view.tab-pane.active{:role => "tabpanel"}
+            - @posts.each do |post|
+              = render 'shared/post_sm', post: post
+          #list-view.tab-pane{:role => "tabpanel"}
+            - @posts.each do |post|
+              = render 'shared/post', post: post, social: false
 .row.pagination
   .col-xs-12
     = will_paginate @posts

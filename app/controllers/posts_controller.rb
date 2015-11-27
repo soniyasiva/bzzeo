@@ -68,7 +68,6 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @posts = Post.all.order(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
-    @view_type = params[:view_type]
   end
 
   # GET /posts/1

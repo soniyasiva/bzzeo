@@ -1,31 +1,35 @@
 .row
   .col-xs-12
-    %ul.list-inline.pull-right
-      %li
-        = link_to feeds_path(view_type: 'grid') do
-          = icon 'th-large'
-        = link_to feeds_path do
-          = icon 'bars'
 = render 'shared/search'
 .row
   .col-xs-12
-    - if @view_type == 'grid'
-      - @items.each do |item|
-        - if item.is_a? Post
-          = render 'shared/post_sm', post: item
-        - elsif item.is_a? Share
-          = render 'shared/share_sm', share: item
-        - elsif item.is_a? Profile
-          = render 'shared/profile_sm', profile: item
-    - else
-      - @items.each do |item|
-        - if item.is_a? Post
-          = render 'shared/post', post: item, social: false
-        - elsif item.is_a? Share
-          = render 'shared/share', share: item, social: false
-        - elsif item.is_a? Profile
-          = render 'shared/profile', profile: item
-
+    / Nav tabs
+    %ul.nav.nav-tabs{:role => "tablist"}
+      %li.active{:role => "presentation"}
+        %a{"aria-controls" => "grid-view", "data-toggle" => "tab", :href => "#grid-view", :role => "tab"} Grid
+      %li{:role => "presentation"}
+        %a{"aria-controls" => "list-view", "data-toggle" => "tab", :href => "#list-view", :role => "tab"} List
+    / Tab panes
+    .row
+      .col-xs-12
+        %br
+        .tab-content
+          #grid-view.tab-pane.active{:role => "tabpanel"}
+            - @items.each do |item|
+              - if item.is_a? Post
+                = render 'shared/post_sm', post: item
+              - elsif item.is_a? Share
+                = render 'shared/share_sm', share: item
+              - elsif item.is_a? Profile
+                = render 'shared/profile_sm', profile: item
+          #list-view.tab-pane{:role => "tabpanel"}
+            - @items.each do |item|
+              - if item.is_a? Post
+                = render 'shared/post', post: item, social: false
+              - elsif item.is_a? Share
+                = render 'shared/share', share: item, social: false
+              - elsif item.is_a? Profile
+                = render 'shared/profile', profile: item
 .row.pagination
   .col-xs-12
     -# hacky pagination, paginates the most numerous model

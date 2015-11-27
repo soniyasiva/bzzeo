@@ -6,11 +6,9 @@ class FeedsController < ApplicationController
     @posts = Post.all.includes(:profile, {comments: :profile}, :likes).paginate(:page => params[:page], :per_page => 10)
     @shares = Share.all.includes(:profile, post: [:profile, {comments: :profile}, :likes]).paginate(:page => params[:page], :per_page => 10)
     @items = (@posts.to_a + @shares.to_a).sort_by(&:created_at)
-    @view_type = params[:view_type]
   end
 
   def search
-    puts "===== search ====="
     # sets vars or nil
     @category = params[:category_id] unless params[:category_id].blank?
     @query = params[:query] unless params[:query].blank?
@@ -46,12 +44,6 @@ class FeedsController < ApplicationController
     else
       @items = @profiles
     end
-
-    # grid vs list view
-    @view_type = params[:view_type]
-    # debug
-    puts "==== items ====="
-    puts @items
     render 'index'
   end
 
