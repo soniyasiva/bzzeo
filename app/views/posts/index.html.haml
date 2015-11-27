@@ -1,7 +1,21 @@
-%h1 Listing posts
+.row
+  .col-xs-12
+    %ul.list-inline.pull-right
+      %li
+        = link_to posts_path(view_type: 'grid') do
+          = icon 'th-large'
+        = link_to posts_path do
+          = icon 'bars'
 
-- @posts.each do |post|
-  = render 'shared/post', post: post, social: false
+- if @view_type == 'grid'
+  - @posts.in_groups_of(4, false) do |post_group|
+    .row
+      .col-xs-12
+        - post_group.each do |post|
+          = render 'shared/post_sm', post: post
+- else
+  - @posts.each do |post|
+    = render 'shared/post', post: post, social: false
 
 .row.pagination
   .col-xs-12
