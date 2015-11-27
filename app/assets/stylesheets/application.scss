@@ -192,6 +192,23 @@ p {
   }
 }
 // POST END
+// POST LISTED START
+.post-listed {
+  .votes {
+    li {
+      a {
+        color: $gray;
+        &.active {
+          color: $brand-primary;
+        }
+      }
+    }
+    .votes-count {
+
+    }
+  }
+}
+// POST LISTED END
 // POST SM AND PROFILE SM START
 .post-sm, .profile-sm {
   padding: 0;

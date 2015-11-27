@@ -1,8 +1,24 @@
-%h1 Listing posts
-
-- @posts.each do |post|
-  = render 'shared/post', post: post, social: false
-
+.row
+  .col-xs-12
+    / Nav tabs
+    %ul.nav.nav-tabs{:role => "tablist"}
+      %li.active{:role => "presentation"}
+        %a{"aria-controls" => "grid-view", "data-toggle" => "tab", :href => "#grid-view", :role => "tab"} Grid
+      %li{:role => "presentation"}
+        %a{"aria-controls" => "list-view", "data-toggle" => "tab", :href => "#list-view", :role => "tab"} List
+    / Tab panes
+    .row
+      .col-xs-12
+        %br
+        .tab-content
+          #grid-view.tab-pane.active{:role => "tabpanel"}
+            = "No results" if !@posts.any?
+            - @posts.each do |post|
+              = render 'shared/post_sm', post: post
+          #list-view.tab-pane{:role => "tabpanel"}
+            - @posts.each do |post|
+              = render 'shared/post', post: post, social: false
+            = "No results" if !@posts.any?
 .row.pagination
   .col-xs-12
     = will_paginate @posts

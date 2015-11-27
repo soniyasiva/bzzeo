@@ -1,17 +1,43 @@
-%h1 Feed
-
-= render 'shared/search'
-
-- @items.each do |item|
-  - if item.is_a? Post
-    = render 'shared/post', post: item, social: false
-  - elsif item.is_a? Share
-    = render 'shared/share', share: item, social: false
-
-.row.pagination
+.row
   .col-xs-12
-    -# hacky pagination, paginates the most numerous model
-    - if @posts.count > @shares.count
-      = will_paginate @posts
-    - else
-      = will_paginate @shares
+= render 'shared/search'
+.row
+  .col-xs-12
+    / Nav tabs
+    %ul.nav.nav-tabs{:role => "tablist"}
+      %li.active{:role => "presentation"}
+        %a{"aria-controls" => "grid-view", "data-toggle" => "tab", :href => "#grid-view", :role => "tab"} Grid
+      %li{:role => "presentation"}
+        %a{"aria-controls" => "list-view", "data-toggle" => "tab", :href => "#list-view", :role => "tab"} List
+    / Tab panes
+    .row
+      .col-xs-12
+        %br
+        .tab-content
+          #grid-view.tab-pane.active{:role => "tabpanel"}
+            - @items.each do |item|
+              - if item.is_a? Post
+                = render 'shared/post_sm', post: item
+              - elsif item.is_a? Share
+                = render 'shared/share_sm', share: item
+              - elsif item.is_a? Profile
+                = render 'shared/profile_sm', profile: item
+            = "No results" if !@items.any?
+          #list-view.tab-pane{:role => "tabpanel"}
+            - @items.each do |item|
+              - if item.is_a? Post
+                = render 'shared/post', post: item, social: false
+              - elsif item.is_a? Share
+                = render 'shared/share', share: item, social: false
+              - elsif item.is_a? Profile
+                = render 'shared/profile', profile: item
+            = "No results" if !@items.any?
+- if @items.any?
+  .row.pagination
+    .col-xs-12
+      -# hacky pagination, paginates the most numerous model
+      - paginator = []
+      - paginator = @shares if !@shares.nil?
+      - paginator = @posts if !@posts.nil? && @posts.count > paginator.count
+      - paginator = @profiles if !@profiles.nil? && @profiles.count > paginator.count
+      = will_paginate paginator

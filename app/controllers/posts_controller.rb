@@ -25,22 +25,39 @@ class PostsController < ApplicationController
 
   # handles upvotes for posts
   def upvote
-    @post.upvote current_user
+    @vote = @post.upvote current_user
+    if @vote.nil?
+      dislike = nil
+    else
+      dislike = @vote.dislike
+    end
     if request.xhr?
-      render json: { count: @post.upvotes.size, id: @post.id }
+      render json: { votes: @post.votes, id: @post.id, dislike: dislike }
     end
   end
 
   # handles downvotes for posts
   def downvote
-    @post.downvote current_user
-    if request.xhr?
-      render json: { count: @post.downvotes.size, id: @post.id }
+    @vote = @post.downvote current_user
+    if @vote.nil?
+      dislike = nil
+    else
+      dislike = @vote.dislike
     end
+    if request.xhr?
+      render json: { votes: @post.votes, id: @post.id, dislike: dislike }
+    end
+  end
+
+  # deals page
+  def deals
+    @category = PostCategory.find_by(name: 'promotion')
+    @posts = Post.where(post_category: @category).sort {|a,b| a.votes <=> b.votes}
   end
 
   # handles pins for posts
   def pin
+    puts "===== pin ====="
     @post.pin current_user
     if request.xhr?
       render json: { post: @post, id: @post.id }
@@ -50,7 +67,9 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all.paginate(:page => params[:page], :per_page => 10)
+    @posts = Post.all
+    @posts = @posts.where(post_category_id: PostCategory.find_by(name: params[:category_name])) unless params[:category_name].nil?
+    @posts = @posts.order(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
   end
 
   # GET /posts/1
@@ -115,7 +134,7 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:image_url, :video_url, :description, :mention_id).merge(
+      params.require(:post).permit(:image_url, :video_url, :description, :mention_id, :post_category_id).merge(
         profile_id: current_user.profile.id
       )
     end

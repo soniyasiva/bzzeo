@@ -68,19 +68,20 @@ class Post < ActiveRecord::Base
     elsif vote.dislike == false
       # already upvoted
       vote.destroy
+      vote = nil
     elsif vote.dislike.nil? || vote.dislike == true
       # catch likes and turn downvotes into upvotes
       vote.update(dislike: false)
     end
-    return
+    return vote
   end
 
   def upvotes
-    likes.unscoped.where(dislike: false)
+    likes.unscoped.where(post: self).where(dislike: false)
   end
 
   def upvoted? user
-    likes.unscoped.where(profile_id: user.profile.id).where(dislike: false).any?
+    likes.unscoped.where(post: self).where(profile_id: user.profile.id).where(dislike: false).any?
   end
 
   # downvotes are dislike true
@@ -94,19 +95,24 @@ class Post < ActiveRecord::Base
     elsif vote.dislike == true
       # already downvoted
       vote.destroy
+      vote = nil
     elsif vote.dislike.nil? || vote.dislike == false
       # catch likes and turn upvotes into downvotes
       vote.update(dislike: true)
     end
-    return
+    return vote
   end
 
   def downvotes
-    likes.unscoped.where(dislike: true)
+    likes.unscoped.where(post: self).where(dislike: true)
   end
 
   def downvoted? user
-    likes.unscoped.where(profile_id: user.profile.id).where(dislike: true).any?
+    likes.unscoped.where(post: self).where(profile_id: user.profile.id).where(dislike: true).any?
+  end
+
+  def votes
+    upvotes.count - downvotes.count
   end
 
   # pins posts to the top of the profile page
@@ -118,6 +124,10 @@ class Post < ActiveRecord::Base
     else
       self.update(pinned: false)
     end
+  end
+
+  def promotion?
+    !post_category.nil? && post_category == PostCategory.find_by(name: 'promotion')
   end
 
 end

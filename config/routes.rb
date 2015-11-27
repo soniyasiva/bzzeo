@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   resources :likes
   resources :comments
   resources :posts do
+    collection do
+      get "categories/:category_name", to: "posts#index"
+    end
     member do
       put "like", to: "posts#like"
       put "upvote", to: "posts#upvote"
@@ -23,6 +26,7 @@ Rails.application.routes.draw do
       post "comment", to: "posts#comment"
     end
   end
+  get "deals", to: "posts#deals"
   resources :tags
   resources :profiles do
     member do

@@ -1,0 +1,10 @@
+%ul.list-unstyled.votes
+  %li
+    = link_to upvote_post_path(post), :class => "button upvote #{"active" if post.upvoted?(current_user)}", method: :put, remote: true, :data => { :id => post.id } do
+      = icon 'caret-up'
+  %li.votes-count
+    %span{ :data => {:id => post.id} }
+      = post.votes
+  %li
+    = link_to downvote_post_path(post), :class => "button downvote #{"active" if post.downvoted?(current_user)}", method: :put, remote: true, :data => { :id => post.id } do
+      = icon 'caret-down'

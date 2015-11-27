@@ -46,40 +46,35 @@
           -# share, like, comment buttons
           .col-xs-12
             %ul.list-inline
-              %li.likes-count
-                %span{ :data => {:id => post.id} }
-                  = post.likes.size
-                likes
-              %li
-                = link_to like_post_path(post), :class => "button btn btn-primary btn-sm like", method: :put, remote: true, :data => { :id => post.id } do
-                  = post.liked?(current_user) ? "Unlike" : "Like"
-              - if post.profile.user == current_user
+              - if !post.promotion?
+                %li.likes-count
+                  %span{ :data => {:id => post.id} }
+                    = post.likes.size
+                  likes
                 %li
-                  = link_to pin_post_path(post), :class => "button btn btn-default btn-sm pin", method: :put, remote: true, :data => { :id => post.id } do
-                    = post.pinned? ? "Unpin" : "Pin"
-              -# %li.upvotes-count
-              -#   %span{ :data => {:id => post.id} }
-              -#     = post.upvotes.size
-              -#   upvotes
-              -# %li
-              -#   = link_to upvote_post_path(post), :class => "button btn btn-primary btn-sm upvote", method: :put, remote: true, :data => { :id => post.id } do
-              -#     = post.upvoted?(current_user) ? "Unupvote" : "Upvote"
-              -# %li.downvotes-count
-              -#   %span{ :data => {:id => post.id} }
-              -#     = post.downvotes.size
-              -#   downvotes
-              -# %li
-              -#   = link_to downvote_post_path(post), :class => "button btn btn-primary btn-sm downvote", method: :put, remote: true, :data => { :id => post.id } do
-              -#     = post.downvoted?(current_user) ? "Undownvote" : "Downvote"
+                  = link_to like_post_path(post), :class => "button btn btn-primary btn-sm like", method: :put, remote: true, :data => { :id => post.id } do
+                    = post.liked?(current_user) ? "Unlike" : "Like"
+                - if post.profile.user == current_user
+                  %li
+                    = link_to pin_post_path(post), :class => "button btn btn-default btn-sm pin", method: :put, remote: true, :data => { :id => post.id } do
+                      = post.pinned? ? "Unpin" : "Pin"
               %li
-                = link_to "Comment", '#', :data => { "new-comment-id" => post.id }, :class => "button btn btn-primary btn-sm new-comment-toggle"
+                = link_to '#', :data => { "new-comment-id" => post.id }, :class => "button btn btn-primary btn-sm new-comment-toggle" do
+                  = post.promotion? ? "Reply" : "Comment"
               %li
                 = link_to "Share", new_share_path( post_id: post.id ), { :class => "button btn btn-primary btn-sm" }
+              - if post.promotion?
+                %li
+                  = render 'shared/voter', post: post
         .row.new-comment.collapse{:data => { "new-comment-id" => post.id }}
           .col-xs-12
             = bootstrap_form_for(Comment.new, url: comment_post_path(post), remote: true) do |f|
-              = f.text_area :description, label: "New Comment"
-              = f.submit "Post Comment", :class => "btn btn-primary btn-sm submit-comment"
+              = f.text_area :description, hide_label: true
+              - if post.promotion?
+                = f.submit "Post Reply", :class => "btn btn-primary btn-sm submit-comment"
+              - else
+                = f.submit "Post Comment", :class => "btn btn-primary btn-sm submit-comment"
+
         - if social
           .row.social-share
             .col-xs-12

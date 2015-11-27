@@ -31,6 +31,7 @@ gem 'bootswatch-rails'
 # social
 gem 'shareable'
 gem 'vimeo'
+gem 'meta-tags'
 # slugs
 gem 'friendly_id', '~> 5.1.0'
 # geo

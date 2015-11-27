@@ -1,0 +1,25 @@
+.row.post-listed
+  .col-xs-12
+    .col-sm-1
+      .profile-avatar
+        .circle-avatar{:style => "background-image:url(#{current_user.profile.thumbnail_url})"}
+    .col-sm-10
+      .row
+        .col-xs-12
+          = link_to post do
+            %h4= post.description
+      .row
+        .col-sm-4
+          .timestamp
+            posted
+            = time_ago_in_words post.created_at
+            ago
+        .col-sm-4
+          .comments
+            = post.comments.count
+            Replies
+        .col-sm-4
+          .share
+            = link_to "Share", new_share_path( post_id: post.id ), { :class => "button btn btn-primary btn-xs" }
+    .col-sm-1
+      = render 'shared/voter', post: post

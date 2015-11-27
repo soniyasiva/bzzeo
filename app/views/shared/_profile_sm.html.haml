@@ -3,6 +3,11 @@
     .description
       .text-wrap
         %h3.name= profile.name
-        %h4.category= profile.category.name unless profile.category.nil?
-        %p.distance= "#{profile.lat}, #{profile.lng}" unless profile.lat.nil?
+        - unless profile.category.nil?
+          %h4.category
+            = profile.category.name
+        - unless profile.lat.nil? || @address.nil?
+          %p.distance
+            = profile.distance_from(@address).round(1)
+            km away
       .image{:style => "background-image: url(#{profile.thumbnail_url});"}
