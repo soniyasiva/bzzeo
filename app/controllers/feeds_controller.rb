@@ -6,8 +6,15 @@ class FeedsController < ApplicationController
   # GET /feeds.json
   def index
     # hacky pagination
-    @posts = Post.all.includes(:profile, {comments: :profile}, :likes).paginate(:page => params[:page], :per_page => 10)
-    @shares = Share.all.includes(:profile, post: [:profile, {comments: :profile}, :likes]).paginate(:page => params[:page], :per_page => 10)
+    # posts
+    @posts = Post.all.includes(:profile, {comments: :profile}, :likes)
+    @posts = @posts.order(created_at: :desc)
+    @posts = @posts.paginate(:page => params[:page], :per_page => 10)
+    # shares
+    @shares = Share.all.includes(:profile, post: [:profile, {comments: :profile}, :likes])
+    @shares = @shares.order(created_at: :desc)
+    @shares = @shares.paginate(:page => params[:page], :per_page => 10)
+    # combine
     @items = (@posts.to_a + @shares.to_a).sort_by(&:created_at)
   end
 
@@ -18,36 +25,13 @@ class FeedsController < ApplicationController
     @address_query = params[:address]
     @address = geocode_address @address_query unless @address_query.blank?
 
-    # gets profiles
-    @profiles = Profile.all
-    # searches profiles for
-    # profile name
-    # profile tag names
-    @profiles = @profiles.joins(:tags).where("profiles.name ILIKE ? OR tags.name ILIKE ?", "%#{@query}%", "%#{@query}%").uniq unless @query.nil?
-    # filter by category
-    @profiles = @profiles.where(category_id: @category) unless @category.nil?
-    # sort by distance
-    # within 100km, sorted by distance from origin, closest first
-    @profiles = @profiles.within(100, :origin => @address).order(address: :asc) unless @address.nil?
-    @profiles = @profiles.paginate(:page => params[:page], :per_page => 10)
-
-    # searches posts also
-    if @category.nil? && @address.nil?
-      # gets posts
-      @posts = Post.includes(:profile, {comments: :profile}, :likes)
-      # searches posts for
-      # description
-      @posts = @posts.where("description ILIKE ?", "%#{@query}%") unless @query.nil?
-      # preorder posts by created_at
-      @posts = @posts.order(created_at: :desc)
-      @posts = @posts.paginate(:page => params[:page], :per_page => 10)
-      # combine the two result times and sort by created_at desc
-      @items = (@posts.to_a + @profiles.to_a).sort_by do |item|
-        item.created_at
-      end.reverse!
-    else
-      @items = @profiles
-    end
+    @profiles = Profile.search @query, @address, params[:page]
+    @posts = Post.search @query, @category, params[:page]
+    # search posts and profiles
+    # combine the two result times and sort by created_at desc
+    @items = (@posts.to_a + @profiles.to_a).sort_by do |item|
+      item.created_at
+    end.reverse!
     render 'index'
   end
 
