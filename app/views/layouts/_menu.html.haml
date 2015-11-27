@@ -31,6 +31,13 @@
           = link_to new_post_path do
             = icon 'arrow-circle-right'
             Bzz
+        - if !user_signed_in?
+          %li
+            = link_to new_user_session_path do
+              Login
+          %li
+            = link_to new_user_registration_path do
+              Signup
         - if user_signed_in? && current_user.admin?
           %li.dropdown
             %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "#", :role => "button"}
