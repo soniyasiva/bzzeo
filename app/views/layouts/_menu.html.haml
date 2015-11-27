@@ -50,7 +50,7 @@
             -# show profile photo only for users with on, otherwise name
             - if current_user.profile.thumbnail_url.blank?
               %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "#", :role => "button"}
-                = current_user.profile.name
+                = current_user.profile.name.blank? ? "My Profile" : current_user.profile.name
             - else
               %a.dropdown-toggle.user-menu{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "#", :role => "button"}
                 .profile-avatar
