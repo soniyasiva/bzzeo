@@ -44,6 +44,16 @@ class Post < ActiveRecord::Base
     errors[:base] << "Review must mention a profile" if post_category_id == PostCategory.find_by(name: 'review').id && mention_id.blank?
   end
 
+  def meta_image
+    if !thumbnail_url.blank?
+      thumbnail_url
+    elsif !image_url.blank?
+      image_url
+    else
+      nil
+    end
+  end
+
   # likes are dislike nil
   def like user
     # get if like exists
