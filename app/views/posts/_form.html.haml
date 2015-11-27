@@ -4,10 +4,10 @@
   = f.text_field :video_url, :value => render_url(@post.video_url)
   = f.text_area :description
   = f.hidden_field :mention_id, value: params[:mention_id]
-  -# - if params[:post_category_id].nil?
-  -#   = f.select(:post_category_id, PostCategory.where.not(name: 'review').collect {|c| [c.name, c.id]}, :include_blank => true )
-  -# - else
-  -#   = f.hidden_field :post_category_id, value: params[:post_category_id]
+  - if params[:post_category_id].nil?
+    = f.select(:post_category_id, PostCategory.where.not(name: 'review').collect {|c| [c.name.capitalize!, c.id]}, :include_blank => true )
+  - else
+    = f.hidden_field :post_category_id, value: params[:post_category_id]
   = f.uploadcare_uploader :image_url, :data => { "images-only" => "true"}
   %br
   = f.submit 'Save'

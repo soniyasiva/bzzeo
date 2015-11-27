@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       post "comment", to: "posts#comment"
     end
   end
+  get "deals", to: "posts#deals"
   resources :tags
   resources :profiles do
     member do

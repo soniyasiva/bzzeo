@@ -1,0 +1,32 @@
+.row.post-listed
+  .col-xs-12
+    .col-sm-1
+      = image_tag(post.image_url, :class => "img-responsive")
+    .col-sm-10
+      .row
+        .col-xs-12
+          = post.description
+      .row
+        .col-sm-4
+          .timestamp
+            posted
+            = time_ago_in_words post.created_at
+            ago
+        .col-sm-4
+          .comments
+            = post.comments.count
+            Replies
+        .col-sm-4
+          .share
+            = link_to "Share", new_share_path( post_id: post.id ), { :class => "button btn btn-primary btn-xs" }
+    .col-sm-1
+      %ul.list-unstyled.votes
+        %li
+          = link_to upvote_post_path(post), :class => "button upvote #{"active" if post.upvoted?(current_user)}", method: :put, remote: true, :data => { :id => post.id } do
+            = icon 'caret-up'
+        %li.votes-count
+          %span{ :data => {:id => post.id} }
+            = post.votes
+        %li
+          = link_to downvote_post_path(post), :class => "button downvote #{"active" if post.downvoted?(current_user)}", method: :put, remote: true, :data => { :id => post.id } do
+            = icon 'caret-down'

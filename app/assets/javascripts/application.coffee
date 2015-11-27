@@ -43,31 +43,37 @@ $(document).on 'ajax:success', 'a.pin', (status,data,xhr)->
     else
       $(this).text("Unpin")
 
+updateVotes = (data) ->
+  console.log data
+  # toggle links text
+  $(".votes-count span[data-id=#{data.id}]").each ->
+    $(this).text(data.votes)
+  # ipvote arrow
+  $("a.upvote[data-id=#{data.id}]").each ->
+    if data.dislike is off
+      $(this).addClass('active')
+    else
+      $(this).removeClass('active')
+  # downvote arrow
+  $("a.downvote[data-id=#{data.id}]").each ->
+    if data.dislike is on
+      $(this).addClass('active')
+    else
+      $(this).removeClass('active')
+
 # on post upvote success
 $(document).on 'ajax:success', 'a.upvote', (status,data,xhr)->
   console.log 'upvote'
   # update counter
   $(".upvotes-count span[data-id=#{data.id}]").text data.count
-
-  # toggle links text
-  $("a.upvote[data-id=#{data.id}]").each ->
-    if $(this).text().indexOf("Un") > -1
-      $(this).text("Upvote")
-    else
-      $(this).text("Unupvote")
+  updateVotes data
 
 # on post downvote success
 $(document).on 'ajax:success', 'a.downvote', (status,data,xhr)->
   console.log 'downvote'
   # update counter
   $(".downvotes-count span[data-id=#{data.id}]").text data.count
-
-  # toggle links text
-  $("a.downvote[data-id=#{data.id}]").each ->
-    if $(this).text().indexOf("Un") > -1
-      $(this).text("Downvote")
-    else
-      $(this).text("Undownvote")
+  updateVotes data
 
 # on profile friend success
 $(document).on 'ajax:success', 'a.friend', (status,data,xhr)->
