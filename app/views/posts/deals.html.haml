@@ -1,6 +1,7 @@
 %h1 Deals
 
 - @posts.each do |post|
+  - next if post.votes < -5
   = render 'shared/post_listed', post: post
 
 = "No results" if !@posts.any?

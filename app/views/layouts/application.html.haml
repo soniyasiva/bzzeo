@@ -27,4 +27,5 @@
             %span{"aria-hidden" => "true"} &times;
           = alert
       = yield
-    = render 'layouts/bottom_menu'
+    - if user_signed_in?
+      = render 'layouts/bottom_menu'

@@ -4,18 +4,23 @@
       = icon 'plus'
   .col-xs-12.navbar-default.navbar-fixed-bottom
     .row
-      = link_to '/feeds' do
-        .col-xs-4.text-center
+      = link_to feeds_path do
+        .col-xs-3.text-center
           .mobile-option
             = icon 'th-large'
             %br Feed
-      = link_to '/feeds/search' do
-        .col-xs-4.text-center
+      = link_to conversations_path do
+        .col-xs-3.text-center
           .mobile-option
-            = icon 'search'
-            %br Search
-      = link_to '/posts/cagetories/jobs' do
-        .col-xs-4.text-center
+            = icon 'comments'
+            %br Messages
+      = link_to notifications_path do
+        .col-xs-3.text-center
           .mobile-option
-            = icon 'briefcase'
-            %br Jobs
+            = icon 'exclamation-triangle'
+            %br Activity
+      = link_to profile_path(current_user.profile) do
+        .col-xs-3.text-center
+          .mobile-option
+            = icon 'user'
+            %br Me
