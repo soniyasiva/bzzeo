@@ -1,15 +1,16 @@
-= bootstrap_form_for @post do |f|
-  = render 'shared/form_errors', model: @post
+.row
+  .col-xs-12.col-sm-4.col-sm-offset-4
+    = bootstrap_form_for @post do |f|
+      = render 'shared/form_errors', model: @post
 
-  = f.text_field :video_url, :value => render_url(@post.video_url)
-  = f.text_area :description
-  = f.hidden_field :mention_id, value: params[:mention_id]
-  - if params[:post_category_id].nil?
-    = f.select(:post_category_id, PostCategory.where.not(name: 'review').collect {|c| [c.name.capitalize!, c.id]}, :include_blank => true )
-  - else
-    = f.hidden_field :post_category_id, value: params[:post_category_id]
-  = f.check_box :hidden, label: "Hidden on your profile"
-  = f.uploadcare_uploader :image_url, :data => { "images-only" => "true"}
-  %br
-  %br
-  = f.submit 'Save'
+      = f.text_field :video_url, :value => render_url(@post.video_url), help: "YouTube or Vimeo"
+      = f.text_area :description
+      = f.hidden_field :mention_id, value: params[:mention_id]
+      - if params[:post_category_id].nil?
+        = f.select(:post_category_id, PostCategory.where.not(name: 'review').collect {|c| [c.name.capitalize!, c.id]}, :include_blank => true )
+      - else
+        = f.hidden_field :post_category_id, value: params[:post_category_id]
+      = f.uploadcare_uploader :image_url, :data => { "images-only" => "true"}
+      %br
+      = f.check_box :hidden, label: "Hidden on your profile"
+      = f.submit 'Save'

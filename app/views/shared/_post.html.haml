@@ -45,7 +45,7 @@
         - if user_signed_in?
           .row.options
             -# share, like, comment buttons
-            .col-xs-12
+            .col-xs-8
               %ul.list-inline
                 - if !post.promotion?
                   %li.likes-count
@@ -64,9 +64,9 @@
                     = post.promotion? ? "Reply" : "Comment"
                 %li
                   = link_to "Share", new_share_path( post_id: post.id ), { :class => "button btn btn-primary btn-sm" }
-                - if post.promotion?
-                  %li
-                    = render 'shared/voter', post: post
+            - if post.promotion?
+              .col-xs-4
+                = render 'shared/voter', post: post
           .row.new-comment.collapse{:data => { "new-comment-id" => post.id }}
             .col-xs-12
               = bootstrap_form_for(Comment.new, url: comment_post_path(post), remote: true) do |f|

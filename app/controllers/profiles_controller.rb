@@ -55,7 +55,7 @@ class ProfilesController < ApplicationController
   # GET /profiles/1.json
   def show
     # viewed profile tracker
-    @view = View.create(profile_id: current_user.id, viewed_id: @profile.id) unless current_user.nil?
+    @view = View.create(profile_id: current_user.id, viewed_id: @profile.id) if user_signed_in? && current_user.profile != @profile
   end
 
   # GET /profiles/new

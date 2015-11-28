@@ -105,10 +105,12 @@ $(document).on 'ajax:success', '.new_comment', (status,data,xhr)->
       <div class=\"col-xs-12\">
         <div class=\"row profile\">
           <div class=\"col-xs-12\">
-            #{data.profile.name}
+            <a href=\"/profiles/#{data.profile.id}\">
+              #{data.profile.name}
+            </a>
           </div>
         </div>
-        <div class=\"row description\">
+        <div class=\"row comment-description\">
           <div class=\"col-xs-12\">
             #{data.comment.description}
           </div>

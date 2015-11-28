@@ -1,7 +1,9 @@
-= bootstrap_form_for @share do |f|
-  = render 'shared/form_errors', model: @share
+.row
+  .col-xs-12.col-sm-6.col-sm-offset-3
+    = bootstrap_form_for @share do |f|
+      = render 'shared/form_errors', model: @share
 
-  = f.hidden_field :post_id, value: @post.id
-  = f.submit 'Share'
-
+      = f.hidden_field :post_id, value: @post.id
+      = f.submit 'Share This Post'
+%br
 = render 'shared/post', post: @post, social: false
