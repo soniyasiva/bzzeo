@@ -3,18 +3,17 @@
     .navbar-header
       %button.navbar-toggle.collapsed{"aria-controls" => "navbar", "aria-expanded" => "false", "data-target" => "#navbar", "data-toggle" => "collapse", :type => "button"}
         %span.sr-only Toggle navigation
-        %span.icon-bar
-        %span.icon-bar
-        %span.icon-bar
+        = icon 'bars'
       %a.navbar-brand{:href => "/"}
         %img.img-responsive.logo{src: "https://ucarecdn.com/be977ec3-0bb9-4f3e-ad1c-5cd5367b993a/"}
     #navbar.collapse.navbar-collapse
       %ul.nav.navbar-nav.navbar-left
-        %li.menu-search
-          = render 'shared/menu_search'
+        - unless request.path == search_feeds_path
+          %li.menu-search
+            = render 'shared/menu_search'
         -# %li{class: "#{active? profiles_path}"}
         -#   = link_to "Directory", profiles_path
-      %ul.nav.navbar-nav.pull-right
+      %ul.nav.navbar-nav.navbar-right
         %li{class: "#{active? root_path}"}
           = link_to root_path do
             = icon 'home'

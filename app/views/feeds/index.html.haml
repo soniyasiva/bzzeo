@@ -1,6 +1,6 @@
 .row
   .col-xs-12
-= render 'shared/search'
+= render 'shared/search' if request.path == search_feeds_path
 .row
   .col-xs-12
     / Nav tabs

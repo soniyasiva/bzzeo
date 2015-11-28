@@ -1,23 +1,8 @@
-%h1 Listing views
+%h1 Viewed My Profile
+%p In the last 7 days
 
-%table
-  %thead
-    %tr
-      %th Profile
-      %th Viewed
-      %th
-      %th
-      %th
-
-  %tbody
-    - @views.each do |view|
-      %tr
-        %td= view.profile.name
-        %td= view.viewed.name
-        %td= link_to 'Show', view
-        %td= link_to 'Edit', edit_view_path(view)
-        %td= link_to 'Destroy', view, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New View', new_view_path
+- @views.each do |viewer|
+  = render 'shared/profile', profile: viewer[:profile]
+  -# .row
+  -#   .col-xs-12
+  -#     %p= "Viewed your profile #{viewer[:count]} times"

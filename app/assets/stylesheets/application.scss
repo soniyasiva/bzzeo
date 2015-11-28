@@ -38,9 +38,10 @@ $nav-link-hover-bg: $brand-primary;
 // BASE START
 body {
   padding-top: 60px;
-  padding-bottom: 50px;
+  padding-bottom: 60px;
   background: #f9f9f9;
 }
+
 a {
   &:hover,
   &:focus,
@@ -54,6 +55,31 @@ p {
 // BASE END
 // HOME PAGE START
 // HOME PAGE END
+// MOBILE MENU START
+footer {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by its height */
+  margin: 0 auto -60px;
+  /* Pad bottom by footer height */
+  padding: 0 0 60px;
+  .mobile-new-post {
+    position: fixed;
+    right: 15px;
+    bottom: 86px;
+  }
+  .mobile-option {
+    padding-top: 1em;
+    padding-bottom: 1em;
+  }
+}
+.navbar-toggle {
+  font-size: 1.8em;
+  color: $brand-primary;
+  padding: 0;
+}
+// MOBILE MENU END
 // MENU START
 .navbar-default {
   .logo {
@@ -71,7 +97,7 @@ p {
       color: $brand-primary;
     }
   }
-  .pull-right {
+  .navbar-right {
     a.dropdown-toggle.user-menu {
       // padding-top: 6px;
       // padding-bottom: 6px;
@@ -103,6 +129,11 @@ p {
 // MENU END
 // HELPER START
 .video {
+  img.triangle-swoosh {
+    z-index: 1000;
+    position: absolute;
+    bottom: 0;
+  }
   iframe {
     width: 100%;
   }
@@ -133,6 +164,15 @@ p {
   left: 0;
   right: 0;
   bottom: 0;
+}
+.btn-circle {
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 24px;
+  line-height: 1.62;
+  border-radius: 50%;
 }
 // HELPER END
 // POST START

@@ -1,0 +1,21 @@
+%footer.visible-xs
+  .col-xs-12
+    = link_to new_post_path, :class => "btn btn-primary btn-circle mobile-new-post" do
+      = icon 'plus'
+  .col-xs-12.navbar-default.navbar-fixed-bottom
+    .row
+      = link_to '/feeds' do
+        .col-xs-4.text-center
+          .mobile-option
+            = icon 'th-large'
+            %br Feed
+      = link_to '/feeds/search' do
+        .col-xs-4.text-center
+          .mobile-option
+            = icon 'search'
+            %br Search
+      = link_to '/posts/cagetories/jobs' do
+        .col-xs-4.text-center
+          .mobile-option
+            = icon 'briefcase'
+            %br Jobs
