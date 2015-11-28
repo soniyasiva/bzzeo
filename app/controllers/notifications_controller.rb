@@ -4,6 +4,7 @@ class NotificationsController < ApplicationController
   check_authorization
 
   before_action :set_notification, only: [:show, :edit, :update, :destroy]
+  after_create :send_email
 
   # GET /notifications
   # GET /notifications.json
@@ -66,6 +67,16 @@ class NotificationsController < ApplicationController
   end
 
   private
+  # send mail
+    def send_email
+      ConversationMailer.new_notification_email(
+        @conversation.receiver.user.email,
+        "#{ENV['SITE']}#{conversation_path(@conversation)}",
+        "New message from #{@conversation.sender.name}",
+        "You can view your message here"
+      ).deliver
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_notification
       @notification = Notification.find(params[:id])
