@@ -38,7 +38,7 @@ $nav-link-hover-bg: $brand-primary;
 // BASE START
 body {
   padding-top: 60px;
-  padding-bottom: 60px;
+  padding-bottom: 90px;
   background: #f9f9f9;
 }
 
@@ -236,18 +236,19 @@ footer {
 // POST END
 // POST LISTED START
 .post-listed {
-  .votes {
-    li {
-      a {
-        color: $gray;
-        &.active {
-          color: $brand-primary;
-        }
+
+}
+.votes {
+  li {
+    a {
+      color: $gray;
+      &.active {
+        color: $brand-primary;
       }
     }
-    .votes-count {
+  }
+  .votes-count {
 
-    }
   }
 }
 // POST LISTED END

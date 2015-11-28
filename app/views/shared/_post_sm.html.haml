@@ -13,21 +13,22 @@
             = post.description.truncate 250
         .image
 
-    .type
-      %span
-        -# - unless post.post_category.nil?
-        -#   = post.post_category.name.capitalize
-        -# - else
-        -#   Post
-        - case post.post_category.name.downcase
-        - when 'job'
-          = icon 'briefcase'
-        - when 'review'
-          = icon 'binoculars'
-        - when 'promotion'
-          = icon 'tag'
-        - when 'status'
-          = icon 'microphone'
-        - when 'portfolio'
-          = icon 'folder-open'
-        - end unless post.post_category.nil?
+    - unless post.post_category.nil?
+      .type
+        %span
+          -# - unless post.post_category.nil?
+          -#   = post.post_category.name.capitalize
+          -# - else
+          -#   Post
+          - case post.post_category.name.downcase
+          - when 'job'
+            = icon 'briefcase'
+          - when 'review'
+            = icon 'binoculars'
+          - when 'promotion'
+            = icon 'tag'
+          - when 'status'
+            = icon 'microphone'
+          - when 'portfolio'
+            = icon 'folder-open'
+          - end unless post.post_category.nil?

@@ -15,7 +15,7 @@ class FeedsController < ApplicationController
     @shares = @shares.order(created_at: :desc)
     @shares = @shares.paginate(:page => params[:page], :per_page => 10)
     # combine
-    @items = (@posts.to_a + @shares.to_a).sort_by(&:created_at)
+    @items = (@posts.to_a + @shares.to_a).sort_by(&:created_at).reverse!
   end
 
   def search
