@@ -9,7 +9,7 @@ class Notification < ActiveRecord::Base
   def send_email
     ConversationMailer.new_notification_email(
       profile.user.email,
-      link,
+      "#{ENV['SITE']}#{link}",
       message,
       message
     ).deliver
