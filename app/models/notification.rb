@@ -7,7 +7,7 @@ class Notification < ActiveRecord::Base
 
   # send mail
   def send_email
-    ConversationMailer.new_notification_email(
+    NotificationMailer.new_notification_email(
       profile.user.email,
       "#{ENV['SITE']}#{link}",
       message,
