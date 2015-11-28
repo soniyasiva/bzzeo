@@ -8,7 +8,11 @@ class ViewsController < ApplicationController
   # GET /views
   # GET /views.json
   def index
-    @views = View.all
+    view_counts = View.where('created_at > ?', 7.days.ago).group(:profile_id).count
+    @views = []
+    view_counts.each do |viewer, count|
+      @views << {profile: Profile.find(viewer), count: count}
+    end
   end
 
   # GET /views/1

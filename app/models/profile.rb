@@ -86,6 +86,22 @@ class Profile < ActiveRecord::Base
     end
   end
 
+  # searches the profiles name and tags by keyword and optional address
+  def self.search query, address=nil, page
+    # catch blank search
+    return [] if query.nil? and address.nil?
+    # gets profiles
+    profiles = Profile.all
+    # searches profiles for
+    # profile name
+    # profile tag names
+    profiles = profiles.joins(:tags).where("profiles.name ILIKE ? OR tags.name ILIKE ?", "%#{query}%", "%#{query}%").uniq unless query.nil?
+    # sort by distance
+    # within 100km, sorted by distance from origin, closest first
+    profiles = profiles.within(100, :origin => address).order(address: :asc) unless address.nil?
+    profiles = profiles.paginate(:page => page, :per_page => 10)
+  end
+
   private
   # geocodes address to lat lng on create and update
   def geocode_address

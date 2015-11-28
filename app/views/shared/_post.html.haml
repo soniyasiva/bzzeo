@@ -3,9 +3,9 @@
     .row.post
       .col-xs-12
         .row
-          .col-xs-12.col-sm-6
+          .col-xs-6
             %h4.profile= link_to post.profile.name, profile_path(post.profile)
-          .col-xs-12.col-sm-6
+          .col-xs-6
             %p.timestamp.pull-right
               posted
               = time_ago_in_words post.created_at

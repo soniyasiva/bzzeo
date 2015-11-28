@@ -36,9 +36,6 @@ class ConversationsController < ApplicationController
       if @conversation.save
         format.html { redirect_to @conversation, notice: 'Conversation was successfully created.' }
         format.json { render :show, status: :created, location: @conversation }
-
-        # send mail
-        ConversationMailer.new_message_email(@conversation).deliver
       else
         format.html { render :new }
         format.json { render json: @conversation.errors, status: :unprocessable_entity }

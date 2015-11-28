@@ -140,4 +140,20 @@ class Post < ActiveRecord::Base
     !post_category.nil? && post_category == PostCategory.find_by(name: 'promotion')
   end
 
+  # searches the posts by keyword and optional category
+  def self.search query, category_id=nil, page
+    return [] if query.nil? and category_id.nil?
+    # gets posts
+    posts = Post.includes(:profile, {comments: :profile}, :likes)
+    # filter by category
+    posts = posts.where(post_category_id: category_id) unless category_id.nil?
+    # searches posts for
+    # description
+    posts = posts.where("description ILIKE ?", "%#{query}%") unless query.nil?
+    # preorder posts by created_at
+    posts = posts.order(created_at: :desc)
+    posts = posts.paginate(:page => page, :per_page => 10)
+    return posts
+  end
+
 end
