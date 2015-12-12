@@ -12,6 +12,6 @@ class Notification < ActiveRecord::Base
       "#{ENV['SITE']}#{link}",
       message,
       message
-    ).deliver
+    ).deliver unless Rails.env.development?
   end
 end
