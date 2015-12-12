@@ -84,6 +84,8 @@ $(document).on 'ajax:success', 'a.friend', (status,data,xhr)->
       $(this).html($(this).html().replace('Unf', 'F'))
     else
       $(this).html($(this).html().replace('F', 'Unf'))
+      # redirect to messages
+      window.location.replace("/conversations/new?profile_id=#{data.id}")
 
 # on profile partner button success
 $(document).on 'ajax:success', 'a.partner', (status,data,xhr)->
