@@ -3,7 +3,10 @@
     - if !post.thumbnail_url.blank?
       .arrow-right-bottom
       .arrow-right-top
-      .image{:style => "background-image: url(#{post.thumbnail_url});"}
+      / thumbnail instead of video
+      -# .image{:style => "background-image: url(#{post.thumbnail_url});"}
+      / video instead of thumbnail
+      = raw embed(post, false, false, '1by1')
     - elsif !post.image_url.blank?
       .image{:style => "background-image: url(#{post.image_url}-/scale_crop/400x400/center/);"}
     - else
