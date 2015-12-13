@@ -114,12 +114,13 @@
           #posts-tab.tab-pane.active{:role => "tabpanel"}
             .row.posts
               .col-xs-12
-                - @profile.posts.where.not(hidden: true).order(pinned: :asc, created_at: :desc).in_groups_of(4, false) do |post_group|
-                  .row
-                    .col-xs-12
-                      - post_group.each do |post|
-                        = render 'shared/post_sm', post: post
-                - unless @profile.posts.any?
+                - if @profile.posts.where.not(hidden: true).any?
+                  - @profile.posts.where.not(hidden: true).order(pinned: :asc, created_at: :desc).in_groups_of(4, false) do |post_group|
+                    .row
+                      .col-xs-12
+                        - post_group.each do |post|
+                          = render 'shared/post_sm', post: post
+                - else
                   %p No posts
           #mentions-tab.tab-pane{:role => "tabpanel"}
             .row.mentions
