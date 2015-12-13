@@ -143,6 +143,10 @@
                           = render 'shared/post_sm', post: mention
                 - else
                   %p No Mentions
+                %br
+                = link_to new_post_path(params: { mention_id: @profile.id, post_category_id: PostCategory.find_by(name: 'review').id }), :class => "btn btn-sm btn-primary" do
+                  = icon 'binoculars'
+                  Review
           #partners-tab.tab-pane{:role => "tabpanel"}
             .row.partners
               .col-xs-12
