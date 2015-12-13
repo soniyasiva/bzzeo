@@ -53,7 +53,7 @@ class PostsController < ApplicationController
   # deals page
   def deals
     @category = PostCategory.find_by(name: 'promotion')
-    @posts = Post.where(post_category: @category).sort {|a,b| a.votes <=> b.votes}
+    @posts = Post.where(post_category: @category).where('created_at >= ?', 4.weeks.ago).sort {|a,b| a.votes <=> b.votes}
   end
 
   # handles pins for posts
