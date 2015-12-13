@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :feeds, :only => [:index] do
     collection do
       get 'search', to: "feeds#search"
+      get 'tag/:tag', to: "feeds#tag"
     end
   end
   resources :post_categories

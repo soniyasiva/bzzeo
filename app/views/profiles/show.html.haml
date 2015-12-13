@@ -84,7 +84,7 @@
             %h4
               = @profile.category.name unless @profile.category.nil?
             %p
-              = @profile.description
+              = raw @profile.tagged_description
         .row.social-share
           .col-xs-12
             %ul.list-inline
