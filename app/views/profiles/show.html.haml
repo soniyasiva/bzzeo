@@ -71,6 +71,16 @@
                       = link_to "https://twitter.com/#{@profile.twitter}", {:target => "_blank"} do
                         = icon 'twitter'
                         = @profile.twitter
+                  - unless @profile.youtube.blank?
+                    %li
+                      = link_to "https://www.youtube.com/user/#{@profile.youtube}", {:target => "_blank"} do
+                        = icon 'youtube'
+                        = @profile.youtube
+                  - unless @profile.linkedin.blank?
+                    %li
+                      = link_to "https://www.linkedin.com/in/#{@profile.linkedin}", {:target => "_blank"} do
+                        = icon 'linkedin'
+                        = @profile.linkedin
                   - unless @profile.instagram.blank?
                     %li
                       = link_to "https://www.instagram.com/#{@profile.instagram}", {:target => "_blank"} do
