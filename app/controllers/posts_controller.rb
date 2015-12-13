@@ -69,7 +69,7 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @posts = Post.all
-    @posts = @posts.where(post_category_id: PostCategory.find_by(name: params[:category_name])) unless params[:category_name].nil?
+    @posts = @posts.where(post_category_id: PostCategory.find_by(name: params[:category_name])).where('created_at >= ?', 8.weeks.ago) unless params[:category_name].nil? # 8 week old jobs
     @posts = @posts.order(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
   end
 
