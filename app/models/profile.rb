@@ -105,9 +105,25 @@ class Profile < ActiveRecord::Base
     # gets profiles
     profiles = Profile.all
     # searches profiles for
-    # profile name
+    # profile name, socials
     # profile tag names
-    profiles = profiles.joins(:tags).where("profiles.name ILIKE ? OR tags.name ILIKE ?", "%#{query}%", "%#{query}%").uniq unless query.nil?
+    # profile user email
+    profiles = profiles.joins(:tags, :user).where("
+      users.email ILIKE ? OR
+      profiles.phone ILIKE ? OR
+      profiles.facebook ILIKE ? OR
+      profiles.instagram ILIKE ? OR
+      profiles.twitter ILIKE ? OR
+      profiles.name ILIKE ? OR
+      tags.name ILIKE ?
+    ",
+      "%#{query}%",
+      "%#{query}%",
+      "%#{query}%",
+      "%#{query}%",
+      "%#{query}%",
+      "%#{query}%",
+      "%#{query}%").uniq
     # sort by distance
     # within 100km, sorted by distance from origin, closest first
     profiles = profiles.within(100, :origin => address).order(address: :asc) unless address.nil?
