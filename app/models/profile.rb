@@ -114,9 +114,13 @@ class Profile < ActiveRecord::Base
       profiles.facebook ILIKE ? OR
       profiles.instagram ILIKE ? OR
       profiles.twitter ILIKE ? OR
+      profiles.youtube ILIKE ? OR
+      profiles.linkedin ILIKE ? OR
       profiles.name ILIKE ? OR
       tags.name ILIKE ?
     ",
+      "%#{query}%",
+      "%#{query}%",
       "%#{query}%",
       "%#{query}%",
       "%#{query}%",
