@@ -20,6 +20,11 @@ module ApplicationHelper
     end
   end
 
+  def city address
+    return nil if address.blank?
+    address.split(',').last(2).join(',')
+  end
+
   # generates standard viewing urls for videos
   def render_url video_id
     case video_platform? video_id
