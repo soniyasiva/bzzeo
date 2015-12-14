@@ -8,18 +8,8 @@
         = embed(@profile, true).html_safe unless @profile.video_url.blank?
       .col-xs-12.col-sm-6
         .row
-          .col-xs-12.col-sm-6
+          .col-xs-12
             %h3.name= @profile.name
-          .col-sm-6.text-center
-            .col-xs-4
-              %h4= @profile.friendeds.count
-              %p Followers
-            .col-xs-4
-              %h4= @profile.mentions.count
-              %p mentions
-            .col-xs-4
-              %h4= @profile.score
-              %p score
         - unless @profile.address.blank?
           .row
             .col-xs-12
@@ -95,6 +85,17 @@
               = @profile.category.name unless @profile.category.nil?
             %p
               = raw @profile.tagged_description
+        .row.text-center
+          .col-xs-12.col-sm-6
+            .col-xs-4
+              %h4= @profile.friendeds.count
+              %p Followers
+            .col-xs-4
+              %h4= @profile.mentions.count
+              %p mentions
+            .col-xs-4
+              %h4= @profile.score
+              %p score
         .row.social-share
           .col-xs-12
             %ul.list-inline
