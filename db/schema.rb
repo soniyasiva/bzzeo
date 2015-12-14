@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151127215814) do
+ActiveRecord::Schema.define(version: 20151213222140) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -155,6 +155,8 @@ ActiveRecord::Schema.define(version: 20151127215814) do
     t.float    "lng"
     t.string   "thumbnail_url"
     t.text     "description"
+    t.string   "youtube"
+    t.string   "linkedin"
   end
 
   add_index "profiles", ["category_id"], name: "index_profiles_on_category_id", using: :btree

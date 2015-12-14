@@ -5,3 +5,6 @@
   = render 'shared/post_listed', post: post
 
 = "No results" if !@posts.any?
+%br
+= link_to new_post_path(params: {post_category_id: PostCategory.find_by(name: 'promotion').id }), :class => "btn btn-primary" do
+  New Deal

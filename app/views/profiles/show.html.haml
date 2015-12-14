@@ -25,7 +25,7 @@
             .col-xs-12
               %p
                 = link_to '#', :class => 'location-button' do
-                  Location
+                  = city @profile.address
                   = icon 'map-marker'
                 %iframe.profile-map.hidden{:allowfullscreen => "", :frameborder => "0", :src => "https://www.google.com/maps/embed/v1/place?key=AIzaSyAcyVJVLnLZvy1UaUP86D7GfeU5vS7Fspw&q=#{h @profile.address}", :style => "border:0"}
         - unless current_user.nil? || current_user == @profile.user
@@ -71,6 +71,16 @@
                       = link_to "https://twitter.com/#{@profile.twitter}", {:target => "_blank"} do
                         = icon 'twitter'
                         = @profile.twitter
+                  - unless @profile.youtube.blank?
+                    %li
+                      = link_to "https://www.youtube.com/user/#{@profile.youtube}", {:target => "_blank"} do
+                        = icon 'youtube'
+                        = @profile.youtube
+                  - unless @profile.linkedin.blank?
+                    %li
+                      = link_to "https://www.linkedin.com/in/#{@profile.linkedin}", {:target => "_blank"} do
+                        = icon 'linkedin'
+                        = @profile.linkedin
                   - unless @profile.instagram.blank?
                     %li
                       = link_to "https://www.instagram.com/#{@profile.instagram}", {:target => "_blank"} do
@@ -84,7 +94,7 @@
             %h4
               = @profile.category.name unless @profile.category.nil?
             %p
-              = @profile.description
+              = raw @profile.tagged_description
         .row.social-share
           .col-xs-12
             %ul.list-inline
@@ -114,13 +124,19 @@
           #posts-tab.tab-pane.active{:role => "tabpanel"}
             .row.posts
               .col-xs-12
-                - @profile.posts.where.not(hidden: true).order(pinned: :asc, created_at: :desc).in_groups_of(4, false) do |post_group|
-                  .row
-                    .col-xs-12
-                      - post_group.each do |post|
-                        = render 'shared/post_sm', post: post
-                - unless @profile.posts.any?
+                - if @profile.posts.where.not(hidden: true).any?
+                  - @profile.posts.where.not(hidden: true).order(pinned: :asc, created_at: :desc).in_groups_of(4, false) do |post_group|
+                    .row
+                      .col-xs-12
+                        - post_group.each do |post|
+                          = render 'shared/post_sm', post: post
+                - else
                   %p No posts
+                - if user_signed_in? && current_user.profile == @profile
+                  %br
+                  = link_to new_post_path, :class => "btn btn-sm btn-primary" do
+                    = icon 'plus'
+                    New Post
           #mentions-tab.tab-pane{:role => "tabpanel"}
             .row.mentions
               .col-xs-12
@@ -132,14 +148,21 @@
                           = render 'shared/post_sm', post: mention
                 - else
                   %p No Mentions
+                %br
+                = link_to new_post_path(params: { mention_id: @profile.id, post_category_id: PostCategory.find_by(name: 'review').id }), :class => "btn btn-sm btn-primary" do
+                  = icon 'binoculars'
+                  Review
           #partners-tab.tab-pane{:role => "tabpanel"}
             .row.partners
               .col-xs-12
-                - if @profile.partnered.any?
-                  - @profile.partnered.in_groups_of(4, false) do |partner_group|
+                - if @profile.partners.any?
+                  - @profile.partners.in_groups_of(4, false) do |partner_group|
                     .row
                       .col-xs-12
                         - partner_group.each do |partner|
-                          = render 'shared/profile_sm', profile: partner.profile
+                          = render 'shared/profile_sm', profile: partner.partner
                 - else
                   %p No Partners
+                - if user_signed_in? && current_user.profile == @profile
+                  %br
+                  %p You should add some more partners

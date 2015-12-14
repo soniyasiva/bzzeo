@@ -86,6 +86,18 @@ class Profile < ActiveRecord::Base
     end
   end
 
+  # takes in strin
+  # returns array of tags
+  def tagged_description
+    return nil if description.nil?
+    t_desc = description
+    description.scan(/\B#\w+/).each do |name|
+      tag = Tag.find_by(name: name.delete!('#'))
+      t_desc.sub! "##{name}", "<a href=\"/feeds/tag/#{tag.name}\">##{tag.name}</a>"
+    end
+    t_desc
+  end
+
   # searches the profiles name and tags by keyword and optional address
   def self.search query, address=nil, page
     # catch blank search
@@ -93,9 +105,29 @@ class Profile < ActiveRecord::Base
     # gets profiles
     profiles = Profile.all
     # searches profiles for
-    # profile name
+    # profile name, socials
     # profile tag names
-    profiles = profiles.joins(:tags).where("profiles.name ILIKE ? OR tags.name ILIKE ?", "%#{query}%", "%#{query}%").uniq unless query.nil?
+    # profile user email
+    profiles = profiles.joins(:tags, :user).where("
+      users.email ILIKE ? OR
+      profiles.phone ILIKE ? OR
+      profiles.facebook ILIKE ? OR
+      profiles.instagram ILIKE ? OR
+      profiles.twitter ILIKE ? OR
+      profiles.youtube ILIKE ? OR
+      profiles.linkedin ILIKE ? OR
+      profiles.name ILIKE ? OR
+      tags.name ILIKE ?
+    ",
+      "%#{query}%",
+      "%#{query}%",
+      "%#{query}%",
+      "%#{query}%",
+      "%#{query}%",
+      "%#{query}%",
+      "%#{query}%",
+      "%#{query}%",
+      "%#{query}%").uniq
     # sort by distance
     # within 100km, sorted by distance from origin, closest first
     profiles = profiles.within(100, :origin => address).order(address: :asc) unless address.nil?

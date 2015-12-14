@@ -5,19 +5,24 @@ module ApplicationHelper
   # generates html for embedding videos
   # swoosh is a ui element
   # hidden is for not preloading the video
-  def embed video_object, swoosh=false, hidden=false
+  def embed video_object, swoosh=false, hidden=false, ratio='16by9'
     case video_platform? video_object.video_url
     when 'vimeo'
-      html = "<div class=\"embed-responsive embed-responsive-16by9\">"
+      html = "<div class=\"embed-responsive embed-responsive-#{ratio}\">"
       html << "<img src=\"https://ucarecdn.com/e58cd11e-0100-47f1-ab55-a27a4f0f1f41/\" class=\"triangle-swoosh img-responsive visible-xs\"/>" if swoosh
       html << "<iframe data-id=\"#{video_object.id}\" class=\"embed-responsive-item #{"collapse" if hidden}\" src=\"https://player.vimeo.com/video/#{video_object.video_url}?title=0&byline=0&portrait=0&badge=0\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>"
     when 'youtube'
-      html = "<div class=\"embed-responsive embed-responsive-16by9\">"
+      html = "<div class=\"embed-responsive embed-responsive-#{ratio}\">"
       html << "<img src=\"https://ucarecdn.com/e58cd11e-0100-47f1-ab55-a27a4f0f1f41/\" class=\"triangle-swoosh img-responsive visible-xs\"/>" if swoosh
       html << "<iframe data-id=\"#{video_object.id}\" class=\"embed-responsive-item #{"collapse" if hidden}\" src=\"https://www.youtube.com/embed/#{video_object.video_url}\" frameborder=\"0\" allowfullscreen></iframe></div>"
     else
       nil
     end
+  end
+
+  def city address
+    return nil if address.blank?
+    address.split(',').last(2).join(',')
   end
 
   # generates standard viewing urls for videos

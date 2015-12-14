@@ -35,6 +35,15 @@ class FeedsController < ApplicationController
     render 'index'
   end
 
+  def tag
+    @profiles = Profile.joins(:tags).where("tags.name = ?", params[:tag]) unless params[:tag].nil?
+    @profiles = @profiles.paginate(:page => params[:page], :per_page => 10)
+    puts params[:tag]
+    puts @profiles
+    @items = @profiles
+    render 'index'
+  end
+
   private
   def geocode_address address
     return nil if address.blank?

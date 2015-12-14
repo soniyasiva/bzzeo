@@ -9,6 +9,8 @@
   = f.text_field :facebook
   = f.text_field :twitter
   = f.text_field :instagram
+  = f.text_field :youtube
+  = f.text_field :linkedin
   = f.text_area :description
   =# f.text_field :all_tags, placeholder: "Tags separated with comma"
   = f.select(:category_id, Category.all.collect {|c| [c.name, c.id]})
