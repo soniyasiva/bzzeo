@@ -132,6 +132,11 @@
                           = render 'shared/post_sm', post: post
                 - else
                   %p No posts
+                - if user_signed_in? && current_user.profile == @profile
+                  %br
+                  = link_to new_post_path, :class => "btn btn-sm btn-primary" do
+                    = icon 'plus'
+                    New Post
           #mentions-tab.tab-pane{:role => "tabpanel"}
             .row.mentions
               .col-xs-12
@@ -158,3 +163,6 @@
                           = render 'shared/profile_sm', profile: partner.partner
                 - else
                   %p No Partners
+                - if user_signed_in? && current_user.profile == @profile
+                  %br
+                  %p You should add some more partners
