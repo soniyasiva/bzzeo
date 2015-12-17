@@ -21,11 +21,14 @@
         - unless current_user.nil? || current_user == @profile.user
           .row.more-info
             .col-xs-12
+              / connect
               .btn-group
+                = link_to friend_profile_path(@profile), :class => "friend btn btn-primary btn-sm dropdown-toggle", method: :put, remote: true, :data => { :id => @profile.id }, "aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button" do
+                  = icon 'eye'
+                  = @profile.friend?(current_user) ? "Unfollow" : "Follow"
                 %button.btn.btn-primary.btn-sm.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-                  = icon 'plus'
-                  Connect
                   %span.caret
+                  %span.sr-only Toggle Dropdown
                 %ul.dropdown-menu
                   %li
                     = link_to friend_profile_path(@profile), :class => "friend", method: :put, remote: true, :data => { :id => @profile.id } do
@@ -35,17 +38,15 @@
                     = link_to partner_profile_path(@profile), :class => "partner", method: :put, remote: true, :data => { :id => @profile.id } do
                       = icon 'user'
                       = @profile.partner?(current_user) ? "Unpartner" : "Partner"
+              / contact
               .btn-group
-                %button.btn.btn-primary.btn-sm.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                = link_to new_conversation_path(profile_id: @profile.id), :class => "btn btn-primary btn-sm dropdown-toggle", "aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button" do
                   = icon 'at'
                   Contact
+                %button.btn.btn-primary.btn-sm.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
                   %span.caret
+                  %span.sr-only Toggle Dropdown
                 %ul.dropdown-menu
-                  %li
-                    = link_to new_conversation_path(profile_id: @profile.id) do
-                      = icon 'comment'
-                      Message
-                      = @profile.representitive unless @profile.representitive.blank?
                   - unless @profile.phone.blank?
                     %li
                       = tel_to @profile.phone
@@ -76,9 +77,28 @@
                       = link_to "https://www.instagram.com/#{@profile.instagram}", {:target => "_blank"} do
                         = icon 'instagram'
                         = @profile.instagram
-              = link_to new_post_path(params: { mention_id: @profile.id, post_category_id: PostCategory.find_by(name: 'review').id }), :class => "btn btn-sm btn-primary" do
-                = icon 'binoculars'
-                Review
+
+              / review
+              .btn-group
+                = link_to new_post_path(params: { mention_id: @profile.id, post_category_id: PostCategory.find_by(name: 'review').id }), :class => "btn btn-primary btn-sm dropdown-toggle", "aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button" do
+                  = icon 'binoculars'
+                  Review
+                %button.btn.btn-primary.btn-sm.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                  %span.caret
+                  %span.sr-only Toggle Dropdown
+                %ul.dropdown-menu
+                  %li
+                    = link_to "https://twitter.com/home?status=#{ENV['SITE']}#{profile_path(@profile)}", :target => "_blank" do
+                      = icon 'twitter'
+                      Share on Twitter
+                  %li
+                    = link_to "https://www.linkedin.com/shareArticle?mini=true&url=#{ENV['SITE']}#{profile_path(@profile)}", :target => "_blank" do
+                      = icon 'linkedin'
+                      Share on LinkedIn
+                  %li
+                    = link_to "https://www.facebook.com/sharer/sharer.php?u=#{ENV['SITE']}#{profile_path(@profile)}", :target => "_blank" do
+                      = icon 'facebook'
+                      Share on Facebook
         .row
           .col-xs-12
             %h4
@@ -96,19 +116,6 @@
             .col-xs-4
               %h4= @profile.score
               %p score
-        .row.social-share
-          .col-xs-12
-            %ul.list-inline
-              %li
-                .twitter
-                  = twitter_button
-              %li
-                .linkedin
-                  = linkedin_button
-              %li
-                .facebook
-                  = facebook_button
-              -# %li= google_plus_button
 
     .row.posts
       .col-xs-12
