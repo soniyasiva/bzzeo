@@ -12,6 +12,10 @@
               ago
               %span.pinned{:data => { :id => post.id }, :class => "#{'hidden' unless post.pinned?}"}
                 = icon 'thumb-tack'# if post.pinned?
+              - if current_user.profile == post.profile || current_user.admin?
+                = link_to edit_post_path(post), :class => "btn btn-warning btn-xs" do
+                  = icon 'pencil'
+                = link_to 'x', post, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "btn btn-danger btn-xs"
         .row.image
           -# image, if there is one
           .col-xs-12

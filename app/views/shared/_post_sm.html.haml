@@ -13,9 +13,15 @@
       .description
         .text-wrap
           %p
+            = "@#{post.mention.name}" unless post.mention.nil?
             = post.description.truncate 250
         .image
-
+    .profile
+      - unless post.profile.thumbnail_url.blank?
+        .profile-avatar
+          .circle-avatar{:style => "background-image:url(#{post.profile.thumbnail_url})"}
+      %p
+        = "by #{post.profile.name}"
     - unless post.post_category.nil?
       .type
         %span
