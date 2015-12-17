@@ -73,7 +73,7 @@ class Profile < ActiveRecord::Base
 
   # magic formula for score
   def score
-    views.count + likes.count
+    views.count + likes.count + posts.count
   end
 
   # takes in strin
