@@ -1,5 +1,7 @@
 .col-xs-12.col-sm-3.post-sm
-  = link_to (post.id.nil? ? link : post_path(post)) do
+  - link_override = post.id.nil? ? link : post_path(post)
+  - link_override = new_conversation_path(profile_id: post.profile_id) if !post.post_category.nil? && post.post_category.name == 'job'
+  = link_to link_override do
     - if !post.thumbnail_url.blank?
       .arrow-right-bottom
       .arrow-right-top

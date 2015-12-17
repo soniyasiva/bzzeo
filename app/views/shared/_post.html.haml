@@ -3,9 +3,9 @@
     .row.post
       .col-xs-12
         .row
-          .col-xs-6
+          .col-xs-5
             %h4.profile= link_to post.profile.name, profile_path(post.profile)
-          .col-xs-6
+          .col-xs-7
             %p.timestamp.pull-right
               posted
               = time_ago_in_words post.created_at
@@ -13,7 +13,7 @@
               %span.pinned{:data => { :id => post.id }, :class => "#{'hidden' unless post.pinned?}"}
                 = icon 'thumb-tack'# if post.pinned?
               - if current_user.profile == post.profile || current_user.admin?
-                = link_to edit_post_path(post), :class => "btn btn-warning btn-xs" do
+                = link_to edit_post_path(post), :class => "btn btn-default btn-xs" do
                   = icon 'pencil'
                 = link_to post, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "btn btn-danger btn-xs" do
                   = icon 'times'
@@ -50,7 +50,7 @@
         - if user_signed_in?
           .row.options
             -# share, like, comment buttons
-            .col-xs-8
+            .col-xs-9
               %ul.list-inline
                 - if !post.promotion?
                   %li.likes-count
@@ -70,7 +70,7 @@
                 %li
                   = link_to "Share", new_share_path( post_id: post.id ), { :class => "button btn btn-primary btn-sm" }
             - if post.promotion?
-              .col-xs-4
+              .col-xs-3
                 = render 'shared/voter', post: post
           .row.new-comment.collapse{:data => { "new-comment-id" => post.id }}
             .col-xs-12
