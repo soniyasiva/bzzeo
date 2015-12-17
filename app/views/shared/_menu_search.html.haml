@@ -10,9 +10,12 @@
               = pg.name.capitalize!
     = f.text_field :query, placeholder: "Search Profiles and Posts", hide_label: true, :value => @query
     = f.hidden_field :category_id, :value => nil
-    %span.input-group-btn
-      = link_to search_feeds_path, :class => "btn btn-default" do
+    %span.input-group-btn.address
+      = link_to '', :class => "search-filter-btn btn btn-default" do
         = icon 'filter'
+    %span.input-group-btn.address.address-text.hidden
+      near
+    = f.text_field :address, placeholder: "Location", hide_label: true, :value => @address, :class => "address hidden"
     %span.input-group-btn
       %button.btn.btn-default{:type => "submit"}
         = icon 'search'

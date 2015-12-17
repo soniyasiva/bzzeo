@@ -155,3 +155,9 @@ $ ->
     $('.profile-map').toggleClass('hidden')
     false # prevent default
   )
+  # reveals location search in menu
+  $('.search-filter-btn').on('click', ->
+    console.log 'filter button clicked'
+    $('.menu-search .address').toggleClass('hidden');
+    false
+  )

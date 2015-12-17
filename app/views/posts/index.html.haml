@@ -16,7 +16,7 @@
           #grid-view.tab-pane{:role => "tabpanel", :class => "#{'active' unless @view == 'list'}"}
             = "No results" if !@posts.any?
             - @posts.each do |post|
-              = render 'shared/post_sm', post: post
+              = render partial: 'shared/post_sm', locals: {post: post}
           #list-view.tab-pane{:role => "tabpanel", :class => "#{'active' if @view == 'list'}"}
             - @posts.each do |post|
               = render 'shared/post', post: post, social: false

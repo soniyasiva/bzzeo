@@ -1,5 +1,7 @@
 .col-xs-12.col-sm-3.post-sm
-  = link_to post_path(post) do
+  - link_override = post.id.nil? ? link : post_path(post)
+  - link_override = new_conversation_path(profile_id: post.profile_id) if !post.post_category.nil? && post.post_category.name == 'job'
+  = link_to link_override do
     - if !post.thumbnail_url.blank?
       .arrow-right-bottom
       .arrow-right-top
@@ -13,9 +15,15 @@
       .description
         .text-wrap
           %p
+            = "@#{post.mention.name}" unless post.mention.nil?
             = post.description.truncate 250
         .image
-
+    .profile
+      - unless post.profile.nil? || post.profile.thumbnail_url.blank? # for special posts with link
+        .profile-avatar
+          .circle-avatar{:style => "background-image:url(#{post.profile.thumbnail_url})"}
+        %p
+          = "by #{post.profile.name}"
     - unless post.post_category.nil?
       .type
         %span
