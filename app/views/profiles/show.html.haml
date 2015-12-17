@@ -115,14 +115,27 @@
         / Nav tabs
         %ul.nav.nav-tabs{:role => "tablist"}
           %li.active{:role => "presentation"}
-            %a{"aria-controls" => "home", "data-toggle" => "tab", :href => "#posts-tab", :role => "tab"} Posts
+            %a{"aria-controls" => "portfolio", "data-toggle" => "tab", :href => "#portfolio-tab", :role => "tab"} Portfolio
           %li{:role => "presentation"}
-            %a{"aria-controls" => "profile", "data-toggle" => "tab", :href => "#mentions-tab", :role => "tab"} Mentions
+            %a{"aria-controls" => "posts", "data-toggle" => "tab", :href => "#posts-tab", :role => "tab"} Posts
           %li{:role => "presentation"}
-            %a{"aria-controls" => "messages", "data-toggle" => "tab", :href => "#partners-tab", :role => "tab"} Partners
+            %a{"aria-controls" => "mentions", "data-toggle" => "tab", :href => "#mentions-tab", :role => "tab"} Mentions
+          %li{:role => "presentation"}
+            %a{"aria-controls" => "partners", "data-toggle" => "tab", :href => "#partners-tab", :role => "tab"} Partners
         / Tab panes
         .tab-content
-          #posts-tab.tab-pane.active{:role => "tabpanel"}
+          #portfolio-tab.tab-pane.active{:role => "tabpanel"}
+            .row.portfolios
+              .col-xs-12
+                - if @profile.posts.where(post_category: PostCategory.find_by(name:"portfolio")).where.not(hidden: true).any?
+                  - @profile.posts.where(post_category: PostCategory.find_by(name:"portfolio")).where.not(hidden: true).order(pinned: :asc, created_at: :desc).in_groups_of(4, false) do |post_group|
+                    .row
+                      .col-xs-12
+                        - post_group.each do |post|
+                          = render 'shared/post_sm', post: post
+                - else
+                  %p No portfolio items
+          #posts-tab.tab-pane{:role => "tabpanel"}
             .row.posts
               .col-xs-12
                 - if @profile.posts.where.not(hidden: true).any?
