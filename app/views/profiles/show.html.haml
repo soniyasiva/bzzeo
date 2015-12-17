@@ -134,45 +134,45 @@
           #portfolio-tab.tab-pane.active{:role => "tabpanel"}
             .row.portfolios
               .col-xs-12
-                - if @profile.posts.where(post_category: PostCategory.find_by(name:"portfolio")).where.not(hidden: true).any?
-                  - @profile.posts.where(post_category: PostCategory.find_by(name:"portfolio")).where.not(hidden: true).order(pinned: :asc, created_at: :desc).in_groups_of(4, false) do |post_group|
-                    .row
-                      .col-xs-12
-                        - post_group.each do |post|
-                          = render 'shared/post_sm', post: post
-                - else
-                  %p No portfolio items
+                // portfolio posts
+                - portfolio_posts = @profile.posts.where(post_category: PostCategory.find_by(name:"portfolio")).where.not(hidden: true).order(pinned: :asc, created_at: :desc)
+                // adds a post at the start
+                - portfolio_posts = portfolio_posts.unshift(Post.new(description: "Add a new portfolio item. They can show off your company's best work.")) if current_user.profile == @profile
+                - portfolio_posts.in_groups_of(4, false) do |post_group|
+                  .row
+                    .col-xs-12
+                      - post_group.each do |post|
+                        = render partial: 'shared/post_sm', locals: {post: post, link: "/posts/new?post_category_id=#{PostCategory.find_by(name: 'portfolio').id}"}
+                - unless @profile.posts.where(post_category: PostCategory.find_by(name:"portfolio")).where.not(hidden: true).any?
+                  %p No portfolio posts
           #posts-tab.tab-pane{:role => "tabpanel"}
             .row.posts
               .col-xs-12
-                - if @profile.posts.where.not(hidden: true).any?
-                  - @profile.posts.where.not(hidden: true).order(pinned: :asc, created_at: :desc).in_groups_of(4, false) do |post_group|
-                    .row
-                      .col-xs-12
-                        - post_group.each do |post|
-                          = render 'shared/post_sm', post: post
-                - else
+                // posts
+                - profile_posts = @profile.posts.where.not(hidden: true).order(pinned: :asc, created_at: :desc)
+                // adds a post at the start
+                - profile_posts.unshift(Post.new(description: "Add a new post to get people's attention and draw them to your profile.")) if current_user.profile == @profile
+                - profile_posts.in_groups_of(4, false) do |post_group|
+                  .row
+                    .col-xs-12
+                      - post_group.each do |post|
+                        = render partial: 'shared/post_sm', locals: {post: post, link: new_post_path}
+                - unless @profile.posts.where.not(hidden: true).any?
                   %p No posts
-                - if user_signed_in? && current_user.profile == @profile
-                  %br
-                  = link_to new_post_path, :class => "btn btn-sm btn-primary" do
-                    = icon 'plus'
-                    New Post
           #mentions-tab.tab-pane{:role => "tabpanel"}
             .row.mentions
               .col-xs-12
-                - if @profile.mentions.any?
-                  - @profile.mentions.order(created_at: :desc).in_groups_of(4, false) do |mention_group|
-                    .row
-                      .col-xs-12
-                        - mention_group.each do |mention|
-                          = render 'shared/post_sm', post: mention
-                - else
+                // mentions
+                - profile_mentions = @profile.mentions.order(created_at: :desc)
+                // adds a post at the start
+                - profile_mentions.unshift(Post.new(description: "Review this business")) if current_user.profile != @profile
+                - profile_mentions.in_groups_of(4, false) do |mention_group|
+                  .row
+                    .col-xs-12
+                      - mention_group.each do |mention|
+                        = render partial: 'shared/post_sm', locals: {post: mention, link: "/posts/new?post_category_id=#{PostCategory.find_by(name: 'review').id}"}
+                - unless @profile.mentions.any?
                   %p No Mentions
-                %br
-                = link_to new_post_path(params: { mention_id: @profile.id, post_category_id: PostCategory.find_by(name: 'review').id }), :class => "btn btn-sm btn-primary" do
-                  = icon 'binoculars'
-                  Review
           #partners-tab.tab-pane{:role => "tabpanel"}
             .row.partners
               .col-xs-12

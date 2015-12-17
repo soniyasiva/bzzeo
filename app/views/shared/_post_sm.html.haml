@@ -1,5 +1,5 @@
 .col-xs-12.col-sm-3.post-sm
-  = link_to post_path(post) do
+  = link_to (post.id.nil? ? link : post_path(post)) do
     - if !post.thumbnail_url.blank?
       .arrow-right-bottom
       .arrow-right-top
@@ -17,11 +17,11 @@
             = post.description.truncate 250
         .image
     .profile
-      - unless post.profile.thumbnail_url.blank?
+      - unless post.profile.nil? || post.profile.thumbnail_url.blank? # for special posts with link
         .profile-avatar
           .circle-avatar{:style => "background-image:url(#{post.profile.thumbnail_url})"}
-      %p
-        = "by #{post.profile.name}"
+        %p
+          = "by #{post.profile.name}"
     - unless post.post_category.nil?
       .type
         %span
