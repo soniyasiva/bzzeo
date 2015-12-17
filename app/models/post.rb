@@ -7,6 +7,8 @@ class Post < ActiveRecord::Base
   has_many :comments
   has_many :likes
   has_many :shares
+  has_many :post_tags
+  has_many :tags, through: :post_tags
 
   validates :profile, presence: true
   validate :has_content
@@ -14,6 +16,7 @@ class Post < ActiveRecord::Base
   validate :has_mention_for_review
 
   before_save :format_video
+  before_save :extract_hash_tags
 
   after_create :notify
 
@@ -154,6 +157,33 @@ class Post < ActiveRecord::Base
     posts = posts.order(created_at: :desc)
     posts = posts.paginate(:page => page, :per_page => 10)
     return posts
+  end
+
+  # tag form helper on display
+  def all_tags
+    self.tags.map(&:name).join(", ")
+  end
+
+  # takes in strin
+  # returns array of tags
+  def extract_hash_tags
+    self.post_tags.destroy_all
+    return if description.blank?
+    description.scan(/\B#\w+/).each do |name|
+      self.tags << Tag.where(name: name.delete!('#')).first_or_create!
+    end
+  end
+
+  # takes in strin
+  # returns array of tags
+  def tagged_description
+    return nil if description.nil?
+    t_desc = description
+    description.scan(/\B#\w+/).each do |name|
+      tag = Tag.find_by(name: name.delete!('#'))
+      t_desc.sub! "##{name}", "<a href=\"/feeds/tag/#{tag.name}\">##{tag.name}</a>"
+    end
+    t_desc
   end
 
 end

@@ -28,7 +28,7 @@
             - unless post.mention.nil?
               = link_to profile_path(post.mention) do
                 = "@#{post.mention.name}"
-            = auto_link(post.description, :html => { :target => '_blank' }) unless post.description.nil?
+            = auto_link(raw(post.tagged_description), :html => { :target => '_blank' }) unless post.description.nil?
         .row.comments{ :data => {:id => post.id} }
           -# all comments for the post
           .col-xs-12
