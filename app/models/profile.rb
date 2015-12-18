@@ -108,17 +108,21 @@ class Profile < ActiveRecord::Base
     # profile name, socials
     # profile tag names
     # profile user email
-    profiles = profiles.joins(:tags, :user, :category).where("
-      profiles.name ILIKE ? OR
-      tags.name ILIKE ? OR
-      categories.name ILIKE ?
-    ",
-      "%#{query}%",
-      "%#{query}%",
-      "%#{query}%").uniq
-    # sort by distance
-    # within 100km, sorted by distance from origin, closest first
+
+    # filter by distance
     profiles = profiles.within(100, :origin => address).order(address: :asc) unless address.nil?
+
+    # separate because active record OR clauses suck
+    tag_profiles = profiles.joins(:tags).where("tags.name ILIKE ?", "%#{query}%")
+    name_profiles = profiles.where("name ILIKE ?", "%#{query}%")
+    category_profiles = profiles.joins(:category).where("categories.name ILIKE ?", "%#{query}%")
+
+    profiles = (name_profiles.to_a + category_profiles.to_a + tag_profiles.to_a).uniq
+
+    # sort by distance. this might not actually work
+    profiles = profiles.sort_by(&:address)
+
+    # within 100km, sorted by distance from origin, closest first
     profiles = profiles.paginate(:page => page, :per_page => 10)
   end
 
