@@ -1,4 +1,5 @@
 include Video
+require 'will_paginate/array'
 
 class Profile < ActiveRecord::Base
   # geo
