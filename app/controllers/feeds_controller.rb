@@ -32,7 +32,7 @@ class FeedsController < ApplicationController
     @items = (@posts.to_a + @profiles.to_a).sort_by do |item|
       item.created_at
     end.reverse!
-    render 'index'
+    render 'split_index'
   end
 
   def tag
@@ -41,7 +41,7 @@ class FeedsController < ApplicationController
     @posts = Post.joins(:tags).where("tags.name = ?", params[:tag]) unless params[:tag].nil?
     @posts = @posts.paginate(:page => params[:page], :per_page => 10)
     @items = (@profiles.to_a + @posts.to_a).sort_by(&:created_at).reverse!
-    render 'index'
+    render 'split_index'
   end
 
   private

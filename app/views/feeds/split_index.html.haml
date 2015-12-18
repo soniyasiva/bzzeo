@@ -15,14 +15,38 @@
         %br
         .tab-content
           #grid-view.tab-pane.active{:role => "tabpanel"}
-            - @items.each do |item|
-              - if item.is_a? Post
-                = render 'shared/post_sm', post: item
-              - elsif item.is_a? Share
-                = render 'shared/share_sm', share: item
-              - elsif item.is_a? Profile
-                = render 'shared/profile_sm', profile: item
-            = "No results" if !@items.any?
+            - unless @profiles.nil? || @profiles.empty?
+              .row
+                .col-xs-12
+                  %h2 Profiles
+                  %hr
+                  - @profiles.each do |profile|
+                    = render 'shared/profile_sm', profile: profile
+            - PostCategory.all.each do |post_category|
+              - posts = @posts.where(post_category: post_category)
+              - next if posts.empty?
+              .row
+                .col-xs-12
+                  %h2= "#{post_category.name.pluralize.capitalize}"
+                  %hr
+                  - posts.each do |post|
+                    = render 'shared/post_sm', post: post
+            - posts = @posts.where(post_category: nil)
+            - unless posts.empty?
+              .row
+                .col-xs-12
+                  %h2 Posts
+                  %hr
+                  - posts.each do |post|
+                    = render 'shared/post_sm', post: post
+            - unless @shares.nil? || @shares.empty?
+              .row
+                .col-xs-12
+                  %h2 Shares
+                  %hr
+                  - @shares.each do |share|
+                    = render 'shared/share_sm', share: share
+            = "No results" if !@posts.any? && !@profiles.any?
           #list-view.tab-pane{:role => "tabpanel"}
             - @items.each do |item|
               - if item.is_a? Post
