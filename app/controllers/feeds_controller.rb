@@ -38,9 +38,11 @@ class FeedsController < ApplicationController
   def tag
     @profiles = Profile.joins(:tags).where("tags.name = ?", params[:tag]) unless params[:tag].nil?
     @profiles = @profiles.paginate(:page => params[:page], :per_page => 10)
+    @posts = Post.joins(:tags).where("tags.name = ?", params[:tag]) unless params[:tag].nil?
+    @posts = @posts.paginate(:page => params[:page], :per_page => 10)
     puts params[:tag]
     puts @profiles
-    @items = @profiles
+    @items = (@profiles.to_a + @posts.to_a).sort_by(&:created_at).reverse!
     render 'index'
   end
 
