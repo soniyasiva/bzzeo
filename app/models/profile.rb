@@ -108,23 +108,11 @@ class Profile < ActiveRecord::Base
     # profile name, socials
     # profile tag names
     # profile user email
-    profiles = profiles.joins(:tags, :user).where("
-      users.email ILIKE ? OR
-      profiles.phone ILIKE ? OR
-      profiles.facebook ILIKE ? OR
-      profiles.instagram ILIKE ? OR
-      profiles.twitter ILIKE ? OR
-      profiles.youtube ILIKE ? OR
-      profiles.linkedin ILIKE ? OR
+    profiles = profiles.joins(:tags, :user, :category).where("
       profiles.name ILIKE ? OR
-      tags.name ILIKE ?
+      tags.name ILIKE ? OR
+      categories.name ILIKE ?
     ",
-      "%#{query}%",
-      "%#{query}%",
-      "%#{query}%",
-      "%#{query}%",
-      "%#{query}%",
-      "%#{query}%",
       "%#{query}%",
       "%#{query}%",
       "%#{query}%").uniq
