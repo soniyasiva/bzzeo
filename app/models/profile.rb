@@ -101,7 +101,7 @@ class Profile < ActiveRecord::Base
   # searches the profiles name and tags by keyword and optional address
   def self.search query, address=nil, page
     # catch blank search
-    return [] if query.nil? and address.nil?
+    return [] if query.nil? && address.nil?
     # gets profiles
     profiles = Profile.all
     # searches profiles for
