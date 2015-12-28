@@ -35,6 +35,15 @@ $nav-link-hover-bg: $brand-primary;
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
+// MIXINS START
+@mixin placeholder {
+  ::-webkit-input-placeholder {@content}
+  :-moz-placeholder           {@content}
+  ::-moz-placeholder          {@content}
+  :-ms-input-placeholder      {@content}
+}
+// MIXINS END
+
 // BASE START
 body {
   padding-top: 60px;
@@ -435,3 +444,23 @@ iframe {
   font-weight: bold;
 }
 // CONVERSATION END
+// TWITTER TYPEAHEAD START
+.twitter-typeahead {
+  .tt-hint {
+    color: $gray
+  }
+  .tt-menu {
+    display: block !important;
+    background: $brand-primary;
+    width: 100%;
+    color: white;
+    .tt-suggestion {
+      padding: 1em;
+      &:hover {
+        cursor: pointer;
+        background: $brand-secondary;
+      }
+    }
+  }
+}
+// TWITTER TYPEAHEAD END

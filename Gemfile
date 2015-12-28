@@ -41,6 +41,7 @@ gem 'geokit-rails'
 gem 'rails_autolink'
 gem 'will_paginate', '~> 3.0.6'
 gem 'font-awesome-sass', '~> 4.4.0'
+gem 'twitter-typeahead-rails'
 # env vars
 gem "figaro"
 

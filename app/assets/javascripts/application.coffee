@@ -13,6 +13,7 @@
 #= require jquery
 #= require jquery_ujs
 #= require bootstrap-sprockets
+#= require twitter/typeahead
 #= require_tree .
 
 
@@ -161,3 +162,26 @@ $ ->
     $('.menu-search .address').toggleClass('hidden');
     false
   )
+
+  # twitter typeahead
+  numbers = new Bloodhound(
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('num')
+    queryTokenizer: Bloodhound.tokenizers.whitespace
+    local: [
+      { num: 'one' }
+      { num: 'two' }
+      { num: 'three' }
+      { num: 'four' }
+      { num: 'five' }
+      { num: 'six' }
+      { num: 'seven' }
+      { num: 'eight' }
+      { num: 'nine' }
+      { num: 'ten' }
+    ])
+  # initialize the bloodhound suggestion engine
+  numbers.initialize()
+  # instantiate the typeahead UI
+  $('.example-numbers .typeahead').typeahead null,
+    displayKey: 'num'
+    source: numbers.ttAdapter()
