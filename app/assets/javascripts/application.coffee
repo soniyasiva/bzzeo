@@ -13,6 +13,7 @@
 #= require jquery
 #= require jquery_ujs
 #= require bootstrap-sprockets
+#= require handlebars
 #= require twitter/typeahead
 #= require_tree .
 
@@ -168,9 +169,10 @@ $ ->
     {
       datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name')
       queryTokenizer: Bloodhound.tokenizers.whitespace
-      prefetch: '/profiles.json'
+      prefetch: '/profiles.json' # profiles by default
+      # use normal search function
       remote: {
-        url: '/profiles.json'
+        url: '/feeds/search.json?query=%QUERY'
         wildcard: '%QUERY'
       }
     }
@@ -178,12 +180,13 @@ $ ->
   # initialize the bloodhound suggestion engine
   numbers.initialize()
   # instantiate the typeahead UI
-  $('.example-numbers .typeahead').typeahead null,
-    displayKey: 'name'
-    source: numbers.ttAdapter()
-
-
-  remote: {
-    url: '../data/films/queries/%QUERY.json',
-    wildcard: '%QUERY'
-  }
+  $('.example-numbers .typeahead').typeahead {
+      minLength: 2
+    },
+    {
+      displayKey: 'name'
+      limit: 6
+      source: numbers.ttAdapter()
+      templates:
+        suggestion: Handlebars.compile('<div>{{name}}{{description}}</div>')
+    }

@@ -32,7 +32,11 @@ class FeedsController < ApplicationController
     @items = (@posts.to_a + @profiles.to_a).sort_by do |item|
       item.created_at
     end.reverse!
-    render 'split_index'
+
+    respond_to do |format|
+      format.html { render 'split_index' }
+      format.json { render json: @items }
+    end
   end
 
   def tag
