@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :notifications
+  resources :notifications do
+    member do
+      get :follow
+    end
+  end
   resources :feeds, :only => [:index] do
     collection do
       get 'search', to: "feeds#search"

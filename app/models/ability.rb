@@ -18,8 +18,8 @@ class Ability
       can [:friend, :partner], Profile
       can [:like, :comment, :pin, :upvote, :downvote, :create, :deals], Post
       can :create, Share
-      can :read, Notification do |notification|
-        profile.user == user
+      can [:read, :follow], Notification do |notification|
+        notification.profile.user == user
       end
     end
 
