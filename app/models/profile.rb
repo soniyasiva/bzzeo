@@ -2,6 +2,10 @@ include Video
 require 'will_paginate/array'
 
 class Profile < ActiveRecord::Base
+  # slugs
+  extend FriendlyId
+  friendly_id :name, use: :slugged
+
   # geo
   acts_as_mappable
   before_validation :geocode_address, :on => [:create, :update]

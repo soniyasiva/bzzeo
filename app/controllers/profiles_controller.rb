@@ -1,6 +1,7 @@
 class ProfilesController < ApplicationController
+  before_filter :redirect_to_newest_url # use friendlyid by default
   before_action :authenticate_user!, :except => :show
-  load_and_authorize_resource
+  load_and_authorize_resource :find_by => :slug # auth from friendlyid
   check_authorization
 
   before_action :set_profile, only: [:show, :edit, :update, :destroy, :friend, :partner]
@@ -110,7 +111,7 @@ class ProfilesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_profile
-      @profile = Profile.find(params[:id])
+      @profile = Profile.friendly.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -123,5 +124,14 @@ class ProfilesController < ApplicationController
       params.require(:friend).permit(:friend_id).merge(
         profile_id: current_user.profile.id
       )
+    end
+
+    # friendlyid redirect
+    def redirect_to_newest_url
+      @profile = Profile.friendly.find params[:id]
+
+      if request.path != profile_path(@profile)
+        return redirect_to @profile, :status => :moved_permanently
+      end
     end
 end
