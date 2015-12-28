@@ -165,23 +165,25 @@ $ ->
 
   # twitter typeahead
   numbers = new Bloodhound(
-    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('num')
-    queryTokenizer: Bloodhound.tokenizers.whitespace
-    local: [
-      { num: 'one' }
-      { num: 'two' }
-      { num: 'three' }
-      { num: 'four' }
-      { num: 'five' }
-      { num: 'six' }
-      { num: 'seven' }
-      { num: 'eight' }
-      { num: 'nine' }
-      { num: 'ten' }
-    ])
+    {
+      datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name')
+      queryTokenizer: Bloodhound.tokenizers.whitespace
+      prefetch: '/profiles.json'
+      remote: {
+        url: '/profiles.json'
+        wildcard: '%QUERY'
+      }
+    }
+  )
   # initialize the bloodhound suggestion engine
   numbers.initialize()
   # instantiate the typeahead UI
   $('.example-numbers .typeahead').typeahead null,
-    displayKey: 'num'
+    displayKey: 'name'
     source: numbers.ttAdapter()
+
+
+  remote: {
+    url: '../data/films/queries/%QUERY.json',
+    wildcard: '%QUERY'
+  }
