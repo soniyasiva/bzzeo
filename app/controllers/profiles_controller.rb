@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-  before_filter :redirect_to_newest_url # use friendlyid by default
+  before_filter :redirect_to_newest_url, only: [:show] # use friendlyid by default
   before_action :authenticate_user!, :except => :show
   load_and_authorize_resource :find_by => :slug # auth from friendlyid
   check_authorization

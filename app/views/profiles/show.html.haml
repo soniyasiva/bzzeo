@@ -23,7 +23,7 @@
             .col-xs-12
               / connect
               .btn-group
-                = link_to friend_profile_path(@profile), :class => "friend btn btn-primary btn-sm dropdown-toggle", method: :put, remote: true, :data => { :id => @profile.id }, "aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button" do
+                = link_to friend_profile_path(@profile), :class => "friend btn btn-primary btn-sm dropdown-toggle", method: :put, remote: true, :data => { :id => @profile.id }, :type => "button" do
                   = icon 'eye'
                   = @profile.friend?(current_user) ? "Unfollow" : "Follow"
                 %button.btn.btn-primary.btn-sm.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
@@ -40,7 +40,7 @@
                       = @profile.partner?(current_user) ? "Unpartner" : "Partner"
               / contact
               .btn-group
-                = link_to new_conversation_path(profile_id: @profile.id), :class => "btn btn-primary btn-sm dropdown-toggle", "aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button" do
+                = link_to new_conversation_path(profile_id: @profile.id), :class => "btn btn-primary btn-sm dropdown-toggle", :type => "button" do
                   = icon 'at'
                   Contact
                 %button.btn.btn-primary.btn-sm.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
@@ -80,7 +80,7 @@
 
               / review
               .btn-group
-                = link_to new_post_path(params: { mention_id: @profile.id, post_category_id: PostCategory.find_by(name: 'review').id }), :class => "btn btn-primary btn-sm dropdown-toggle", "aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button" do
+                = link_to new_post_path(params: { mention_id: @profile.id, post_category_id: PostCategory.find_by(name: 'review').id }), :class => "btn btn-primary btn-sm dropdown-toggle", :type => "button" do
                   = icon 'binoculars'
                   Review
                 %button.btn.btn-primary.btn-sm.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
