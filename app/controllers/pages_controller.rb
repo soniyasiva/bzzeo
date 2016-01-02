@@ -15,6 +15,8 @@ class PagesController < ApplicationController
   # GET /pages/1
   # GET /pages/1.json
   def show
+    # homepage
+    redirect_to feeds_path if user_signed_in? && @page.slug == 'home'
   end
 
   # GET /pages/new
