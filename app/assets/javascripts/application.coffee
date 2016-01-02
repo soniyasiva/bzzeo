@@ -188,5 +188,5 @@ $ ->
       limit: 6
       source: numbers.ttAdapter()
       templates:
-        suggestion: Handlebars.compile('<div>{{name}}{{description}}</div>')
+        suggestion: Handlebars.compile('<div><p>{{name}}</p><p>{{description}}</p></div>')
     }
