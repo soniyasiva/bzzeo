@@ -54,6 +54,11 @@ p {
 }
 // BASE END
 // HOME PAGE START
+.controller-pages.action-show.id-home {
+  @media (min-width: 768px) {
+    margin-top: 7em;
+  }
+}
 // HOME PAGE END
 // MOBILE MENU START
 footer {

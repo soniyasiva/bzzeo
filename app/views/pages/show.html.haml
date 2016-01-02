@@ -1,3 +1,29 @@
 .row
   .col-xs-12
+    -# .row
+    -#   .col-xs-12.col-sm-6
+    -#     .embed-responsive.embed-responsive-16by9
+    -#       %iframe.embed-responsive-item{:allowfullscreen => "", :frameborder => "0", :src => "https://www.youtube.com/embed/pt8VYOfr8To"}
+    -#     %h3.text-center
+    -#       Explore businesses, deals, jobs + more - locally & globally!
+    -#   .col-xs-12.col-sm-6
+    -#     .row
+    -#       .col-xs-12
+    -#         %h2.text-center (Get ahead, Get bzzeo.)
+    -#         = form_tag session_path(:user) do |f|
+    -#           .form-group
+    -#             = label_tag 'user[email]', 'Email'
+    -#             = text_field_tag 'user[email]', nil, class: 'form-control'
+    -#           .form-group
+    -#             = label_tag 'user[password]', 'Password'
+    -#             = password_field_tag 'user[password]', nil, class: 'form-control'
+    -#           .form-group
+    -#             = check_box_tag 'user[remember_me]', nil, class: 'form-control'
+    -#             = label_tag 'user[remember_me]', 'Remember me'
+    -#     .row
+    -#       .col-xs-12.col-sm-6
+    -#         %button.btn.btn-block.btn-primary Login
+    -#         = link_to "Forgot your password?", new_password_path(:user)
+    -#       .col-xs-12.col-sm-6
+    -#         = link_to "Join", new_user_registration_path, :class => "btn btn-block btn-default"
     = @page.html.html_safe unless @page.html.blank?
