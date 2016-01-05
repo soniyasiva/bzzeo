@@ -1,0 +1,18 @@
+.row
+  .col-xs-12
+    .row
+      .col-xs-12.col-sm-3
+        %ul.nav{:role => "tablist"}
+          - @profiles.each do |profile|
+            %li{:class => "#{'active' if profile.id == @profile_id}", :role => "presentation"}
+              %a{"data-toggle" => "tab", :href => "#profile-#{profile.id}"}
+                %p= profile.name
+                %p= profile.conversations(current_user).first.message
+      .col-xs-12.col-sm-9
+        .tab-content
+          - @profiles.each do |profile|
+            %div{:id => "profile-#{profile.id}", :class => "tab-pane #{'active' if profile.id == @profile_id}"}
+              - profile.conversations(current_user).sort_by(&:created_at).each do |convo|
+                %div{:class => "convo #{'self' if convo.sender.id == current_user.id}"}
+                  %p= convo.message
+                  %p= "sent #{time_ago_in_words convo.created_at}"

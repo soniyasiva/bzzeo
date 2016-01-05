@@ -11,6 +11,12 @@ class ConversationsController < ApplicationController
     @sent = Conversation.where(sender: current_user.profile)
   end
 
+  def dashboard
+    # profiles with conversations
+    @profile_id = params[:profile_id].to_i
+    @profiles = (current_user.profile.receivers.pluck(:sender_id) + current_user.profile.senders.pluck(:receiver_id)).uniq.map {|p| Profile.find(p)}
+  end
+
   # GET /conversations/1
   # GET /conversations/1.json
   def show

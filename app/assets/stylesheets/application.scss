@@ -439,4 +439,12 @@ iframe {
 .unread {
   font-weight: bold;
 }
+.convo {
+  padding: 1em;
+  background: #ffffff;
+  &.self {
+    background: #cccccc;
+    text-align: right;
+  }
+}
 // CONVERSATION END

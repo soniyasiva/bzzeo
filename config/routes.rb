@@ -14,7 +14,11 @@ Rails.application.routes.draw do
   resources :views
   resources :partners
   resources :pages
-  resources :conversations
+  resources :conversations do
+    collection do
+      get "dashboard", to: "conversations#dashboard"
+    end
+  end
   resources :friends
   resources :shares
   resources :likes

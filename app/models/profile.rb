@@ -55,8 +55,19 @@ class Profile < ActiveRecord::Base
     frienders + friendeds
   end
 
-  def conversations
-    senders + receivers
+  def last_conversation with_profile
+    last_sent = senders.where(receiver: with_profile).last
+    last_received = receivers.where(sender: with_profile).last
+    last = last_sent
+    last = last_received if last_sent.nil? || (!last_received.nil? && last_received.created_at > last_sent.created_at)
+  end
+
+  def conversations with_profile=nil
+    if with_profile.nil?
+      senders + receivers
+    else
+      senders.where(receiver: with_profile) + receivers.where(sender: with_profile)
+    end
   end
 
   # tag form helper on display
