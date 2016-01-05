@@ -77,6 +77,8 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'guard-rails', require: false
   gem 'guard-rspec', require: false
+  gem 'guard-livereload', '~> 2.4', require: false
+  gem "rack-livereload", :group => :development
 
   # debug user interaction
   gem 'capybara'
