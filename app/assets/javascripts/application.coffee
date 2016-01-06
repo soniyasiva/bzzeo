@@ -162,16 +162,17 @@ $ ->
     false
   )
 
-  $('a.convo-profile').click (e) ->
+  # handles convo profile click
+  $('a.convo-profile').on('click', (e) ->
     console.log 'convo-profile fired'
     e.preventDefault()
     $(this).tab 'show'
-    #
-    $(document).on 'shown.bs.tab', 'a[data-toggle="tab"]', (e) ->
-      console.log e
-      return
+    # profile-id
+    profile = $(this).attr('aria-controls')
+    console.log profile
     # conversation scroller
-    scroller = $(this).find('.scroll')
+    scroller = $("##{profile} .scroll")
     console.log scroller.length
     scroller.scrollTop(scroller.height())
     return
+  )
