@@ -13,8 +13,12 @@ class ConversationsController < ApplicationController
 
   def dashboard
     # profiles with conversations
-    @profile_id = params[:profile_id].to_i
     @profiles = (current_user.profile.receivers.pluck(:sender_id) + current_user.profile.senders.pluck(:receiver_id)).uniq.map {|p| Profile.find(p)}
+    if @profile_id.nil?
+      @profile_id = @profiles.first.id unless @profiles.blank?
+    else
+      @profile_id = params[:profile_id].to_i
+    end
   end
 
   # GET /conversations/1
@@ -40,7 +44,7 @@ class ConversationsController < ApplicationController
 
     respond_to do |format|
       if @conversation.save
-        format.html { redirect_to @conversation, notice: 'Conversation was successfully created.' }
+        format.html { redirect_to dashboard_conversations_path(profile_id: @conversation.receiver_id), notice: 'Conversation was successfully created.' }
         format.json { render :show, status: :created, location: @conversation }
       else
         format.html { render :new }

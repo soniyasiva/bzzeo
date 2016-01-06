@@ -419,6 +419,92 @@ footer {
   }
 }
 // PROFILE LIST END
+// CONVERSATION START
+html {
+  height: 100%;
+}
+.controller-conversations.action-dashboard.id-none {
+  height: 100%;
+  padding-bottom: 1em;
+  .main.container {
+    height: 100%;
+    .full-height {
+      height: 100%;
+    }
+    .tab-content {
+      height: 100%;
+    }
+    .scroll {
+      overflow: auto;
+    }
+    .partial-height {
+      height: 100%;
+      padding-bottom: 8em;
+    }
+  }
+  .new-message {
+    position: absolute;
+    bottom: 0;
+    height: 8em;
+    width: 100%;
+  }
+}
+.nav.nav-list {
+  border-right: 1px solid $gray-light;
+  li {
+    &.active {
+      background: $brand-primary;
+      a {
+        h4, p {
+          color: white;
+        }
+      }
+    }
+    .list-profile {
+      > div {
+        padding-right: 0em;
+      }
+    }
+    .last-message {
+      .sent-at {
+        float: right;
+        color: white;
+      }
+    }
+  }
+}
+.unread {
+  font-weight: bold;
+}
+.convo {
+  margin-bottom: 0.5em;
+  .message {
+    background: #ccc;
+    padding: 1em;
+    margin-right: 4em;
+    p {
+      margin-bottom: 0;
+    }
+  }
+  .sent-at {
+    p {
+      color: $gray;
+      margin-bottom: 0;
+    }
+  }
+  &.self {
+    text-align: right;
+    .message {
+      background: $brand-primary;
+      margin-left: 4em;
+      margin-right: 0em;
+      p {
+          color: white;
+      }
+    }
+  }
+}
+// CONVERSATION END
 // SHARE START
 nav.share {display:inline-block;} /* shareable's nav tag */
 nav.share div {float:left;}
@@ -438,16 +524,3 @@ iframe {
   }
 }
 // MAP END
-// CONVERSATION START
-.unread {
-  font-weight: bold;
-}
-.convo {
-  padding: 1em;
-  background: #ffffff;
-  &.self {
-    background: #cccccc;
-    text-align: right;
-  }
-}
-// CONVERSATION END
