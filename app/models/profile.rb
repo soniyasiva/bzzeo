@@ -64,9 +64,9 @@ class Profile < ActiveRecord::Base
 
   def conversations with_profile=nil
     if with_profile.nil?
-      senders + receivers
+      (senders + receivers).sort_by(&:created_at)
     else
-      senders.where(receiver: with_profile) + receivers.where(sender: with_profile)
+      (senders.where(receiver: with_profile) + receivers.where(sender: with_profile)).sort_by(&:created_at)
     end
   end
 

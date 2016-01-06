@@ -12,9 +12,10 @@
                   .col-xs-9
                     %h4= profile.name
                 .row.last-message
-                  .col-xs-12
-                    - convo = profile.conversations(current_user).first
-                    %p= h convo.message.truncate 20
+                  .col-sm-6.col-xs-12
+                    - convo = profile.conversations(current_user).last
+                    %p= h convo.message.truncate 12
+                  .col-sm-6.col-xs-12
                     %span.sent-at= "#{time_ago_in_words(convo.created_at).gsub('about ', '')} ago"
       .col-xs-12.col-sm-9.full-height
         .tab-content
@@ -22,7 +23,7 @@
             %div{:id => "profile-#{profile.id}", :class => "full-height tab-pane #{'active' if profile.id == @profile_id}"}
               .row.partial-height
                 .col-xs-12.full-height.scroll
-                  - profile.conversations(current_user).sort_by(&:created_at).each do |convo|
+                  - profile.conversations(current_user).each do |convo|
                     %div{:class => "convo #{'self' if convo.sender.id == current_user.id}"}
                       .message
                         = simple_format(convo.message)

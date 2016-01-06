@@ -452,14 +452,6 @@ html {
 .nav.nav-list {
   border-right: 1px solid $gray-light;
   li {
-    &.active {
-      background: $brand-primary;
-      a {
-        h4, p {
-          color: white;
-        }
-      }
-    }
     .list-profile {
       > div {
         padding-right: 0em;
@@ -468,7 +460,19 @@ html {
     .last-message {
       .sent-at {
         float: right;
-        color: white;
+      }
+    }
+    &.active {
+      background: $brand-primary;
+      a {
+        h4, p {
+          color: white;
+        }
+      }
+      .last-message {
+        .sent-at {
+          color: white;
+        }
       }
     }
   }
