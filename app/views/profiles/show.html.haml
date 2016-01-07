@@ -9,14 +9,16 @@
       .col-xs-12.col-sm-6
         .row
           .col-xs-12
+            %span.pull-right.profile-map-selector
+              = link_to '#', :class => 'location-button' do
+                = icon 'map-marker'
+                = city @profile.address
             %h3.name= @profile.name
+            %h4= @profile.category.name unless @profile.category.nil?
         - unless @profile.address.blank?
           .row
             .col-xs-12
               %p
-                = link_to '#', :class => 'location-button' do
-                  = city @profile.address
-                  = icon 'map-marker'
                 %iframe.profile-map.hidden{:allowfullscreen => "", :frameborder => "0", :src => "https://www.google.com/maps/embed/v1/place?key=AIzaSyAcyVJVLnLZvy1UaUP86D7GfeU5vS7Fspw&q=#{h @profile.address}", :style => "border:0"}
         - unless current_user.nil? || current_user == @profile.user
           .row.more-info
@@ -101,34 +103,38 @@
                       Share on Facebook
         .row
           .col-xs-12
-            %h4
-              = @profile.category.name unless @profile.category.nil?
-            %p
+            %p.description
               = raw @profile.tagged_description
-        .row.text-center
-          .col-xs-12.col-sm-6
+        .row.text-center.scores
+          .col-xs-12.col-sm-10
             .col-xs-4
-              %h4= @profile.friendeds.count
-              %p Followers
+              %h4= "#{@profile.friendeds.count} Followers"
             .col-xs-4
-              %h4= @profile.mentions.count
-              %p mentions
+              %h4= "#{@profile.mentions.count} mentions"
             .col-xs-4
-              %h4= @profile.score
-              %p score
+              %h4= "#{@profile.score} score"
 
     .row.posts
       .col-xs-12
         / Nav tabs
         %ul.nav.nav-tabs{:role => "tablist"}
-          %li.active{:role => "presentation"}
-            %a{"aria-controls" => "portfolio", "data-toggle" => "tab", :href => "#portfolio-tab", :role => "tab"} Portfolio
-          %li{:role => "presentation"}
-            %a{"aria-controls" => "posts", "data-toggle" => "tab", :href => "#posts-tab", :role => "tab"} Posts
-          %li{:role => "presentation"}
-            %a{"aria-controls" => "mentions", "data-toggle" => "tab", :href => "#mentions-tab", :role => "tab"} Mentions
-          %li{:role => "presentation"}
-            %a{"aria-controls" => "partners", "data-toggle" => "tab", :href => "#partners-tab", :role => "tab"} Partners
+          %li.col-sm-3.text-center.active{:role => "presentation"}
+            %a{"aria-controls" => "portfolio", "data-toggle" => "tab", :href => "#portfolio-tab", :role => "tab"}
+              = icon 'user'
+              -# Portfolio
+          %li.col-sm-3.text-center{:role => "presentation"}
+            %a{"aria-controls" => "posts", "data-toggle" => "tab", :href => "#posts-tab", :role => "tab"}
+              = icon 'sticky-note'
+              -# Posts
+          %li.col-sm-3.text-center{:role => "presentation"}
+            %a{"aria-controls" => "mentions", "data-toggle" => "tab", :href => "#mentions-tab", :role => "tab"}
+              = icon 'at'
+              -# Mentions
+          %li.col-sm-3.text-center{:role => "presentation"}
+            %a{"aria-controls" => "partners", "data-toggle" => "tab", :href => "#partners-tab", :role => "tab"}
+              = icon 'users'
+              -# &infin;
+              -# Partners
         / Tab panes
         .tab-content
           #portfolio-tab.tab-pane.active{:role => "tabpanel"}
@@ -137,7 +143,7 @@
                 // portfolio posts
                 - portfolio_posts = @profile.posts.where(post_category: PostCategory.find_by(name:"portfolio")).where.not(hidden: true).order(pinned: :asc, created_at: :desc)
                 // adds a post at the start
-                - portfolio_posts = portfolio_posts.unshift(Post.new(description: "Add a new portfolio item. They can show off your company's best work.")) if current_user.profile == @profile
+                - portfolio_posts = portfolio_posts.unshift(Post.new(description: "Spice up your profile by adding some of your work, accoldates, a video, or resume")) if current_user.profile == @profile
                 - portfolio_posts.in_groups_of(4, false) do |post_group|
                   .row
                     .col-xs-12
