@@ -122,6 +122,13 @@ $(document).on 'ajax:success', '.new_comment', (status,data,xhr)->
   # empty the box
   $('.new-comment textarea').val('')
 
+# functions
+# take in profile like profile-4
+scrollDownConversation = (profile) ->
+  # conversation scroller
+  scroller = $("##{profile} .scroll")
+  scroller.scrollTop(scroller[0].scrollHeight - scroller[0].clientHeight)
+
 # document ready
 $ ->
   $(".post-category-selector .category-option").on('click', ->
@@ -169,10 +176,6 @@ $ ->
     $(this).tab 'show'
     # profile-id
     profile = $(this).attr('aria-controls')
-    console.log profile
-    # conversation scroller
-    scroller = $("##{profile} .scroll")
-    console.log scroller.length
-    scroller.scrollTop(scroller.height())
+    scrollDownConversation profile
     return
   )
