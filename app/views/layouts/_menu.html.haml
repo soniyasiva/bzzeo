@@ -56,6 +56,7 @@
                 .profile-avatar
                   .circle-avatar{:style => "background-image:url(#{current_user.profile.thumbnail_url})"}
                 &nbsp;
+                %span.badge.badge-notify= current_user.profile.notifications.where.not(read: true).count
               -# .icon-wrap
               -#   = icon 'bars'
             %ul.dropdown-menu{:role => "menu"}

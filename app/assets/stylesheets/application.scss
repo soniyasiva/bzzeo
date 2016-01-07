@@ -87,6 +87,13 @@ footer {
 // MOBILE MENU END
 // MENU START
 .navbar-default {
+  .badge-notify{
+     background: $brand-primary;
+     position:relative;
+     color: white;
+     top: -13px;
+    //  left: -13px;
+  }
   li.icon-menu-item a {
     padding: 0.36em 0.5em;
     font-size: 2em;
@@ -108,15 +115,13 @@ footer {
   }
   .navbar-right {
     a.dropdown-toggle.user-menu {
-      // padding-top: 6px;
-      // padding-bottom: 6px;
       position: relative;
-      padding-left: 55px;
+      padding-left: 2.1em;
     }
     .profile-avatar {
       position: absolute;
       top: 6px;
-      left: 12px;
+      left: 18px;
       .circle-avatar {
         min-width: 33px;
       }
