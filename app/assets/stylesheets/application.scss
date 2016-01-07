@@ -52,6 +52,10 @@ a {
 p {
   color: $gray-dark;
 }
+h1, h2, h3, h4 {
+  // font-variant: small-caps;
+  // font-weight: normal;
+}
 // BASE END
 // HOME PAGE START
 .controller-pages.action-show.id-home {
