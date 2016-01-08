@@ -445,22 +445,40 @@ iframe {
 }
 // CONVERSATION END
 // TWITTER TYPEAHEAD START
-.twitter-typeahead {
-  .tt-hint {
-    color: $gray
-  }
-  .tt-menu {
-    display: block !important; // debugging
-    background: $brand-primary;
+.search-form-group {
+  margin: 0;
+  padding: 0;
+  padding-top: 2px;
+  .twitter-typeahead {
+    margin-top: 1px;
     width: 100%;
-    color: white;
-    .tt-suggestion {
-      padding: 1em;
-      &:hover {
-        cursor: pointer;
-        background: $brand-secondary;
+    .tt-hint {
+      color: $gray
+    }
+    .tt-menu {
+      // display: block !important; // debugging
+      background: white;
+      width: 100%;
+      border: 1px solid #f0f0f0;
+      &.tt-empty {
+        border: none;
+      }
+      .tt-suggestion {
+        border-bottom: 1px solid #f0f0f0;
+        padding: 1em;
+        &:hover {
+          cursor: pointer;
+          background: $brand-primary;
+        }
+        &:last-child {
+          border: 0;
+        }
+        p {
+          margin: 0;
+        }
       }
     }
   }
 }
+
 // TWITTER TYPEAHEAD END

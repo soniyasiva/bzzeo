@@ -29,9 +29,9 @@ class FeedsController < ApplicationController
     @posts = Post.search @query, @category, params[:page]
     # search posts and profiles
     # combine the two result times and sort by created_at desc
-    @items = (@posts.to_a + @profiles.to_a).sort_by do |item|
-      item.created_at
-    end.reverse!
+    # @items = (@profiles.to_a + @posts.to_a)
+    # profiles only
+    @items = @profiles
 
     respond_to do |format|
       format.html { render 'split_index' }

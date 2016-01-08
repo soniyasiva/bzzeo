@@ -169,7 +169,6 @@ $ ->
     {
       datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name')
       queryTokenizer: Bloodhound.tokenizers.whitespace
-      prefetch: '/profiles.json' # profiles by default
       # use normal search function
       remote: {
         url: '/feeds/search.json?query=%QUERY'
@@ -188,5 +187,5 @@ $ ->
       limit: 6
       source: numbers.ttAdapter()
       templates:
-        suggestion: Handlebars.compile('<div><p>{{name}}</p><p>{{description}}</p></div>')
+        suggestion: Handlebars.compile('<div><p>{{name}}</p></div>')
     }
