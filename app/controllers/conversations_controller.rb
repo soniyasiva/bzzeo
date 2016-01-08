@@ -26,8 +26,8 @@ class ConversationsController < ApplicationController
     # get profiles
     @profiles = @profiles.map {|p| Profile.find(p)}
     # jump to profile convo
-    if @profile_id.nil?
-      @profile_id = @profiles.first.id unless @profiles.blank?
+    if params[:profile_id].nil?
+      @profile_id = @profiles.first.id unless @profiles.empty?
     else
       @profile_id = params[:profile_id].to_i
     end
