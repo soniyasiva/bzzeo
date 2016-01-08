@@ -125,7 +125,7 @@ $(document).on 'ajax:success', '.new_comment', (status,data,xhr)->
   $('.new-comment textarea').val('')
 
 # functions
-# take in profile like profile-4
+# take in profile like profile-4 # also used in conversations coffee
 scrollDownConversation = (profile) ->
   # conversation scroller
   scroller = $("##{profile} .scroll")
