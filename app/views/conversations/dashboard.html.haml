@@ -1,0 +1,37 @@
+.row.full-height
+  .col-xs-12.full-height
+    .row.full-height
+      .col-xs-12.col-sm-3
+        %ul.nav.nav-list{:role => "tablist"}
+          - @profiles.each do |profile|
+            %li{:class => "#{'active' if profile.id == @profile_id}", :role => "presentation"}
+              %a{"data-toggle" => "tab", :role => "tab", :href => "#profile-#{profile.id}", "aria-controls" => "profile-#{profile.id}", :class => "convo-profile"}
+                .row.list-profile
+                  .col-xs-3
+                    .circle-avatar{:style => "background-image:url(#{current_user.profile.thumbnail_url})"}
+                  .col-xs-9
+                    %h4= profile.name
+                .row.last-message
+                  .col-sm-6.col-xs-12
+                    - convo = profile.conversations(current_user).last
+                    %p= h convo.message.truncate 12
+                  .col-sm-6.col-xs-12
+                    %span.sent-at= "#{time_ago_in_words(convo.created_at).gsub('about ', '')} ago"
+      .col-xs-12.col-sm-9.full-height
+        .tab-content
+          - @profiles.each do |profile|
+            %div{:id => "profile-#{profile.id}", :class => "full-height tab-pane #{'active' if profile.id == @profile_id}"}
+              .row.partial-height
+                .col-xs-12.full-height.scroll
+                  - profile.conversations(current_user).each do |convo|
+                    %div{:class => "convo #{'self' if convo.sender.id == current_user.id}"}
+                      .message
+                        = simple_format(convo.message)
+                      .sent-at
+                        %p= "#{time_ago_in_words convo.created_at} ago"
+              .row.new-message
+                .col-xs-12
+                  = bootstrap_form_for Conversation.new do |f|
+                    = f.hidden_field :receiver_id, :value => profile.id
+                    = f.text_area :message, label: 'New Message', placeholder: "Write your message..."
+                    = f.submit 'Send Message', :class => "btn btn-xs btn-primary"

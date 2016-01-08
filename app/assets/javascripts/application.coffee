@@ -124,6 +124,13 @@ $(document).on 'ajax:success', '.new_comment', (status,data,xhr)->
   # empty the box
   $('.new-comment textarea').val('')
 
+# functions
+# take in profile like profile-4
+scrollDownConversation = (profile) ->
+  # conversation scroller
+  scroller = $("##{profile} .scroll")
+  scroller.scrollTop(scroller[0].scrollHeight - scroller[0].clientHeight)
+
 # document ready
 $ ->
   $(".post-category-selector .category-option").on('click', ->
@@ -162,6 +169,16 @@ $ ->
     console.log 'filter button clicked'
     $('.menu-search .address').toggleClass('hidden');
     false
+  )
+  # handles convo profile click
+  $('a.convo-profile').on('click', (e) ->
+    console.log 'convo-profile fired'
+    e.preventDefault()
+    $(this).tab 'show'
+    # profile-id
+    profile = $(this).attr('aria-controls')
+    scrollDownConversation profile
+    return
   )
 
   # twitter typeahead

@@ -15,7 +15,7 @@
     = uploadcare_settings
   %body{:class => styles()}
     = render 'layouts/menu'
-    .container
+    .container.main
       -unless notice.nil?
         .alert.alert-info.alert-dismissible{:role => "alert"}
           %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}

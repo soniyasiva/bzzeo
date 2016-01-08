@@ -13,7 +13,7 @@ class Conversation < ActiveRecord::Base
     Notification.create(
       profile: receiver,
       message: "You have a new message from #{sender.name}.",
-      link: "/conversations/#{id}"
+      link: "/conversations/dashboard?profile_id=#{receiver_id}"
     )
   end
 end

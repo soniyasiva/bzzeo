@@ -11,6 +11,28 @@ class ConversationsController < ApplicationController
     @sent = Conversation.where(sender: current_user.profile)
   end
 
+  def dashboard
+    # profiles with conversations
+    # convos newest first
+    @profiles = (current_user.profile.receivers + current_user.profile.senders).sort_by(&:created_at).reverse
+    # conversation with ids
+    @profiles = @profiles.map do |c|
+      if c.receiver_id == current_user.id
+        c.sender_id
+      else
+        c.receiver_id
+      end
+    end.uniq # profiles, newest first
+    # get profiles
+    @profiles = @profiles.map {|p| Profile.find(p)}
+    # jump to profile convo
+    if @profile_id.nil?
+      @profile_id = @profiles.first.id unless @profiles.blank?
+    else
+      @profile_id = params[:profile_id].to_i
+    end
+  end
+
   # GET /conversations/1
   # GET /conversations/1.json
   def show
@@ -34,7 +56,7 @@ class ConversationsController < ApplicationController
 
     respond_to do |format|
       if @conversation.save
-        format.html { redirect_to @conversation, notice: 'Conversation was successfully created.' }
+        format.html { redirect_to dashboard_conversations_path(profile_id: @conversation.receiver_id), notice: 'Conversation was successfully created.' }
         format.json { render :show, status: :created, location: @conversation }
       else
         format.html { render :new }
