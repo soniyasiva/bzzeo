@@ -150,6 +150,7 @@
                       - post_group.each do |post|
                         = render partial: 'shared/post_sm', locals: {post: post, link: "/posts/new?post_category_id=#{PostCategory.find_by(name: 'portfolio').id}"}
                 - unless @profile.posts.where(post_category: PostCategory.find_by(name:"portfolio")).where.not(hidden: true).any?
+                  %br
                   %p No portfolio posts
           #posts-tab.tab-pane{:role => "tabpanel"}
             .row.posts
@@ -164,6 +165,7 @@
                       - post_group.each do |post|
                         = render partial: 'shared/post_sm', locals: {post: post, link: new_post_path}
                 - unless @profile.posts.where.not(hidden: true).any?
+                  %br
                   %p No posts
           #mentions-tab.tab-pane{:role => "tabpanel"}
             .row.mentions
@@ -178,6 +180,7 @@
                       - mention_group.each do |mention|
                         = render partial: 'shared/post_sm', locals: {post: mention, link: "/posts/new?post_category_id=#{PostCategory.find_by(name: 'review').id}"}
                 - unless @profile.mentions.any?
+                  %br
                   %p No Mentions
           #partners-tab.tab-pane{:role => "tabpanel"}
             .row.partners
@@ -189,6 +192,7 @@
                         - partner_group.each do |partner|
                           = render 'shared/profile_sm', profile: partner.partner
                 - else
+                  %br
                   %p No Partners
                 - if user_signed_in? && current_user.profile == @profile
                   %br

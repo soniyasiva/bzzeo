@@ -35,6 +35,15 @@ $nav-link-hover-bg: $brand-primary;
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
+// MIXINS START
+@mixin placeholder {
+  ::-webkit-input-placeholder {@content}
+  :-moz-placeholder           {@content}
+  ::-moz-placeholder          {@content}
+  :-ms-input-placeholder      {@content}
+}
+// MIXINS END
+
 // BASE START
 body {
   padding-top: 60px;
@@ -553,3 +562,40 @@ iframe {
   }
 }
 // MAP END
+// TWITTER TYPEAHEAD START
+.search-form-group {
+  margin: 0;
+  padding: 0;
+  padding-top: 2px;
+  .twitter-typeahead {
+    margin-top: 1px;
+    width: 100%;
+    .tt-hint {
+      color: $gray
+    }
+    .tt-menu {
+      // display: block !important; // debugging
+      background: white;
+      width: 100%;
+      border: 1px solid #f0f0f0;
+      &.tt-empty {
+        border: none;
+      }
+      .tt-suggestion {
+        border-bottom: 1px solid #f0f0f0;
+        padding: 1em;
+        &:hover {
+          cursor: pointer;
+          background: $brand-primary;
+        }
+        &:last-child {
+          border: 0;
+        }
+        p {
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+// TWITTER TYPEAHEAD END

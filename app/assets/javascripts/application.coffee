@@ -13,6 +13,8 @@
 #= require jquery
 #= require jquery_ujs
 #= require bootstrap-sprockets
+#= require handlebars
+#= require twitter/typeahead
 #= require_tree .
 
 
@@ -179,3 +181,29 @@ $ ->
     scrollDownConversation profile
     return
   )
+
+  # twitter typeahead
+  numbers = new Bloodhound(
+    {
+      datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name')
+      queryTokenizer: Bloodhound.tokenizers.whitespace
+      # use normal search function
+      remote: {
+        url: '/feeds/search.json?query=%QUERY'
+        wildcard: '%QUERY'
+      }
+    }
+  )
+  # initialize the bloodhound suggestion engine
+  numbers.initialize()
+  # instantiate the typeahead UI
+  $('.example-numbers .typeahead').typeahead {
+      minLength: 2
+    },
+    {
+      displayKey: 'name'
+      limit: 6
+      source: numbers.ttAdapter()
+      templates:
+        suggestion: Handlebars.compile('<div><p>{{name}}</p></div>')
+    }
