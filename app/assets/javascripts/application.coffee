@@ -183,7 +183,7 @@ $ ->
   )
 
   # twitter typeahead
-  numbers = new Bloodhound(
+  search = new Bloodhound(
     {
       datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name')
       queryTokenizer: Bloodhound.tokenizers.whitespace
@@ -195,15 +195,15 @@ $ ->
     }
   )
   # initialize the bloodhound suggestion engine
-  numbers.initialize()
+  search.initialize()
   # instantiate the typeahead UI
-  $('.example-numbers .typeahead').typeahead {
+  $('.search-typeahead .typeahead').typeahead {
       minLength: 2
     },
     {
       displayKey: 'name'
       limit: 6
-      source: numbers.ttAdapter()
+      source: search.ttAdapter()
       templates:
         suggestion: Handlebars.compile('<div><p>{{name}}</p></div>')
     }
