@@ -20,9 +20,11 @@ Handlebars.registerHelper 'timeAgo', (text) ->
 
 # takes in profile_id like 4
 scrollDownConversation = (profile_id) ->
+  console.log 'scrollDownConversation'
   # conversation scroller
   scroller = $("#profile-#{profile_id} .scroll")
-  scroller.scrollTop(scroller[0].scrollHeight - scroller[0].clientHeight)
+  $("#profile-#{profile_id} .scroll .convo").last()[0].scrollIntoView()
+  return
 
 # takes in profile_id like 4
 refreshMessages = (profile_id) ->
@@ -41,16 +43,18 @@ refreshMessages = (profile_id) ->
       # console.log data
       $.each(data, (index, convo) ->
         scroller.append HandlebarsTemplates['convo'](convo)
-        scrollDownConversation profile_id
       )
+      scrollDownConversation profile_id
       # last message
       last_message = data[data.length - 1]
       $('.nav-list li.active .last-message').html(HandlebarsTemplates['last-convo'](last_message))
       return
+  return
 
 updateConvoName = ->
   profile = $('.conversation-profiles li.active .profile-name').html()
   $('.conversation-convos .profile-name').html(profile)
+  return
 
 # interval function for polling for messages
 # grabs the active tab profile_id
@@ -60,6 +64,7 @@ pollMessages = () ->
   profile_id = profile.split('-')[1]
   return if not profile_id?
   refreshMessages profile_id
+  return
 
 $ ->
   # handles convo profile click
@@ -92,6 +97,6 @@ $ ->
 
   # load convos when page loads
   console.log 'loaded conversations'
-  pollMessages()
+  # pollMessages()
   updateConvoName()
   refresh = setInterval(pollMessages, 3000) # make more than the timeout period

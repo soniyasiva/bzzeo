@@ -81,9 +81,9 @@ footer {
   // min-height: 100%;
   // height: auto !important;
   // height: 100%;
-  // @media (min-width: 768px) {
-  //   padding-bottom: 7em; // match height
-  // }
+  @media (min-width: 768px) {
+    padding-bottom: 7em; // match height
+  }
 
   /* Negative indent footer by its height */
   margin: 0 auto -60px;

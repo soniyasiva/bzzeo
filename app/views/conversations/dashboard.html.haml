@@ -1,6 +1,6 @@
 .row.full-height
   .col-xs-12.full-height
-    .row
+    .row.full-height
       .col-xs-12.col-sm-3.hidden-xs.conversation-profiles
         .row
           .col-xs-12
@@ -23,18 +23,24 @@
                       .col-sm-6.col-xs-12
                         %span.sent-at= "#{time_ago_in_words(convo.created_at).gsub('about ', '')} ago"
       .col-xs-12.col-sm-9.full-height.conversation-convos
-        .row
-          .col-xs-12
-            %h3.profile-name.pull-left Profile Name
-            %button.btn.btn-default.btn-sm.btn-profile-select.visible-xs.pull-right Menu
-        .row
-          .col-xs-12
-            .tab-content
+        -# .row
+        -#   .col-xs-12
+        -#     %h3.profile-name.pull-left Profile Name
+        -#     %button.btn.btn-default.btn-sm.btn-profile-select.visible-xs.pull-right Menu
+        .row.full-height
+          .col-xs-12.full-height
+            .tab-content.full-height
               - @profiles.each do |profile|
                 %div{:id => "profile-#{profile.id}", :class => "full-height tab-pane #{'active' if profile.id == @profile_id}"}
                   .row.partial-height
-                    .col-xs-12.full-height.scroll
+                    .col-xs-12.full-height.scroll{'data-id' => "#{profile.id}"}
                       -# where conversations get injected
+                      -# - profile.conversations(current_user).each do |convo|
+                      -#   %div{:class => "convo #{'self' if convo.sender.id == current_user.id}"}
+                      -#     .message
+                      -#       = simple_format(convo.message)
+                      -#     .sent-at
+                      -#       %p= "#{time_ago_in_words convo.created_at} ago"
                   .row.new-message
                     .col-xs-12
                       = bootstrap_form_for Conversation.new do |f|
