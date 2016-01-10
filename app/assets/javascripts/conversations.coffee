@@ -56,6 +56,7 @@ pollMessages = () ->
   profile = $('.tab-content .tab-pane.active').attr('id')
   # get id from profile
   profile_id = profile.split('-')[1]
+  return if not profile_id?
   refreshMessages profile_id
 
 $ ->
