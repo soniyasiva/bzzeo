@@ -49,6 +49,9 @@ body {
   padding-top: 60px;
   padding-bottom: 90px;
   background: #f9f9f9;
+  @media (max-width: 767px) {
+    padding-bottom: 6em;
+  }
 }
 
 a {
@@ -75,9 +78,13 @@ h1, h2, h3, h4 {
 // HOME PAGE END
 // MOBILE MENU START
 footer {
-  min-height: 100%;
-  height: auto !important;
-  height: 100%;
+  // min-height: 100%;
+  // height: auto !important;
+  // height: 100%;
+  // @media (min-width: 768px) {
+  //   padding-bottom: 7em; // match height
+  // }
+
   /* Negative indent footer by its height */
   margin: 0 auto -60px;
   /* Pad bottom by footer height */
@@ -456,7 +463,9 @@ html {
 }
 .controller-conversations.action-dashboard.id-none {
   height: 100%;
-  padding-bottom: 1em;
+  @media (min-width: 768px) {
+    padding-bottom: 1em;
+  }
   .main.container {
     height: 100%;
     .full-height {
@@ -599,3 +608,36 @@ iframe {
   }
 }
 // TWITTER TYPEAHEAD END
+// BOOTSTRAP 5 COLUMNS START
+.col-xs-5ths,
+.col-sm-5ths,
+.col-md-5ths,
+.col-lg-5ths {
+  position: relative;
+  min-height: 1px;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+.col-xs-5ths {
+  width: 20%;
+  float: left;
+}
+@media (min-width: 768px) {
+  .col-sm-5ths {
+    width: 20%;
+    float: left;
+  }
+}
+@media (min-width: 992px) {
+  .col-md-5ths {
+    width: 20%;
+    float: left;
+  }
+}
+@media (min-width: 1200px) {
+  .col-lg-5ths {
+    width: 20%;
+    float: left;
+  }
+}
+// BOOTSTRAP 5 COLUMNS END

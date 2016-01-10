@@ -1,7 +1,7 @@
 .row.full-height
   .col-xs-12.full-height
     .row.full-height
-      .col-xs-12.col-sm-3
+      .col-xs-12.col-sm-3.hidden-xs
         %ul.nav.nav-list{:role => "tablist"}
           - @profiles.each do |profile|
             %li{:class => "#{'active' if profile.id == @profile_id}", :role => "presentation"}
