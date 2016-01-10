@@ -23,12 +23,7 @@
             %div{:id => "profile-#{profile.id}", :class => "full-height tab-pane #{'active' if profile.id == @profile_id}"}
               .row.partial-height
                 .col-xs-12.full-height.scroll
-                  - profile.conversations(current_user).each do |convo|
-                    %div{:class => "convo #{'self' if convo.sender.id == current_user.id}"}
-                      .message
-                        = simple_format(convo.message)
-                      .sent-at
-                        %p= "#{time_ago_in_words convo.created_at} ago"
+                  -# where conversations get injected
               .row.new-message
                 .col-xs-12
                   = bootstrap_form_for Conversation.new do |f|

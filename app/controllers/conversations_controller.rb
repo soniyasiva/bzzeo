@@ -14,6 +14,13 @@ class ConversationsController < ApplicationController
   def with
     profile = Profile.find(params[:profile_id])
     convos = profile.conversations(current_user)
+    convos.map! do |convo|
+      {
+        created_at: view_context.time_ago_in_words(convo.created_at),
+        message: convo.message,
+        owner: convo.sender_id == current_user.id ? 'self' : ''
+      }
+    end
     render json: convos
   end
 

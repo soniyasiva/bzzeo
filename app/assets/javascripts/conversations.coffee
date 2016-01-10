@@ -2,11 +2,28 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-# take in profile like profile-4 # also used in conversations coffee
-scrollDownConversation = (profile) ->
+# takes in profile_id like 4
+scrollDownConversation = (profile_id) ->
   # conversation scroller
-  scroller = $("##{profile} .scroll")
+  scroller = $("#profile-#{profile_id} .scroll")
   scroller.scrollTop(scroller[0].scrollHeight - scroller[0].clientHeight)
+
+# takes in profile_id like 4
+refreshMessages = (profile_id) ->
+  # get convos
+  $.ajax
+    url: "/conversations/with?profile_id=#{profile_id}"
+    dataType: "json"
+    success: (data, textStatus, jqXHR) ->
+      console.log 'success'
+      scroller = $("#profile-#{profile_id} .scroll")
+      scroller.html('')
+      # console.log data
+      $.each(data, (index, convo) ->
+        console.log convo
+        scroller.append HandlebarsTemplates['convo'](convo)
+        scrollDownConversation profile_id
+      )
 
 $ ->
   # handles convo profile click
@@ -17,20 +34,16 @@ $ ->
     $(this).tab 'show'
     # profile-id
     profile = $(this).attr('aria-controls')
+    # get id from profile
     profile_id = profile.split('-')[1]
-    # get convos
-    $.ajax
-      url: "/conversations/with?profile_id=#{profile_id}"
-      dataType: "json"
-      success: (data, textStatus, jqXHR) ->
-        console.log 'success'
-        console.log data
-
-    scrollDownConversation profile
+    refreshMessages profile_id
     return
   )
 
   # scroll when page loads
   console.log 'loaded conversations'
   profile = $('.tab-content .tab-pane.active').attr('id')
-  scrollDownConversation profile
+  # get id from profile
+  profile_id = profile.split('-')[1]
+  refreshMessages profile_id
+  # scrollDownConversation profile_id
