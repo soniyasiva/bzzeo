@@ -14,9 +14,11 @@ refreshMessages = (profile_id) ->
   $.ajax
     url: "/conversations/with?profile_id=#{profile_id}"
     dataType: "json"
+    timeout: 2000 # make less than the refresh period
     success: (data, textStatus, jqXHR) ->
       console.log 'success'
       scroller = $("#profile-#{profile_id} .scroll")
+      return if scroller.children().length == data.length
       scroller.html('')
       # console.log data
       $.each(data, (index, convo) ->
@@ -24,6 +26,14 @@ refreshMessages = (profile_id) ->
         scroller.append HandlebarsTemplates['convo'](convo)
         scrollDownConversation profile_id
       )
+
+# interval function for polling for messages
+# grabs the active tab profile_id
+pollMessages = () ->
+  profile = $('.tab-content .tab-pane.active').attr('id')
+  # get id from profile
+  profile_id = profile.split('-')[1]
+  refreshMessages profile_id
 
 $ ->
   # handles convo profile click
@@ -40,10 +50,7 @@ $ ->
     return
   )
 
-  # scroll when page loads
+  # load convos when page loads
   console.log 'loaded conversations'
-  profile = $('.tab-content .tab-pane.active').attr('id')
-  # get id from profile
-  profile_id = profile.split('-')[1]
-  refreshMessages profile_id
-  # scrollDownConversation profile_id
+  pollMessages()
+  refresh = setInterval(pollMessages, 3000) # make more than the timeout period
