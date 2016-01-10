@@ -164,12 +164,6 @@ $ ->
     false
   )
 
-  # breaklines in .hbs files
-  Handlebars.registerHelper 'breaklines', (text) ->
-    text = Handlebars.Utils.escapeExpression(text)
-    text = text.replace(/(\r\n|\n|\r)/gm, '<br>')
-    new (Handlebars.SafeString)(text)
-
   # twitter typeahead
   search = new Bloodhound(
     {

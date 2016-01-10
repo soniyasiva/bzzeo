@@ -2,6 +2,22 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+# breaklines in .hbs files helper
+Handlebars.registerHelper 'breaklines', (text) ->
+  text = Handlebars.Utils.escapeExpression(text)
+  text = text.replace(/(\r\n|\n|\r)/gm, '<br>')
+  new (Handlebars.SafeString)(text)
+
+# last message helper
+Handlebars.registerHelper 'truncate', (text) ->
+  text = text.substring(0,11)
+  new (Handlebars.SafeString)(text)
+
+# time ago helper
+Handlebars.registerHelper 'timeAgo', (text) ->
+  text = test.replace('about ', '')
+  new (Handlebars.SafeString)(text)
+
 # takes in profile_id like 4
 scrollDownConversation = (profile_id) ->
   # conversation scroller
@@ -18,7 +34,9 @@ refreshMessages = (profile_id) ->
     success: (data, textStatus, jqXHR) ->
       console.log 'success'
       scroller = $("#profile-#{profile_id} .scroll")
+      # do nothing if no new messages
       return if scroller.children().length == data.length
+      # empty space
       scroller.html('')
       # console.log data
       $.each(data, (index, convo) ->
@@ -26,6 +44,11 @@ refreshMessages = (profile_id) ->
         scroller.append HandlebarsTemplates['convo'](convo)
         scrollDownConversation profile_id
       )
+      # last message
+      last_message = data[data.length - 1]
+      console.log last_message
+      $('.nav-list li.active .last-message').html(HandlebarsTemplates['last-convo'](last_message))
+      return
 
 # interval function for polling for messages
 # grabs the active tab profile_id
