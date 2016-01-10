@@ -15,7 +15,7 @@ Handlebars.registerHelper 'truncate', (text) ->
 
 # time ago helper
 Handlebars.registerHelper 'timeAgo', (text) ->
-  text = test.replace('about ', '')
+  text = text.replace('about ', '')
   new (Handlebars.SafeString)(text)
 
 # takes in profile_id like 4
@@ -71,6 +71,19 @@ $ ->
     # get id from profile
     profile_id = profile.split('-')[1]
     refreshMessages profile_id
+    # toggle mobile profiles menu
+    $('.conversation-profiles').toggleClass('hidden-xs')
+    $('.conversation-convos').toggleClass('hidden-xs')
+    return
+  )
+
+  # menu selector
+  $('.btn-profile-select').on('click', (e) ->
+    console.log 'btn-profile-select'
+    # toggle mobile profiles menu
+    $('.conversation-profiles').toggleClass('hidden-xs')
+    $('.conversation-convos').toggleClass('hidden-xs')
+    e.preventDefault()
     return
   )
 

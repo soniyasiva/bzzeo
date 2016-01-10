@@ -70,6 +70,23 @@ class Profile < ActiveRecord::Base
     end
   end
 
+  # returns array of profiles that the user has had conversations with. In order of most recent conversation
+  def conversationalists
+    # profiles with conversations
+    # convos newest first
+    profiles = (receivers + senders).sort_by(&:created_at).reverse
+    # conversation with ids
+    profiles = profiles.map do |c|
+      if c.receiver_id == id
+        c.sender_id
+      else
+        c.receiver_id
+      end
+    end.uniq # profiles, newest first
+    # get profiles
+    profiles = profiles.map {|p| Profile.find(p)}
+  end
+
   # tag form helper on display
   def all_tags
     self.tags.map(&:name).join(", ")

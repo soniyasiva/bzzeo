@@ -11,6 +11,10 @@ class ConversationsController < ApplicationController
     @sent = Conversation.where(sender: current_user.profile)
   end
 
+  def profile
+    convos = profile.conversations
+  end
+
   def with
     profile = Profile.find(params[:profile_id])
     convos = profile.conversations(current_user)
@@ -25,19 +29,8 @@ class ConversationsController < ApplicationController
   end
 
   def dashboard
-    # profiles with conversations
-    # convos newest first
-    @profiles = (current_user.profile.receivers + current_user.profile.senders).sort_by(&:created_at).reverse
-    # conversation with ids
-    @profiles = @profiles.map do |c|
-      if c.receiver_id == current_user.id
-        c.sender_id
-      else
-        c.receiver_id
-      end
-    end.uniq # profiles, newest first
-    # get profiles
-    @profiles = @profiles.map {|p| Profile.find(p)}
+    @profiles = current_user.profile.conversationalists
+
     # jump to profile convo
     if params[:profile_id].nil?
       @profile_id = @profiles.first.id unless @profiles.empty?
