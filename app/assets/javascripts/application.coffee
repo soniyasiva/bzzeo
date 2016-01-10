@@ -124,13 +124,6 @@ $(document).on 'ajax:success', '.new_comment', (status,data,xhr)->
   # empty the box
   $('.new-comment textarea').val('')
 
-# functions
-# take in profile like profile-4 # also used in conversations coffee
-scrollDownConversation = (profile) ->
-  # conversation scroller
-  scroller = $("##{profile} .scroll")
-  scroller.scrollTop(scroller[0].scrollHeight - scroller[0].clientHeight)
-
 # document ready
 $ ->
   $(".post-category-selector .category-option").on('click', ->
@@ -171,17 +164,6 @@ $ ->
     false
   )
 
-  # handles convo profile click
-  $('a.convo-profile').on('click', (e) ->
-    console.log 'convo-profile fired'
-    e.preventDefault()
-    $(this).tab 'show'
-    # profile-id
-    profile = $(this).attr('aria-controls')
-    scrollDownConversation profile
-    return
-  )
-
   # twitter typeahead
   search = new Bloodhound(
     {
@@ -205,5 +187,6 @@ $ ->
       limit: 6
       source: search.ttAdapter()
       templates:
-        suggestion: Handlebars.compile('<div><p>{{name}}</p></div>')
+        suggestion: HandlebarsTemplates['conversation']
+        # suggestion: Handlebars.compile('<div><p>{{name}}</p></div>')
     }
