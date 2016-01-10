@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :conversations do
     collection do
       get "dashboard", to: "conversations#dashboard"
+      get "with", to: "conversations#with"
     end
   end
   resources :friends

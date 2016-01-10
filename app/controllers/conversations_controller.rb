@@ -11,6 +11,12 @@ class ConversationsController < ApplicationController
     @sent = Conversation.where(sender: current_user.profile)
   end
 
+  def with
+    profile = Profile.find(params[:profile_id])
+    convos = profile.conversations(current_user)
+    render json: convos
+  end
+
   def dashboard
     # profiles with conversations
     # convos newest first
