@@ -40,15 +40,17 @@ refreshMessages = (profile_id) ->
       scroller.html('')
       # console.log data
       $.each(data, (index, convo) ->
-        console.log convo
         scroller.append HandlebarsTemplates['convo'](convo)
         scrollDownConversation profile_id
       )
       # last message
       last_message = data[data.length - 1]
-      console.log last_message
       $('.nav-list li.active .last-message').html(HandlebarsTemplates['last-convo'](last_message))
       return
+
+updateConvoName = ->
+  profile = $('.conversation-profiles li.active .profile-name').html()
+  $('.conversation-convos .profile-name').html(profile)
 
 # interval function for polling for messages
 # grabs the active tab profile_id
@@ -70,6 +72,7 @@ $ ->
     profile = $(this).attr('aria-controls')
     # get id from profile
     profile_id = profile.split('-')[1]
+    updateConvoName()
     refreshMessages profile_id
     # toggle mobile profiles menu
     $('.conversation-profiles').toggleClass('hidden-xs')
@@ -90,4 +93,5 @@ $ ->
   # load convos when page loads
   console.log 'loaded conversations'
   pollMessages()
+  updateConvoName()
   refresh = setInterval(pollMessages, 3000) # make more than the timeout period
