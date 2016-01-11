@@ -62,7 +62,7 @@ class ConversationsController < ApplicationController
 
     respond_to do |format|
       if @conversation.save
-        format.html { redirect_to dashboard_conversations_path(profile_id: @conversation.receiver_id), notice: 'Conversation was successfully created.' }
+        format.html { redirect_to dashboard_conversations_path(profile_id: @conversation.receiver_id) }
         format.json { render :show, status: :created, location: @conversation }
       else
         format.html { render :new }
