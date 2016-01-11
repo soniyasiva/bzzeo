@@ -13,6 +13,8 @@
 #= require jquery
 #= require jquery_ujs
 #= require bootstrap-sprockets
+#= require handlebars
+#= require twitter/typeahead
 #= require_tree .
 
 
@@ -161,3 +163,30 @@ $ ->
     $('.menu-search .address').toggleClass('hidden');
     false
   )
+
+  # twitter typeahead
+  search = new Bloodhound(
+    {
+      datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name')
+      queryTokenizer: Bloodhound.tokenizers.whitespace
+      # use normal search function
+      remote: {
+        url: '/feeds/search.json?query=%QUERY'
+        wildcard: '%QUERY'
+      }
+    }
+  )
+  # initialize the bloodhound suggestion engine
+  search.initialize()
+  # instantiate the typeahead UI
+  $('.search-typeahead .typeahead').typeahead {
+      minLength: 2
+    },
+    {
+      displayKey: 'name'
+      limit: 6
+      source: search.ttAdapter()
+      templates:
+        suggestion: HandlebarsTemplates['conversation']
+        # suggestion: Handlebars.compile('<div><p>{{name}}</p></div>')
+    }

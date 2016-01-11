@@ -10,4 +10,4 @@
       - @notifications.each do |notification|
         %tr
           %td= notification.message
-          %td= link_to "View", notification.link, :class => "btn btn-default btn-xs"
+          %td= link_to "View", follow_notification_path(notification), :class => "btn btn-xs #{notification.read? ? 'btn-default' : 'btn-primary'}"

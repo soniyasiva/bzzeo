@@ -41,6 +41,8 @@ gem 'geokit-rails'
 gem 'rails_autolink'
 gem 'will_paginate', '~> 3.0.6'
 gem 'font-awesome-sass', '~> 4.4.0'
+gem 'twitter-typeahead-rails'
+gem 'handlebars_assets'
 # env vars
 gem "figaro"
 
@@ -77,6 +79,8 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'guard-rails', require: false
   gem 'guard-rspec', require: false
+  gem 'guard-livereload', '~> 2.4', require: false
+  gem "rack-livereload", :group => :development
 
   # debug user interaction
   gem 'capybara'

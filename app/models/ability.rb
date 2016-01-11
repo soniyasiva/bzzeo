@@ -14,12 +14,12 @@ class Ability
       can :manage, Profile do |profile|
         profile.user == user
       end
-      can :create, Conversation
-      can [:friend, :partner], Profile
+      can [:create, :dashboard], Conversation
+      can [:read, :friend, :partner], Profile
       can [:like, :comment, :pin, :upvote, :downvote, :create, :deals], Post
       can :create, Share
-      can :read, Notification do |notification|
-        profile.user == user
+      can [:read, :follow], Notification do |notification|
+        notification.profile.user == user
       end
     end
 

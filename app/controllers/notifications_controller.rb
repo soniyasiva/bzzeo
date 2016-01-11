@@ -3,7 +3,12 @@ class NotificationsController < ApplicationController
   load_and_authorize_resource
   check_authorization
 
-  before_action :set_notification, only: [:show, :edit, :update, :destroy]
+  before_action :set_notification, only: [:show, :edit, :update, :destroy, :follow]
+
+  def follow
+    @notification.update(read: true)
+    redirect_to @notification.link
+  end
 
   # GET /notifications
   # GET /notifications.json

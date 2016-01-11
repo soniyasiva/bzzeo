@@ -2,6 +2,10 @@ include Video
 require 'will_paginate/array'
 
 class Profile < ActiveRecord::Base
+  # slugs
+  extend FriendlyId
+  friendly_id :name, use: :slugged
+
   # geo
   acts_as_mappable
   before_validation :geocode_address, :on => [:create, :update]
@@ -51,8 +55,36 @@ class Profile < ActiveRecord::Base
     frienders + friendeds
   end
 
-  def conversations
-    senders + receivers
+  def last_conversation with_profile
+    last_sent = senders.where(receiver: with_profile).last
+    last_received = receivers.where(sender: with_profile).last
+    last = last_sent
+    last = last_received if last_sent.nil? || (!last_received.nil? && last_received.created_at > last_sent.created_at)
+  end
+
+  def conversations with_profile=nil
+    if with_profile.nil?
+      (senders + receivers).sort_by(&:created_at)
+    else
+      (senders.where(receiver: with_profile) + receivers.where(sender: with_profile)).sort_by(&:created_at)
+    end
+  end
+
+  # returns array of profiles that the user has had conversations with. In order of most recent conversation
+  def conversationalists
+    # profiles with conversations
+    # convos newest first
+    profiles = (receivers + senders).sort_by(&:created_at).reverse
+    # conversation with ids
+    profiles = profiles.map do |c|
+      if c.receiver_id == id
+        c.sender_id
+      else
+        c.receiver_id
+      end
+    end.uniq # profiles, newest first
+    # get profiles
+    profiles = profiles.map {|p| Profile.find(p)}
   end
 
   # tag form helper on display

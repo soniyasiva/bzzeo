@@ -14,37 +14,37 @@
         -# %li{class: "#{active? profiles_path}"}
         -#   = link_to "Directory", profiles_path
       %ul.nav.navbar-nav.navbar-right
-        %li{class: "#{active? root_path}"}
+        %li{class: "icon-menu-item #{active? root_path}"}
           = link_to root_path do
             = icon 'home'
-            Home
-        %li{class: "#{active? '/deals'}"}
+            -# Home
+        %li{class: "icon-menu-item #{active? '/deals'}"}
           = link_to '/deals' do
-            = icon 'tag'
-            Hacks
-        %li{class: "#{active? '/posts/categories/job'}"}
+            = icon 'star'
+            -# Hacks
+        %li{class: "icon-menu-item  #{active? '/posts/categories/job'}"}
           = link_to '/posts/categories/job' do
             = icon 'briefcase'
-            Jobs
-        %li{class: "new-post #{active? new_post_path}"}
+            -# Jobs
+        %li{class: "icon-menu-item new-post #{active? new_post_path}"}
           = link_to new_post_path do
-            = icon 'arrow-circle-right'
-            Bzz
+            = icon 'plus'
+            -# Bzz
         - if !user_signed_in?
           %li
             = link_to new_user_session_path do
               Login
           %li
             = link_to new_user_registration_path do
-              Signup
-        -# - if user_signed_in? && current_user.admin?
-        -#   %li.dropdown
-        -#     %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "#", :role => "button"}
-        -#       Admin
-        -#       %span.caret
-        -#     %ul.dropdown-menu{:role => "menu"}
-        -#       %li
-        -#         = link_to "Pages", pages_path
+              Join
+        - if user_signed_in? && current_user.admin?
+          %li.dropdown
+            %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+              Admin
+              %span.caret
+            %ul.dropdown-menu{:role => "menu"}
+              %li
+                = link_to "Pages", pages_path
         - if user_signed_in?
           %li.dropdown
             -# show profile photo only for users with on, otherwise name
@@ -56,6 +56,7 @@
                 .profile-avatar
                   .circle-avatar{:style => "background-image:url(#{current_user.profile.thumbnail_url})"}
                 &nbsp;
+                %span.badge.badge-notify= current_user.profile.notifications.where(read: false, read: nil).count
               -# .icon-wrap
               -#   = icon 'bars'
             %ul.dropdown-menu{:role => "menu"}
@@ -63,8 +64,8 @@
                 = link_to "My Profile", profile_path(current_user.profile)
               %li{class: "#{active? edit_profile_path(current_user.profile)}"}
                 = link_to "Edit Profile", edit_profile_path(current_user.profile)
-              %li{class: "#{active? conversations_path}"}
-                = link_to "Messages", conversations_path
+              %li{class: "#{active? dashboard_conversations_path}"}
+                = link_to "Messages", dashboard_conversations_path
               %li{class: "#{active? views_path}"}
                 = link_to "Viewed My Profile", views_path
               %li{class: "#{active? notifications_path}"}

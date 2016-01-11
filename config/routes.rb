@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :notifications
+  resources :notifications do
+    member do
+      get :follow
+    end
+  end
   resources :feeds, :only => [:index] do
     collection do
       get 'search', to: "feeds#search"
@@ -10,7 +14,12 @@ Rails.application.routes.draw do
   resources :views
   resources :partners
   resources :pages
-  resources :conversations
+  resources :conversations do
+    collection do
+      get "dashboard", to: "conversations#dashboard"
+      get "with", to: "conversations#with"
+    end
+  end
   resources :friends
   resources :shares
   resources :likes
@@ -36,7 +45,8 @@ Rails.application.routes.draw do
     end
   end
   devise_for :users
-  root to: "feeds#index"
+  root to: "pages#show", :id => 'home'
+  # root to: "feeds#index"
   resources :categories
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -5,22 +5,31 @@
   .col-xs-12.navbar-default.navbar-fixed-bottom
     .row
       = link_to feeds_path do
-        .col-xs-3.text-center
+        .col-xs-5ths.text-center
           .mobile-option
             = icon 'th-large'
-            %br Feed
-      = link_to conversations_path do
-        .col-xs-3.text-center
+            %br Home
+
+      = link_to '/posts/categories/job' do
+        .col-xs-5ths.text-center
           .mobile-option
-            = icon 'comments'
-            %br Messages
+            = icon 'briefcase'
+            %br Jobs
+
+      = link_to '/deals' do
+        .col-xs-5ths.text-center
+          .mobile-option
+            = icon 'star'
+            %br Deals
+
       = link_to notifications_path do
-        .col-xs-3.text-center
+        .col-xs-5ths.text-center
           .mobile-option
             = icon 'exclamation-triangle'
             %br Activity
+
       = link_to profile_path(current_user.profile) do
-        .col-xs-3.text-center
+        .col-xs-5ths.text-center
           .mobile-option
             = icon 'user'
             %br Me

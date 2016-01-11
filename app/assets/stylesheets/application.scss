@@ -35,11 +35,23 @@ $nav-link-hover-bg: $brand-primary;
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
+// MIXINS START
+@mixin placeholder {
+  ::-webkit-input-placeholder {@content}
+  :-moz-placeholder           {@content}
+  ::-moz-placeholder          {@content}
+  :-ms-input-placeholder      {@content}
+}
+// MIXINS END
+
 // BASE START
 body {
   padding-top: 60px;
   padding-bottom: 90px;
   background: #f9f9f9;
+  @media (max-width: 767px) {
+    padding-bottom: 6em;
+  }
 }
 
 a {
@@ -52,14 +64,27 @@ a {
 p {
   color: $gray-dark;
 }
+h1, h2, h3, h4 {
+  // font-variant: small-caps;
+  // font-weight: normal;
+}
 // BASE END
 // HOME PAGE START
+.controller-pages.action-show.id-home {
+  @media (min-width: 768px) {
+    margin-top: 7em;
+  }
+}
 // HOME PAGE END
 // MOBILE MENU START
 footer {
-  min-height: 100%;
-  height: auto !important;
-  height: 100%;
+  // min-height: 100%;
+  // height: auto !important;
+  // height: 100%;
+  @media (min-width: 768px) {
+    padding-bottom: 7em; // match height
+  }
+
   /* Negative indent footer by its height */
   margin: 0 auto -60px;
   /* Pad bottom by footer height */
@@ -82,6 +107,17 @@ footer {
 // MOBILE MENU END
 // MENU START
 .navbar-default {
+  .badge-notify{
+     background: $brand-primary;
+     position:relative;
+     color: white;
+     top: -13px;
+    //  left: -13px;
+  }
+  li.icon-menu-item a {
+    padding: 0.36em 0.5em;
+    font-size: 2em;
+  }
   .logo {
     max-height: 35px;
     margin-top: -7px;
@@ -99,15 +135,13 @@ footer {
   }
   .navbar-right {
     a.dropdown-toggle.user-menu {
-      // padding-top: 6px;
-      // padding-bottom: 6px;
       position: relative;
-      padding-left: 55px;
+      padding-left: 2.1em;
     }
     .profile-avatar {
       position: absolute;
       top: 6px;
-      left: 12px;
+      left: 18px;
       .circle-avatar {
         min-width: 33px;
       }
@@ -193,6 +227,9 @@ footer {
   border-radius: 5px;
   border: 1px solid #f0f0f0;
   margin-bottom: 1em;
+  .voter {
+    vertical-align: middle;
+  }
   .name {
 
   }
@@ -359,11 +396,17 @@ footer {
 // SOCIAL SHARE END
 // PROFILE START
 .profile {
+  .profile-tab {
+    padding: 0;
+  }
   .name {
     // margin: 0;
   }
   .video {
 
+  }
+  .description {
+    margin-top: 1em;
   }
   // bugfix
   .friend, .partner {
@@ -376,6 +419,12 @@ footer {
     margin-top: 1em;
     .tab-content {
       margin-top: 1em;
+    }
+  }
+  .scores {
+    margin-top: 1em;
+    h4 {
+      font-size: 1.1em;
     }
   }
 }
@@ -411,6 +460,122 @@ footer {
   }
 }
 // PROFILE LIST END
+// CONVERSATION START
+html {
+  height: 100%;
+}
+.controller-conversations.action-dashboard.id-none {
+  height: 100%;
+  @media (min-width: 768px) {
+    padding-bottom: 1em;
+  }
+  .btn-new-conversation {
+    width: 36px;
+    height: 36px;
+    padding: 5px 0 5px 1px;
+    font-size: 16px;
+    margin-right: 1em;
+  }
+  .profile-name {
+    margin-top: 0;
+  }
+  .messages-name {
+    margin-top: 0;
+  }
+  .profile-name-wrapper {
+    position: absolute;
+    top: 0;
+    background: #f9f9f9;
+    width: 100%;
+  }
+  .main.container {
+    height: 100%;
+    .full-height {
+      height: 100%;
+    }
+    .tab-content {
+      height: 100%;
+    }
+    .scroll {
+      overflow: auto;
+    }
+    .partial-height {
+      height: 100%;
+      padding-bottom: 8em;
+    }
+  }
+  .new-message {
+    position: absolute;
+    bottom: 0;
+    height: 8em;
+    width: 100%;
+  }
+}
+.nav.nav-list {
+  border-right: 1px solid #f0f0f0;
+  li {
+    border-top: 1px solid #f0f0f0;
+    .list-profile {
+      > div {
+        padding-right: 0em;
+      }
+    }
+    .last-message {
+      .sent-at {
+        float: right;
+      }
+    }
+    h4, p, a{
+      color: #333333;
+    }
+    &.active, &:hover {
+      border-top: 1px solid $brand-primary;
+      background: $brand-primary;
+      a {
+        h4, p {
+          color: white;
+        }
+      }
+      .last-message {
+        .sent-at {
+          color: white;
+        }
+      }
+    }
+  }
+}
+.unread {
+  font-weight: bold;
+}
+.convo {
+  margin-bottom: 0.5em;
+  .message {
+    background: #ccc;
+    padding: 1em;
+    margin-right: 4em;
+    p {
+      margin-bottom: 0;
+    }
+  }
+  .sent-at {
+    p {
+      color: $gray;
+      margin-bottom: 0;
+    }
+  }
+  &.self {
+    text-align: right;
+    .message {
+      background: $brand-primary;
+      margin-left: 4em;
+      margin-right: 0em;
+      p {
+          color: white;
+      }
+    }
+  }
+}
+// CONVERSATION END
 // SHARE START
 nav.share {display:inline-block;} /* shareable's nav tag */
 nav.share div {float:left;}
@@ -423,6 +588,9 @@ nav.share iframe {border:0; margin-top:0; padding-top:0;} /* if using medium siz
 *+html .fb-like{display:inline}/* ie7 inline block fix*/
 // SHARE END
 // MAP START
+.profile-map-selector {
+  margin-top: 1.9em;
+}
 iframe {
   &.profile-map {
     width: 100%;
@@ -430,8 +598,73 @@ iframe {
   }
 }
 // MAP END
-// CONVERSATION START
-.unread {
-  font-weight: bold;
+// TWITTER TYPEAHEAD START
+.search-form-group {
+  margin: 0;
+  padding: 0;
+  padding-top: 2px;
+  .twitter-typeahead {
+    margin-top: 1px;
+    width: 100%;
+    .tt-hint {
+      color: $gray
+    }
+    .tt-menu {
+      // display: block !important; // debugging
+      background: white;
+      width: 100%;
+      border: 1px solid #f0f0f0;
+      &.tt-empty {
+        border: none;
+      }
+      .tt-suggestion {
+        border-bottom: 1px solid #f0f0f0;
+        padding: 1em;
+        &:hover {
+          cursor: pointer;
+          background: $brand-primary;
+        }
+        &:last-child {
+          border: 0;
+        }
+        p {
+          margin: 0;
+        }
+      }
+    }
+  }
 }
-// CONVERSATION END
+// TWITTER TYPEAHEAD END
+// BOOTSTRAP 5 COLUMNS START
+.col-xs-5ths,
+.col-sm-5ths,
+.col-md-5ths,
+.col-lg-5ths {
+  position: relative;
+  min-height: 1px;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+.col-xs-5ths {
+  width: 20%;
+  float: left;
+}
+@media (min-width: 768px) {
+  .col-sm-5ths {
+    width: 20%;
+    float: left;
+  }
+}
+@media (min-width: 992px) {
+  .col-md-5ths {
+    width: 20%;
+    float: left;
+  }
+}
+@media (min-width: 1200px) {
+  .col-lg-5ths {
+    width: 20%;
+    float: left;
+  }
+}
+// BOOTSTRAP 5 COLUMNS END
