@@ -466,6 +466,19 @@ html {
   @media (min-width: 768px) {
     padding-bottom: 1em;
   }
+  .btn-new-conversation {
+    width: 36px;
+    height: 36px;
+    padding: 5px 0 5px 1px;
+    font-size: 16px;
+    margin-right: 1em;
+  }
+  .profile-name {
+    margin-top: 0;
+  }
+  .messages-name {
+    margin-top: 0;
+  }
   .profile-name-wrapper {
     position: absolute;
     top: 0;

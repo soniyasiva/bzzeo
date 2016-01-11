@@ -4,7 +4,7 @@
       .col-xs-12.col-sm-3.hidden-xs.conversation-profiles
         .row
           .col-xs-12
-            %h3 Messages
+            %h3.messages-name Messages
         .row
           .col-xs-12
             %ul.nav.nav-list{:role => "tablist"}
@@ -46,4 +46,6 @@
         .row.profile-name-wrapper
           .col-xs-12
             %h3.profile-name.pull-left Profile Name
-            %button.btn.btn-default.btn-sm.btn-profile-select.visible-xs.pull-right Menu
+            %button{:class => "btn btn-default btn-sm btn-profile-select visible-xs pull-right"}= icon 'bars'
+            = link_to new_conversation_path(), :class => "btn btn-sm btn-primary btn-circle pull-right btn-new-conversation" do
+              = icon 'plus'
