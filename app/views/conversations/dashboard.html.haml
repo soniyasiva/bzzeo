@@ -23,10 +23,6 @@
                       .col-sm-6.col-xs-12
                         %span.sent-at= "#{time_ago_in_words(convo.created_at).gsub('about ', '')} ago"
       .col-xs-12.col-sm-9.full-height.conversation-convos
-        -# .row
-        -#   .col-xs-12
-        -#     %h3.profile-name.pull-left Profile Name
-        -#     %button.btn.btn-default.btn-sm.btn-profile-select.visible-xs.pull-right Menu
         .row.full-height
           .col-xs-12.full-height
             .tab-content.full-height
@@ -47,3 +43,7 @@
                         = f.hidden_field :receiver_id, :value => profile.id
                         = f.text_area :message, label: 'New Message', placeholder: "Write your message..."
                         = f.submit 'Send Message', :class => "btn btn-xs btn-primary"
+        .row.profile-name-wrapper
+          .col-xs-12
+            %h3.profile-name.pull-left Profile Name
+            %button.btn.btn-default.btn-sm.btn-profile-select.visible-xs.pull-right Menu

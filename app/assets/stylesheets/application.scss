@@ -466,6 +466,12 @@ html {
   @media (min-width: 768px) {
     padding-bottom: 1em;
   }
+  .profile-name-wrapper {
+    position: absolute;
+    top: 0;
+    background: #f9f9f9;
+    width: 100%;
+  }
   .main.container {
     height: 100%;
     .full-height {
@@ -490,8 +496,9 @@ html {
   }
 }
 .nav.nav-list {
-  border-right: 1px solid $gray-light;
+  border-right: 1px solid #f0f0f0;
   li {
+    border-top: 1px solid #f0f0f0;
     .list-profile {
       > div {
         padding-right: 0em;
@@ -502,7 +509,11 @@ html {
         float: right;
       }
     }
-    &.active {
+    h4, p, a{
+      color: #333333;
+    }
+    &.active, &:hover {
+      border-top: 1px solid $brand-primary;
       background: $brand-primary;
       a {
         h4, p {
