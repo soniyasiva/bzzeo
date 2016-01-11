@@ -61,7 +61,8 @@ updateConvoName = ->
 # interval function for polling for messages
 # grabs the active tab profile_id
 pollMessages = () ->
-  profile = $('.tab-content .conversation-pane.conversation-tab-pane.active').attr('id')
+  profile = $('.tab-content .conversation-tab-pane.active').attr('id')
+  console.log profile
   # get id from profile
   return if not profile?
   profile_id = profile.split('-')[1]
@@ -100,6 +101,6 @@ $ ->
 
   # load convos when page loads
   console.log 'loaded conversations'
-  # pollMessages()
+  pollMessages()
   updateConvoName()
   refresh = setInterval(pollMessages, 3000) # make more than the timeout period

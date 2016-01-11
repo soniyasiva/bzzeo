@@ -14,7 +14,7 @@ class Ability
       can :manage, Profile do |profile|
         profile.user == user
       end
-      can [:create, :dashboard], Conversation
+      can [:create, :dashboard, :with, :profile], Conversation
       can [:read, :friend, :partner], Profile
       can [:like, :comment, :pin, :upvote, :downvote, :create, :deals], Post
       can :create, Share
