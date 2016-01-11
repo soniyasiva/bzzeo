@@ -27,7 +27,7 @@
           .col-xs-12.full-height
             .tab-content.full-height
               - @profiles.each do |profile|
-                %div{:id => "profile-#{profile.id}", :class => "full-height tab-pane #{'active' if profile.id == @profile_id}"}
+                %div{:id => "profile-#{profile.id}", :class => "full-height tab-pane conversation-tab-pane #{'active' if profile.id == @profile_id}"}
                   .row.partial-height
                     .col-xs-12.full-height.scroll{'data-id' => "#{profile.id}"}
                       -# where conversations get injected

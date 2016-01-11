@@ -28,6 +28,8 @@ scrollDownConversation = (profile_id) ->
 
 # takes in profile_id like 4
 refreshMessages = (profile_id) ->
+  console.log $('.controller-conversations.action-dashboard.id-none')
+  # return unless $('.controller-conversations.action-dashboard.id-none')?
   # get convos
   $.ajax
     url: "/conversations/with?profile_id=#{profile_id}"
@@ -59,10 +61,11 @@ updateConvoName = ->
 # interval function for polling for messages
 # grabs the active tab profile_id
 pollMessages = () ->
-  profile = $('.tab-content .tab-pane.active').attr('id')
+  profile = $('.tab-content .conversation-pane.conversation-tab-pane.active').attr('id')
   # get id from profile
+  return if not profile?
   profile_id = profile.split('-')[1]
-  return if not profile_id?
+  console.log profile_id
   refreshMessages profile_id
   return
 
