@@ -1,7 +1,7 @@
 class ProfilesController < ApplicationController
   before_filter :redirect_to_newest_url, only: [:show] # use friendlyid by default
   before_action :authenticate_user!, :except => :show
-  load_and_authorize_resource :find_by => :slug # auth from friendlyid
+  load_and_authorize_resource :find_by => :slug, except: :edit # auth from friendlyid
   check_authorization
 
   before_action :set_profile, only: [:show, :edit, :update, :destroy, :friend, :partner]
@@ -66,6 +66,7 @@ class ProfilesController < ApplicationController
 
   # GET /profiles/1/edit
   def edit
+    authorize! :edit, @profile
   end
 
   # POST /profiles
@@ -128,9 +129,13 @@ class ProfilesController < ApplicationController
 
     # friendlyid redirect
     def redirect_to_newest_url
+      puts "=== redirect_to_newest_url ==="
       @profile = Profile.friendly.find params[:id]
+      puts @profile.inspect
+      request.path != profile_path(@profile)
+      puts !@profile.slug.blank?
 
-      if request.path != profile_path(@profile)
+      if request.path != profile_path(@profile) && !@profile.slug.blank?
         return redirect_to @profile, :status => :moved_permanently
       end
     end
