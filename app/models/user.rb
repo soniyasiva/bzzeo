@@ -7,6 +7,6 @@ class User < ActiveRecord::Base
   has_one :profile
 
   after_create do
-    Profile.create(:user => self)
+    Profile.create(:user => self, name: email.match(/^[a-zA-Z]+/))
   end unless Rails.env.test?
 end
