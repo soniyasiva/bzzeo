@@ -1,0 +1,10 @@
+.row
+  .col-xs-12
+    %h1 Listing profiles
+.row.profiles
+  .col-xs-12
+    - @profiles.each do |profile|
+      = render 'shared/profile_sm', profile: profile
+.row.pagination
+  .col-xs-12
+    = will_paginate @profiles

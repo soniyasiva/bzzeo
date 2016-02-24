@@ -1,0 +1,8 @@
+%h1 Viewed My Profile
+%p In the last 7 days
+
+- @views.each do |viewer|
+  = render 'shared/profile', profile: viewer[:profile]
+  -# .row
+  -#   .col-xs-12
+  -#     %p= "Viewed your profile #{viewer[:count]} times"

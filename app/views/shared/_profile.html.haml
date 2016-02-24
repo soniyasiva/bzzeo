@@ -1,0 +1,16 @@
+.row.profile
+  .col-xs-12.col-sm-3.left-panel
+    = link_to profile do
+      %img{ :src => profile.thumbnail_url, :class => "img-responsive thumb" }
+  .col-xs-12.col-sm-9.right-panel
+    = link_to profile do
+      %h3.name= profile.name
+    - unless profile.category.nil?
+      %h4.category
+        = profile.category.name
+    - unless profile.lat.nil? || @address.nil?
+      %p.distance
+        = profile.distance_from(@address).round(1)
+        km away
+.col-xs-12
+  %hr

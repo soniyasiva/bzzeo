@@ -1,0 +1,7 @@
+= bootstrap_form_for @comment do |f|
+  = render 'shared/form_errors', model: @comment
+
+  = f.text_field :profile
+  = f.text_field :post
+  = f.text_area :description
+  = f.submit 'Save'

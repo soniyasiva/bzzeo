@@ -1,0 +1,35 @@
+%footer.visible-xs
+  .col-xs-12
+    = link_to new_post_path, :class => "btn btn-primary btn-circle mobile-new-post" do
+      = icon 'plus'
+  .col-xs-12.navbar-default.navbar-fixed-bottom
+    .row
+      = link_to feeds_path do
+        .col-xs-5ths.text-center
+          .mobile-option
+            = icon 'th-large'
+            %br Home
+
+      = link_to '/posts/categories/job' do
+        .col-xs-5ths.text-center
+          .mobile-option
+            = icon 'briefcase'
+            %br Jobs
+
+      = link_to '/deals' do
+        .col-xs-5ths.text-center
+          .mobile-option
+            = icon 'star'
+            %br Deals
+
+      = link_to notifications_path do
+        .col-xs-5ths.text-center
+          .mobile-option
+            = icon 'exclamation-triangle'
+            %br Activity
+
+      = link_to profile_path(current_user.profile) do
+        .col-xs-5ths.text-center
+          .mobile-option
+            = icon 'user'
+            %br Me

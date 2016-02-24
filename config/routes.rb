@@ -1,4 +1,53 @@
 Rails.application.routes.draw do
+  resources :notifications do
+    member do
+      get :follow
+    end
+  end
+  resources :feeds, :only => [:index] do
+    collection do
+      get 'search', to: "feeds#search"
+      get 'tag/:tag', to: "feeds#tag"
+    end
+  end
+  resources :post_categories
+  resources :views
+  resources :partners
+  resources :pages
+  resources :conversations do
+    collection do
+      get "dashboard", to: "conversations#dashboard"
+      get "with", to: "conversations#with"
+    end
+  end
+  resources :friends
+  resources :shares
+  resources :likes
+  resources :comments
+  resources :posts do
+    collection do
+      get "categories/:category_name", to: "posts#index"
+    end
+    member do
+      put "like", to: "posts#like"
+      put "upvote", to: "posts#upvote"
+      put "downvote", to: "posts#downvote"
+      put "pin", to: "posts#pin"
+      post "comment", to: "posts#comment"
+    end
+  end
+  get "deals", to: "posts#deals"
+  resources :tags
+  resources :profiles do
+    member do
+      put "friend", to: "profiles#friend"
+      put "partner", to: "profiles#partner"
+    end
+  end
+  devise_for :users
+  root to: "pages#show", :id => 'home'
+  # root to: "feeds#index"
+  resources :categories
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,0 +1,5 @@
+= bootstrap_form_for @category do |f|
+  = render 'shared/form_errors', model: @category
+
+  = f.text_field :name
+  = f.submit 'Save'

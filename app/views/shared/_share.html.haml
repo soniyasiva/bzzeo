@@ -1,0 +1,9 @@
+.row
+  .col-xs-12.col-sm-6.col-sm-offset-3
+    %p
+      Shared by
+      = link_to profile_path(share.profile) do
+        = share.profile.name
+      = time_ago_in_words share.created_at
+      ago
+= render 'shared/post', post: share.post, social: share

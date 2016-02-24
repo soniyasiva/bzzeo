@@ -1,0 +1,6 @@
+= bootstrap_form_for @conversation do |f|
+  = render 'shared/form_errors', model: @conversation
+
+  = f.select(:receiver_id, Profile.all.collect {|c| [c.name, c.id]})
+  = f.text_area :message
+  = f.submit 'Send Message'

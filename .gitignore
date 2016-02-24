@@ -11,3 +11,12 @@
 /log/*
 !/log/.keep
 /tmp
+
+bzzeo-staging
+
+bzzeo-production
+
+# Ignore application configuration
+/config/application.yml
+
+*.dump

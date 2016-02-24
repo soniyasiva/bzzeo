@@ -1,0 +1,20 @@
+%h1 Listing tags
+
+.table-responsive
+  %table.table.table-striped
+    %thead
+      %tr
+        %th Name
+        %th
+        %th
+        %th
+
+    %tbody
+      - @tags.each do |tag|
+        %tr
+          %td= tag.name
+          %td= link_to 'Show', tag
+          %td= link_to 'Edit', edit_tag_path(tag)
+          %td= link_to 'Destroy', tag, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+= link_to 'New Tag', new_tag_path

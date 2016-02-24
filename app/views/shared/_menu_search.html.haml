@@ -1,0 +1,21 @@
+= bootstrap_form_tag url: search_feeds_path, method: 'get' do |f|
+  .input-group.post-category-selector.search-typeahead
+    .input-group-btn
+      %button.btn.btn-default.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+        %span.caret
+      %ul.dropdown-menu
+        - PostCategory.all.each do |pg|
+          %li
+            = link_to '#', :class => "category-option", :data => { :id => pg.id } do
+              = pg.name.capitalize!
+    = f.text_field :query, placeholder: "Search Profiles and Posts", hide_label: true, :value => @query, :class => "typeahead", :wrapper => { :class => 'search-form-group'}
+    = f.hidden_field :category_id, :value => nil
+    %span.input-group-btn.address
+      = link_to '', :class => "search-filter-btn btn btn-default" do
+        = icon 'filter'
+    %span.input-group-btn.address.address-text.hidden
+      near
+    = f.text_field :address, placeholder: "Location", hide_label: true, :value => @address, :class => "address hidden"
+    %span.input-group-btn
+      %button.btn.btn-default{:type => "submit"}
+        = icon 'search'

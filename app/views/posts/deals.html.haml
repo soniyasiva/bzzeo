@@ -1,0 +1,12 @@
+%h1 Deals
+%p You should add a new deal
+
+- @posts.each do |post|
+  - next if post.votes < -5
+  = render 'shared/post_listed', post: post
+
+= "No results" if !@posts.any?
+%br
+%br
+= link_to new_post_path(params: {post_category_id: PostCategory.find_by(name: 'promotion').id }), :class => "btn btn-primary" do
+  New Deal

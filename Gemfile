@@ -14,10 +14,42 @@ gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
+# heroku
+gem 'rails_12factor', group: :production
+gem 'seed_dump'
+# .haml instead of .html
+gem "haml-rails", "~> 0.9"
+# users
+gem 'devise'
+gem 'cancancan', '~> 1.10'
+# uploadcare
+gem 'uploadcare-rails'
+# bootstrap
+gem 'bootstrap-sass', '~> 3.3.4'
+gem 'bootstrap_form'
+gem 'bootswatch-rails'
+# social
+gem 'shareable'
+gem 'vimeo'
+gem 'meta-tags'
+# slugs
+gem 'friendly_id', '~> 5.1.0'
+# geo
+gem 'geokit'
+gem 'geokit-rails'
+# ui
+gem 'rails_autolink'
+gem 'will_paginate', '~> 3.0.6'
+gem 'font-awesome-sass', '~> 4.4.0'
+gem 'twitter-typeahead-rails'
+gem 'handlebars_assets'
+# env vars
+gem "figaro"
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+# gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -41,5 +73,17 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-end
 
+  # testing
+  gem 'rspec-rails', '~> 3.0'
+  gem 'factory_girl_rails'
+  gem 'guard-rails', require: false
+  gem 'guard-rspec', require: false
+  gem 'guard-livereload', '~> 2.4', require: false
+  gem "rack-livereload", :group => :development
+
+  # debug user interaction
+  gem 'capybara'
+  gem 'launchy'
+  # gem 'database_cleaner'
+end

@@ -1,0 +1,670 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+*/
+
+ // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
+@import "bootstrap-sprockets";
+// CUSTOM VARIABLES START
+$brand-primary: #0dcccb;
+$brand-secondary: #007f7f;
+$navbar-default-bg: #ffffff;
+$navbar-default-link-hover-bg: $brand-primary;
+$navbar-default-bg: #ffffff;
+$navbar-default-link-color: #222222;
+$navbar-default-link-hover-color: #ffffff;
+$navbar-default-link-active-color: #ffffff;
+$navbar-default-color: #222222;
+$navbar-default-link-active-bg: $brand-primary;
+$nav-link-hover-bg: $brand-primary;
+
+// CUSTOM VARIABLES END
+@import "bootswatch/yeti/variables";
+@import "bootstrap";
+@import "rails_bootstrap_forms";
+@import "bootswatch/yeti/bootswatch";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
+// MIXINS START
+@mixin placeholder {
+  ::-webkit-input-placeholder {@content}
+  :-moz-placeholder           {@content}
+  ::-moz-placeholder          {@content}
+  :-ms-input-placeholder      {@content}
+}
+// MIXINS END
+
+// BASE START
+body {
+  padding-top: 60px;
+  padding-bottom: 90px;
+  background: #f9f9f9;
+  @media (max-width: 767px) {
+    padding-bottom: 6em;
+  }
+}
+
+a {
+  &:hover,
+  &:focus,
+  &:active {
+    text-decoration: none;
+  }
+}
+p {
+  color: $gray-dark;
+}
+h1, h2, h3, h4 {
+  // font-variant: small-caps;
+  // font-weight: normal;
+}
+// BASE END
+// HOME PAGE START
+.controller-pages.action-show.id-home {
+  @media (min-width: 768px) {
+    margin-top: 7em;
+  }
+}
+// HOME PAGE END
+// MOBILE MENU START
+footer {
+  // min-height: 100%;
+  // height: auto !important;
+  // height: 100%;
+  @media (min-width: 768px) {
+    padding-bottom: 7em; // match height
+  }
+
+  /* Negative indent footer by its height */
+  margin: 0 auto -60px;
+  /* Pad bottom by footer height */
+  padding: 0 0 60px;
+  .mobile-new-post {
+    position: fixed;
+    right: 15px;
+    bottom: 86px;
+  }
+  .mobile-option {
+    padding-top: 1em;
+    padding-bottom: 1em;
+  }
+}
+.navbar-toggle {
+  font-size: 1.8em;
+  color: $brand-primary;
+  padding: 0;
+}
+// MOBILE MENU END
+// MENU START
+.navbar-default {
+  .badge-notify{
+     background: $brand-primary;
+     position:relative;
+     color: white;
+     top: -13px;
+    //  left: -13px;
+  }
+  li.icon-menu-item a {
+    padding: 0.36em 0.5em;
+    font-size: 2em;
+  }
+  .logo {
+    max-height: 35px;
+    margin-top: -7px;
+  }
+  .navbar-nav > li.new-post {
+    &.active a {
+      color: #ffffff;
+    }
+    a {
+      &:hover {
+        color: #ffffff;
+      }
+      color: $brand-primary;
+    }
+  }
+  .navbar-right {
+    a.dropdown-toggle.user-menu {
+      position: relative;
+      padding-left: 2.1em;
+    }
+    .profile-avatar {
+      position: absolute;
+      top: 6px;
+      left: 18px;
+      .circle-avatar {
+        min-width: 33px;
+      }
+    }
+    .icon-wrap {
+      float :right;
+      position: absolute;
+      right: 0;
+      top: 9px;
+      font-size: 28px;
+      color: $gray;
+    }
+  }
+}
+.menu-search {
+  max-width: 30em;
+  margin-top: 5px;
+  #address {
+    margin-left: -1px;
+  }
+  span.address-text {
+    font-size: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+// MENU END
+// HELPER START
+.video {
+  img.triangle-swoosh {
+    z-index: 1000;
+    position: absolute;
+    bottom: 0;
+  }
+  iframe {
+    width: 100%;
+  }
+}
+.embed-responsive-1by1 {
+  padding-bottom: 100%;
+}
+.circle-avatar{
+  /* make it responsive */
+  max-width: 100%;
+  width:100%;
+  height:auto;
+  display:block;
+  /* div height to be the same as width*/
+  padding-top:100%;
+
+  /* make it a cirkle */
+  border-radius:50%;
+
+  /* Centering on image`s center*/
+  background-position-y: center;
+  background-position-x: center;
+  background-repeat: no-repeat;
+
+  /* it makes the clue thing, takes smaller dimention to fill div */
+  background-size: cover;
+
+  /* it is optional, for making this div centered in parent*/
+  margin: 0 auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.btn-circle {
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 24px;
+  line-height: 1.62;
+  border-radius: 50%;
+}
+// HELPER END
+// POST START
+.post {
+  background: #ffffff;
+  padding-top: 0.5em;
+  border-radius: 5px;
+  border: 1px solid #f0f0f0;
+  margin-bottom: 1em;
+  .voter {
+    vertical-align: middle;
+  }
+  .name {
+
+  }
+  .thumb {
+    width: 100%;
+  }
+  .profile {
+
+  }
+  .timestamp {
+    margin-top: 0.7em;
+    margin-bottom: 0;
+  }
+  .image {
+    margin-bottom: 0.5em;
+  }
+  .description {
+    margin-bottom: 1em;
+  }
+  .video {
+    margin-bottom: 0.5em;
+  }
+  .comments {
+    .comment {
+      // &:first-child {
+      //   border-top: 1px solid #f0f0f0;
+      // }
+      border-top: 1px solid #f0f0f0;
+      padding: 1em 0;
+      .profile {
+
+      }
+      .comment-description {
+
+      }
+    }
+  }
+  .options {
+    border-top: 1px solid #f0f0f0;
+    padding: 1em;
+    ul {
+      margin-bottom: 0;
+    }
+    .likes-count {
+
+    }
+  }
+  .new-comment {
+    margin-bottom: 1em;
+  }
+}
+// POST END
+// POST LISTED START
+.post-listed {
+
+}
+.votes {
+  li {
+    a {
+      color: $gray;
+      &.active {
+        color: $brand-primary;
+      }
+    }
+  }
+  .votes-count {
+
+  }
+}
+// POST LISTED END
+// POST SM AND PROFILE SM START
+.post-sm, .profile-sm {
+  padding: 0;
+  .description {
+    position: relative;
+    overflow: hidden;
+    .text-wrap {
+      color: #fff;
+      position: absolute;
+      padding: 1em;
+      width: 100%;
+      p, h1, h2, h3, h4 {
+        color: #fff;
+      }
+    }
+    .image {
+      background-color: $brand-primary;
+    }
+  }
+  .profile {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    p {
+      color: #fff;
+      padding: 0 0 0.8em 3.1em;
+      margin-bottom: 0;
+    }
+    .profile-avatar {
+      position: absolute;
+      bottom: 6px;
+      left: 7px;
+      .circle-avatar {
+        min-width: 33px;
+      }
+    }
+  }
+  .type {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: #fff;
+    padding: 0.1em 0.5em;
+
+  }
+  .image{
+    padding-bottom: 100%;
+    background-position: 50% 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  .arrow-right-top, .arrow-right-bottom {
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: 43%;
+    bottom: 37%;
+  }
+  .arrow-right-top {
+    border-top: 35px solid transparent;
+    border-bottom: 35px solid transparent;
+    border-left: 48px solid $brand-primary;
+  }
+  .arrow-right-bottom {
+    border-top: 35px solid transparent;
+    border-bottom: 35px solid transparent;
+    border-left: 60px solid $brand-secondary;
+  }
+}
+.profile-sm {
+  .description {
+    .text-wrap {
+      background: rgba(0, 0, 0, 0.4);
+    }
+  }
+}
+// POST SM AND PROFILE SM END
+// SOCIAL SHARE START
+.social-share {
+  // bugfix
+  .facebook {
+    .fb-like {
+      position: absolute;
+      top: -1px;
+    }
+  }
+  .twitter {
+
+  }
+  .linkedin {
+
+  }
+}
+// SOCIAL SHARE END
+// PROFILE START
+.profile {
+  .profile-tab {
+    padding: 0;
+  }
+  .name {
+    // margin: 0;
+  }
+  .video {
+
+  }
+  .description {
+    margin-top: 1em;
+  }
+  // bugfix
+  .friend, .partner {
+    &:active,
+    &:focus {
+      background: $brand-primary;
+    }
+  }
+  .posts {
+    margin-top: 1em;
+    .tab-content {
+      margin-top: 1em;
+    }
+  }
+  .scores {
+    margin-top: 1em;
+    h4 {
+      font-size: 1.1em;
+    }
+  }
+}
+// PROFILE END
+// PROFILE LIST START
+.profiles {
+  .profile {
+    .left-panel {
+      .thumb {
+        margin-top: 1.7em;
+      }
+    }
+    .right-panel {
+      .name {
+
+      }
+      .status {
+
+      }
+      .category-header {
+
+      }
+      .category {
+
+      }
+      .distance-header {
+
+      }
+      .distance {
+
+      }
+    }
+  }
+}
+// PROFILE LIST END
+// CONVERSATION START
+html {
+  height: 100%;
+}
+.controller-conversations.action-dashboard.id-none {
+  height: 100%;
+  @media (min-width: 768px) {
+    padding-bottom: 1em;
+  }
+  .btn-new-conversation {
+    width: 36px;
+    height: 36px;
+    padding: 5px 0 5px 1px;
+    font-size: 16px;
+    margin-right: 1em;
+  }
+  .profile-name {
+    margin-top: 0;
+  }
+  .messages-name {
+    margin-top: 0;
+  }
+  .profile-name-wrapper {
+    position: absolute;
+    top: 0;
+    background: #f9f9f9;
+    width: 100%;
+  }
+  .main.container {
+    height: 100%;
+    .full-height {
+      height: 100%;
+    }
+    .tab-content {
+      height: 100%;
+    }
+    .scroll {
+      overflow: auto;
+    }
+    .partial-height {
+      height: 100%;
+      padding-bottom: 8em;
+    }
+  }
+  .new-message {
+    position: absolute;
+    bottom: 0;
+    height: 8em;
+    width: 100%;
+  }
+}
+.nav.nav-list {
+  border-right: 1px solid #f0f0f0;
+  li {
+    border-top: 1px solid #f0f0f0;
+    .list-profile {
+      > div {
+        padding-right: 0em;
+      }
+    }
+    .last-message {
+      .sent-at {
+        float: right;
+      }
+    }
+    h4, p, a{
+      color: #333333;
+    }
+    &.active, &:hover {
+      border-top: 1px solid $brand-primary;
+      background: $brand-primary;
+      a {
+        h4, p {
+          color: white;
+        }
+      }
+      .last-message {
+        .sent-at {
+          color: white;
+        }
+      }
+    }
+  }
+}
+.unread {
+  font-weight: bold;
+}
+.convo {
+  margin-bottom: 0.5em;
+  .message {
+    background: #ccc;
+    padding: 1em;
+    margin-right: 4em;
+    p {
+      margin-bottom: 0;
+    }
+  }
+  .sent-at {
+    p {
+      color: $gray;
+      margin-bottom: 0;
+    }
+  }
+  &.self {
+    text-align: right;
+    .message {
+      background: $brand-primary;
+      margin-left: 4em;
+      margin-right: 0em;
+      p {
+          color: white;
+      }
+    }
+  }
+}
+// CONVERSATION END
+// SHARE START
+nav.share {display:inline-block;} /* shareable's nav tag */
+nav.share div {float:left;}
+nav.share iframe {border:0; margin-top:0; padding-top:0;} /* if using medium sized buttons */
+#___plusone_0 {font-size: default !important;}
+.fb_iframe_widget span { vertical-align: top; }
+.fb_edge_widget_with_comment { vertical-align: top;}
+.fb-like{display:inline-block}
+* html .fb-like{display:inline}/* ie6 inline block fix*/
+*+html .fb-like{display:inline}/* ie7 inline block fix*/
+// SHARE END
+// MAP START
+.profile-map-selector {
+  margin-top: 1.9em;
+}
+iframe {
+  &.profile-map {
+    width: 100%;
+    height: 200px;
+  }
+}
+// MAP END
+// TWITTER TYPEAHEAD START
+.search-form-group {
+  margin: 0;
+  padding: 0;
+  padding-top: 2px;
+  .twitter-typeahead {
+    margin-top: 1px;
+    width: 100%;
+    .tt-hint {
+      color: $gray
+    }
+    .tt-menu {
+      // display: block !important; // debugging
+      background: white;
+      width: 100%;
+      border: 1px solid #f0f0f0;
+      &.tt-empty {
+        border: none;
+      }
+      .tt-suggestion {
+        border-bottom: 1px solid #f0f0f0;
+        padding: 1em;
+        &:hover {
+          cursor: pointer;
+          background: $brand-primary;
+        }
+        &:last-child {
+          border: 0;
+        }
+        p {
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+// TWITTER TYPEAHEAD END
+// BOOTSTRAP 5 COLUMNS START
+.col-xs-5ths,
+.col-sm-5ths,
+.col-md-5ths,
+.col-lg-5ths {
+  position: relative;
+  min-height: 1px;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+.col-xs-5ths {
+  width: 20%;
+  float: left;
+}
+@media (min-width: 768px) {
+  .col-sm-5ths {
+    width: 20%;
+    float: left;
+  }
+}
+@media (min-width: 992px) {
+  .col-md-5ths {
+    width: 20%;
+    float: left;
+  }
+}
+@media (min-width: 1200px) {
+  .col-lg-5ths {
+    width: 20%;
+    float: left;
+  }
+}
+// BOOTSTRAP 5 COLUMNS END

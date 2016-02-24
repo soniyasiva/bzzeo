@@ -1,0 +1,12 @@
+.row
+  .col-xs-12.col-sm-4.col-sm-offset-4
+    %h2 Sign up
+    = bootstrap_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+      = devise_error_messages!
+      = f.email_field :email, autofocus: true
+      - if @validatable
+        = f.password_field :password, autocomplete: "off"
+      = f.password_field :password_confirmation, autocomplete: "off"
+      = f.submit "Sign up", :class => "btn btn-primary btn-block"
+    %br
+    = render "devise/shared/links"

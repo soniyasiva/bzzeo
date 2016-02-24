@@ -1,0 +1,13 @@
+%h1 Notifications
+
+.table-responsive
+  %table.table.table-striped
+    %thead
+      %tr
+        %th Message
+        %th View
+    %tbody
+      - @notifications.each do |notification|
+        %tr
+          %td= notification.message
+          %td= link_to "View", follow_notification_path(notification), :class => "btn btn-xs #{notification.read? ? 'btn-default' : 'btn-primary'}"

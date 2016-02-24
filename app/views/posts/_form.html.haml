@@ -1,0 +1,42 @@
+.row
+  .col-xs-12.col-sm-8.col-sm-offset-2
+    = bootstrap_form_for @post do |f|
+      = render 'shared/form_errors', model: @post
+      .row
+        .col-xs-12.col-sm-5
+          %p Profiles with videos get more views. Post your link here
+        .col-xs-1.hidden-xs
+          %h2= icon 'arrow-right'
+        .col-xs-12.col-sm-6
+          = f.text_field :video_url, :value => render_url(@post.video_url), label: "Video URL (YouTube or Vimeo)"
+      .row
+        .col-xs-12.col-sm-5
+          %p Choose to update your [profile], post a [status], a [deal], OR a [job] app
+        .col-xs-1.hidden-xs
+          %h2= icon 'arrow-right'
+        .col-xs-12.col-sm-6
+          - if params[:post_category_id].nil?
+            = f.select(:post_category_id, PostCategory.where.not(name: 'review').collect {|c| [c.name.capitalize!, c.id]}, :include_blank => true )
+          - else
+            = f.hidden_field :post_category_id, value: params[:post_category_id]
+      .row
+        .col-xs-12.col-sm-5
+          %p Leave a description and throw in some hashtags to be found!
+        .col-xs-1.hidden-xs
+          %h2= icon 'arrow-right'
+        .col-xs-12.col-sm-6
+          = f.text_area :description, :placeholder => "Blah, blah, blah!..."
+      .row
+        .col-xs-12.col-sm-5
+          %p If you don't have a video to share with your post, share a beaut image.
+        .col-xs-1.hidden-xs
+          %h2= icon 'arrow-right'
+        .col-xs-12.col-sm-6
+          %label Photo
+          %br
+          = f.uploadcare_uploader :image_url, :data => { "images-only" => "true"}
+          = f.hidden_field :mention_id, value: params[:mention_id]
+      .row
+        .col-xs-12.col-sm-6.col-sm-offset-6
+          = f.check_box :hidden, label: "Hidden on profile"
+          = f.submit 'POST NEW BZZ'

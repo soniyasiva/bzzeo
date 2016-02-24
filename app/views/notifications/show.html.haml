@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Message:
+  = @notification.message
+%p
+  %b Link:
+  = @notification.link
+%p
+  %b Profile:
+  = @notification.profile
+
+= link_to 'Edit', edit_notification_path(@notification)
+\|
+= link_to 'Back', notifications_path
