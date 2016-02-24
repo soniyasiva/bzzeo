@@ -10,9 +10,9 @@ class ApplicationController < ActionController::Base
   end
 
   def ensure_profile
-    if user_signed_in? && current_user.profile.name.blank? && request.path != edit_profile_path(current_user.profile) && request.path != profile_path(current_user.profile)
+    if user_signed_in? && (current_user.profile.name.blank? || current_user.email.match(/^[a-zA-Z]+/).to_s.capitalize == current_user.profile.name) && request.path != edit_profile_path(current_user.profile) && request.path != profile_path(current_user.profile)
       redirect_to edit_profile_path(current_user.profile)
-      flash[:notice] = "Please fill out your profile."
+      flash[:notice] = "Please fill out your profile and change your name from \"#{current_user.profile.name}\""
     end
   end
 end

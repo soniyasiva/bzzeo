@@ -36,10 +36,16 @@ class Profile < ActiveRecord::Base
   # validations
   validates :user, presence: true
   validates_uniqueness_of :user_id
+  validates :name, presence: true
 
   before_save :format_video
   before_save :validate_social_media_profiles
   before_save :extract_hash_tags
+
+  # friendly id name change update slug
+  def should_generate_new_friendly_id?
+    slug.blank? || name_changed?
+  end
 
   # checks to see whether the current profile is friended by the user. should be passed current_user
   def friend? user
