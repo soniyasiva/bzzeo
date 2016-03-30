@@ -6,9 +6,9 @@
   = f.text_field :representitive
   = f.text_field :phone
   = f.text_field :address
-  = f.text_field :facebook
-  = f.text_field :twitter
-  = f.text_field :instagram
+  = f.text_field :facebook, help: "This is your username or page web address. example: johnsmith if your page is at http://facebook.com/johnsmith", icon: 'facebook'
+  = f.text_field :twitter, label: "Twitter Username", help: "example: johnsmith", prepend: "@"
+  = f.text_field :instagram, label: "Instagram Username", help: "example: johnsmith", prepend: "@"
   = f.text_field :youtube
   = f.text_field :linkedin
   = f.text_area :description
