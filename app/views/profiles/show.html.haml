@@ -143,7 +143,7 @@
                 // portfolio posts
                 - portfolio_posts = @profile.posts.where(post_category: PostCategory.find_by(name:"portfolio")).where.not(hidden: true).order(pinned: :asc, created_at: :desc)
                 // adds a post at the start
-                - portfolio_posts = portfolio_posts.unshift(Post.new(description: "Spice up your profile by adding some of your work, accoldates, a video, or resume")) if current_user.profile == @profile
+                - portfolio_posts = portfolio_posts.unshift(Post.new(description: "Spice up your profile by adding some of your work, accoldates, a video, or resume")) if user_signed_in? && current_user.profile == @profile
                 - portfolio_posts.in_groups_of(4, false) do |post_group|
                   .row
                     .col-xs-12
@@ -158,7 +158,7 @@
                 // posts
                 - profile_posts = @profile.posts.where.not(hidden: true).order(pinned: :asc, created_at: :desc)
                 // adds a post at the start
-                - profile_posts.unshift(Post.new(description: "Add a new post to get people's attention and draw them to your profile.")) if current_user.profile == @profile
+                - profile_posts.unshift(Post.new(description: "Add a new post to get people's attention and draw them to your profile.")) if user_signed_in? && current_user.profile == @profile
                 - profile_posts.in_groups_of(4, false) do |post_group|
                   .row
                     .col-xs-12
@@ -173,7 +173,7 @@
                 // mentions
                 - profile_mentions = @profile.mentions.order(created_at: :desc)
                 // adds a post at the start
-                - profile_mentions.unshift(Post.new(description: "Review this business")) if current_user.profile != @profile
+                - profile_mentions.unshift(Post.new(description: "Review this business")) if user_signed_in? && current_user.profile != @profile
                 - profile_mentions.in_groups_of(4, false) do |mention_group|
                   .row
                     .col-xs-12
